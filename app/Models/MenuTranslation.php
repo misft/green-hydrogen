@@ -11,4 +11,8 @@ class MenuTranslation extends Model
     use HasFactory, IsTranslation;
     
     protected $guarded = [];
+
+    protected $hidden = [
+        'created_at', 'updated_at', 'id', 'menu_id'
+    ];
 }

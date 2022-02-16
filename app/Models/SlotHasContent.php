@@ -12,7 +12,11 @@ class SlotHasContent extends Model
 
     protected $translation = SlotHasContentTranslation::class;
 
-    public function type() {
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
+    public function contentType() {
         return $this->belongsTo(ContentType::class);
     }
 

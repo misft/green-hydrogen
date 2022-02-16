@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 class ContentTypeController extends Controller
 {
     public function index() {
+        $contentTypes = ContentType::all();
+
         return view('admin.menu.content_type.index', [
-            'items'=>ContentType::all()
+            'items'=>$contentTypes
         ]);
     }
 }

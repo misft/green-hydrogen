@@ -17,6 +17,7 @@ use Carbon\Translator;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MenuSeeder extends Seeder
 {
@@ -28,7 +29,7 @@ class MenuSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-
+    
         $group = MenuGroup::create();
         MenuGroupTranslation::create([
             'translation_id' => Translation::first()->id,
@@ -45,30 +46,45 @@ class MenuSeeder extends Seeder
             'name' => $faker->name()
         ]);
 
-        for ($i=0; $i < 5; $i++) { 
+        $contents = [
+            'heading' => [
+                'type' => 'title',
+                'value' => 'Hello world!'
+            ],
+            'banner' => [
+                'type' => 'image',
+                'value' => '/storage/image/hello-world.png'
+            ],
+            'carousel' => [
+                'type' => 'slideshow',
+                'value' => [
+                    '/storage/image/image1.png',
+                    '/storage/image/image2.png',
+                    '/storage/image/image3.png',
+                ]
+            ]
+        ];
+
+        for ($i=0; $i < 3; $i++) { 
             $slot = Slot::create([
-                'name' => $faker->name()
+                'name' => array_keys($contents)[$i]
             ]);
-            $menu_has_slot = MenuHasSlot::create([
+            $menuHasSlot = MenuHasSlot::create([
                 'slot_id' => $slot->id,
                 'menu_id' => $menu->id,
                 'order' => $i
             ]);
             $content_type = ContentType::create([
-                'name' => $faker->name()
+                'name' => array_values($contents)[$i]["type"]
             ]);
-            $slot_has_content = SlotHasContent::create([
-                'menu_has_slot_id' => $menu_has_slot->id,
+            $slotHasContent = SlotHasContent::create([
+                'menu_has_slot_id' => $menuHasSlot->id,
                 'content_type_id' => $content_type->id
             ]);
             SlotHasContentTranslation::create([
-                'slot_has_content_id' => $slot_has_content->id,
+                'slot_has_content_id' => $slotHasContent->id,
                 'translation_id' => Translation::first()->id,
-                'content' => json_encode([
-                    'title' => $faker->title,
-                    'description' => $faker->words(),
-                    'image' => $faker->imageUrl()
-                ])
+                'content' => array_values($contents)[$i]["value"]
             ]);
         }
     }

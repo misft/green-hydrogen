@@ -23,7 +23,6 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <!-- Individual column searching (text inputs) Starts-->
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
@@ -46,26 +45,14 @@
                                     @foreach ($menus as $menu)
                                         <tr>=
                                             <td>
-                                                @foreach ($menu->menuGroup->translation as $trans)
-                                                    <h6> <span
-                                                            class="text-info">[{{ $trans->translation->code }}]</span>
-                                                        {{ $trans->name }}
-                                                    </h6>
-                                                @endforeach
+                                                <x-table.cell.language :items="$menu" key="category.name" />
                                             </td>
                                             <td>
-                                                @foreach ($menu->translation as $trans)
-                                                    <h6> <span
-                                                            class="text-info">[{{ $trans->translation->code }}]</span>
-                                                        {{ $trans->name }}
-                                                    </h6>
-                                                @endforeach
+                                                <x-table.cell.language :items="$menu" key="name" />
                                             </td>
                                             <td>
-                                                <button class="btn btn-danger btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                                                <button class="btn btn-success btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Edit</button>
+                                                <x-action.delete-row :action="route('menu.destroy', $menu->id)" />
+                                                <x-action.edit-row :route="route('menu.edit', $menu->id)" />
                                             </td>
                                         </tr>
                                     @endforeach
@@ -75,7 +62,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Individual column searching (text inputs) Ends-->
         </div>
     </div>
 @endsection

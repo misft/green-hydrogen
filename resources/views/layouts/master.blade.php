@@ -15,6 +15,7 @@
     <title>Poco - @yield('title')</title>
     @include('layouts.css')
     @yield('style')
+    @stack('style')
 
 </head>
 
@@ -83,6 +84,8 @@
         </div>
     </div>
     @include('layouts.script')
+    
+    @stack('script')
 </body>
 
 </html>

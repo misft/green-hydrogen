@@ -12,5 +12,24 @@ class SlotHasContentController extends Controller
         return view('admin.menu.slot_has_content.index', [
             'items' => SlotHasContent::with(['translation', 'menuSlot'])->get()
         ]);
-    }   
+    }
+
+    public function destroy(Request $request, $id) {
+
+    }
+
+    public function edit(Request $request, $id) {
+        $slot_content = SlotHasContent::with('translation')->find($id);
+        return view('admin.menu.slot_has_content.create_edit', [
+            'slot_content' => $slot_content
+        ]);
+    }
+
+    public function update(Request $request, SlotHasContent $id) {
+        
+    }
+
+    public function show(SlotHasContent $id) {
+        
+    }
 }

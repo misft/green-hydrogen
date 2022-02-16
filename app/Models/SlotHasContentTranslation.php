@@ -10,8 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 class SlotHasContentTranslation extends Model
 {
     use HasFactory, IsTranslation;
-
+    
     protected $casts = [
         'content' => 'array'
+    ];
+
+    protected $hidden = [
+        'created_at', 'updated_at'
     ];
 }

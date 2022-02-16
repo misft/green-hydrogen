@@ -2,13 +2,17 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CompanyDirectoryController;
 use App\Http\Controllers\Admin\ContentTypeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuGroupController;
 use App\Http\Controllers\Admin\MenuHasSlotController;
+use App\Http\Controllers\Admin\NewsCategoryController;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
+use App\Models\Menu;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -35,11 +39,16 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::prefix('menu')->name('menu.')->group(function() {
-    Route::resource('/', MenuController::class);
-    Route::resource('/group', MenuGroupController::class);
-    Route::resource('/slot', SlotController::class);
-    Route::resource('/content_type', ContentTypeController::class);
-    Route::resource('/menu_slot', MenuHasSlotController::class);
-    Route::resource('/slot_content', SlotHasContentController::class);
+Route::resource('/menu_group', MenuGroupController::class);
+Route::resource('/slot', SlotController::class);
+Route::resource('/content_type', ContentTypeController::class);
+Route::resource('/menu_slot', MenuHasSlotController::class);
+Route::resource('/slot_content', SlotHasContentController::class);
+Route::resource('/menu', MenuController::class);
+Route::resource('/news', NewsController::class);
+Route::resource('/news_category', NewsCategoryController::class);
+Route::resource('/company_directory', CompanyDirectoryController::class);
+
+Route::get('/test', function() {
+    return Menu::with(['slots.content.translation', 'slots.content.contentType:id,name', 'translation:id,name'])->get();
 });

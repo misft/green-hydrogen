@@ -13,4 +13,14 @@ class MenuGroup extends Model
     protected $translation = MenuGroupTranslation::class;
 
     protected $guarded = [];
+
+    protected $hidden = ['created_at', 'updated_at'];
+
+    public function menus() {
+        return $this->hasMany(Menu::class);
+    }
+
+    public function translatedMenus() {
+        return $this->hasMany(Menu::class)->localize();
+    }
 }

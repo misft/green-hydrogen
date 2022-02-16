@@ -23,45 +23,29 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <!-- Individual column searching (text inputs) Starts-->
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Individual column searching (text inputs) </h5>
-                        <span>The searching functionality provided by DataTables is useful for quickly search through the
-                            information in the table - however the search is global, and you may wish to present controls
-                            that search on specific columns.</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive product-table">
-                            <table class="display" id="basic-1">
-                                <thead>
-                                    <tr>
-                                        <th>Menu</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($items as $item)
-                                        <tr>
-                                            <td>
-                                                <h6>{{ $item->name }}</h6>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-danger btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                                                <button class="btn btn-success btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Edit</button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Individual column searching (text inputs) Ends-->
+            <x-page.grid :headers="['Name']" :create-route="route('content_type.create')">
+                <x-slot name="title">
+                    Content Type
+                </x-slot>
+                <x-slot name="description">
+                    Content Type Management
+                </x-slot>
+                <x-slot name="data">
+                    @foreach ($items as $item)
+                    <tr>
+                        <td>
+                            <h6>{{ $item->name }}</h6>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-xs" type="button"
+                                data-original-title="btn btn-danger btn-xs" title="">Delete</button>
+                            <button class="btn btn-success btn-xs" type="button"
+                                data-original-title="btn btn-danger btn-xs" title="">Edit</button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </x-slot>
+            </x-page.grid>
         </div>
     </div>
 @endsection

@@ -41,6 +41,12 @@ return [
             'provider' => 'admins',
         ],
 
+        'landing_page' => [
+            'driver' => 'token',
+            'provider' => 'company_directory',
+            'hash' => true
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -75,6 +81,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
+
+        'company_directory' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\CompanyDirectory::class
+        ]
     ],
 
     /*
@@ -106,6 +117,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'company_directory' => [
+            'provider' => 'company_directory',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60
+        ]
     ],
 
     /*
