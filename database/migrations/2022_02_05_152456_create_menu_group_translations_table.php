@@ -15,8 +15,8 @@ class CreateMenuGroupTranslationsTable extends Migration
     {
         Schema::create('menu_group_translations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('menu_group_id')->references('id')->on('menu_groups');
-            $table->foreignId('translation_id')->references('id')->on('translations');
+            $table->foreignId('menu_group_id')->references('id')->on('menu_groups')->cascadeOnDelete();
+            $table->foreignId('translation_id')->references('id')->on('translations')->cascadeOnDelete();
             $table->string('name');
             $table->timestamps();
         });

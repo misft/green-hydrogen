@@ -15,10 +15,12 @@ class TranslationSeeder extends Seeder
     public function run()
     {
         Translation::create([
-            'code'=>'id-ID'
+            'code'=>'id-ID',
+            'name' => 'Indonesia'
         ]);
         Translation::create([
-            'code'=>'en-US'
+            'code'=>'en-US',
+            'name' => 'US'
         ]);
     }
 }

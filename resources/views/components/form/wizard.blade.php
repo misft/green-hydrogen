@@ -1,4 +1,4 @@
-<div class="col-sm-12 col-xl-6">
+<div class="col-sm-12">
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -9,8 +9,7 @@
                     {{ $slot }}
                 </div>
                 <div class="card-footer">
-                    <button form="form" class="btn btn-primary btn-pill">Submit</button>
-                    <button form="form" class="btn btn-secondary btn-pill">Cancel</button>
+                    {{ $footer }}
                 </div>
             </div>
         </div>

@@ -19,6 +19,7 @@ class CreateAdminsTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->text('remember_token')->nullable();
+            $table->json('scopes')->nullable();
             $table->timestamps();
         });
     }

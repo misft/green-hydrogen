@@ -18,6 +18,10 @@ class Menu extends Model
         'created_at', 'updated_at'
     ];
 
+    protected $fillable = [
+        'menu_group_id'
+    ];
+
     public function menuGroup() {
         return $this->belongsTo(MenuGroup::class);
     }

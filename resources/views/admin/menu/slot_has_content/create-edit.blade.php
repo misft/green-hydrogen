@@ -21,25 +21,28 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            @foreach ($slot_content->translation as $translation)
-                <div class="col-sm-12 col-xl-6">
+            @foreach (@$slotContentTranslation ?? [0] as $i => $translation)
+                <div class="col-sm-12">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>{{ $translation->getCode() }}</h5>
+                                    <h5>{{ @$translation->translation->code }}</h5>
                                 </div>
                                 <div class="card-body">
                                     <form id="form"
-                                        action="{{ request()->is('slot_content.create')? route('slot_content.create'): route('slot_content.update', $slot_content->id) }}"
+                                        action="{{ request()->routeIs('slot_content.create') ? route('slot_content.store') : route('slot_content.update', @$slot_content->id ?? 0) }}"
                                         class="theme-form mega-form" method="post">
+                                        @if(request()->routeIs('slot_content.edit'))
                                         @method('put')
-                                        @csrf
-                                        <x-form.localization :value="$translation->getCode()" />
-
-                                        @foreach ((array) $translation->content as $key => $value)
-                                            <x-dynamic-component :component="'form.'.$value['type']" :name="$key"
-                                                :label="$value['type']" />
+                                        @endif
+                                        @csrf 
+                                        <x-form.localization :value="@$translation->translation->code" />
+                                        <x-form.select label="Menu" :value="@$slot_content->menuSlot->menu_id" placeholder="Select Menu" name="menu_id" :items="$menus" />
+                                        <x-form.select label="Slot" :value="@$slot_content->menuSlot->slot_id" placeholder="Select Slot" name="slot_id" :items="$slots" />
+                                        <x-form.select label="Content Type" :value="@$slot_content->contentType->id" placeholder="Select Content Type" name="content_type_id" :items="$contentTypes" />
+                                        @foreach ((array) @$translation->content ?? [0] as $j => $value)
+                                            <x-form.content :slot-content="@$slot_content" :translation="$translation" />
                                         @endforeach
                                     </form>
                                 </div>

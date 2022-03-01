@@ -32,6 +32,33 @@
                     <li><a href="{{ route('news.index') }}">News</a></li>
                 </ul>
             </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-home"></i><span>Company Directory </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('company_directory_topic.index') }}">Company Topic</a></li>
+                    <li><a href="{{ route('company_directory.index') }}">Registered Companies</a></li>
+                    <li><a href="{{ route('company_document_category.index') }}">Document Category</a></li>
+                    <li><a href="{{ route('company_document.index') }}">Documents</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-home"></i><span>Region </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('region.index') }}">Region</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-home"></i><span>Language </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('language.index') }}">Language</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

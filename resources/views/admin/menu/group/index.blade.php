@@ -33,6 +33,8 @@
                             that search on specific columns.</span>
                     </div>
                     <div class="card-body">
+                        <x-action.create-button :route="route('menu_group.create')"/>
+
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
@@ -45,18 +47,12 @@
                                     @foreach ($groups as $group)
                                         <tr>
                                             <td>
-                                                @foreach ($group->translation as $trans)
-                                                    <h6> <span
-                                                            class="text-info">[{{ $trans->translation->code }}]</span>
-                                                        {{ $trans->name }}
-                                                    </h6>
-                                                @endforeach
+                                                <x-table.cell.language :items="$group" key="name" />
+
                                             </td>
                                             <td>
-                                                <button class="btn btn-danger btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                                                <button class="btn btn-success btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Edit</button>
+                                                <x-action.delete-row :action="route('menu_group.destroy', $group->id)" />
+                                                <x-action.edit-row :route="route('menu_group.edit', $group->id)" />
                                             </td>
                                         </tr>
                                     @endforeach

@@ -21,21 +21,25 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            @foreach ($menu->translation ?? [0] as $translation)
+            @foreach ($menu->translations ?? [0] as $key => $translation)
             <x-form.wizard>
                 <x-slot name="header">
                     {{ request()->routeIs('menu.create') ? 'Create Menu' : 'Update Menu' }}
                 </x-slot>
-                <form id="form"
-                    action="{{ request()->routeIs('menu.create') ? route('menu.store'): route('menu.update', $menu->id) }}"
+                <form id="form-{{ $key }}"
+                    action="{{ request()->routeIs('menu.create') ? route('menu.store'): route('menu.update', @$menu->id) }}"
                     class="theme-form mega-form" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.localization :value="@$translation->translation->code" />
+                    <x-form.localization :value="@$translation->translation_id" />
                     <x-form.select :items="$groups" name="group" :value="@$group->id" label="Group" placeholder="Select Group" />
-                    <x-form.text name="name" placeholder="Input menu name" :value="$translation->name" label="Name" />
+                    <x-form.text name="name" placeholder="Input menu name" :value="@$translation->name" label="Name" />
                 </form>
+                <x-slot name="footer">
+                    <button form="form-{{ $key }}" class="btn btn-primary btn-pill">Submit</button>
+                    <button form="form-{{ $key }}" class="btn btn-secondary btn-pill">Cancel</button>
+                </x-slot>
             </x-form.wizard>
             @endforeach
         </div>

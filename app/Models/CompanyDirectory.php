@@ -12,6 +12,12 @@ class CompanyDirectory extends Authenticatable
 
     public $guarded = [];
 
+    protected $hidden = [
+        'password', 'remember_token'
+    ];
+
+    public static $scopes = [];
+
     public function scopeEmail($query, $email) {
         return $query->whereEmail($email);
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\MenuGroup;
 use App\Models\MenuGroupTranslation;
+use App\Models\MenuTranslation;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -26,7 +27,11 @@ class MenuController extends Controller
     }
 
     public function store(Request $request) {
-        $menu = Menu::create($request->all());
+        Menu::create($request->all());
+        MenuTranslation::updateOrCreate([
+            'translation_id' => $request->get('translation_id'),
+            'menu_group_id' => $request->get('menu_group_id')
+        ], $request->all());
 
         return back()->with([
             'success' => 'Data is successfully created'
@@ -47,6 +52,11 @@ class MenuController extends Controller
         $menu = Menu::find($id);
 
         $menu->update($request->all());
+
+        $menu->translations()->updateOrCreate([
+            'translation_id' => $request->get('translation_id'),
+            'menu_id' => $menu->id
+        ], $request->all());
 
         return back()->with([
             'success' => 'Data is successfully created'

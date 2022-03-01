@@ -3,6 +3,9 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CompanyDirectoryController;
+use App\Http\Controllers\Admin\CompanyDirectoryTopicController;
+use App\Http\Controllers\Admin\CompanyDocumentCategoryController;
+use App\Http\Controllers\Admin\CompanyDocumentController;
 use App\Http\Controllers\Admin\ContentTypeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
@@ -10,19 +13,15 @@ use App\Http\Controllers\Admin\MenuGroupController;
 use App\Http\Controllers\Admin\MenuHasSlotController;
 use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
-use App\Models\Menu;
+use App\Http\Controllers\Admin\TranslationController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
 Route::get('/', function(){
-    return redirect()->route('default');
+    return redirect()->route('dashboard');
 })->name('/');
 
 Route::get('/clear-cache', function() {
@@ -48,7 +47,8 @@ Route::resource('/menu', MenuController::class);
 Route::resource('/news', NewsController::class);
 Route::resource('/news_category', NewsCategoryController::class);
 Route::resource('/company_directory', CompanyDirectoryController::class);
-
-Route::get('/test', function() {
-    return Menu::with(['slots.content.translation', 'slots.content.contentType:id,name', 'translation:id,name'])->get();
-});
+Route::resource('/company_directory_topic', CompanyDirectoryTopicController::class);
+Route::resource('/company_document_category', CompanyDocumentCategoryController::class);
+Route::resource('/company_document', CompanyDocumenqtController::class);
+Route::resource('/region', RegionController::class);
+Route::resource('/language', TranslationController::class);

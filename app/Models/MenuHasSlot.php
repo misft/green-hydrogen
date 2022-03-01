@@ -13,6 +13,8 @@ class MenuHasSlot extends Model
         'created_at', 'updated_at'
     ];
 
+    protected $guarded = [];
+
     public function menu() {
         return $this->belongsTo(Menu::class);
     }

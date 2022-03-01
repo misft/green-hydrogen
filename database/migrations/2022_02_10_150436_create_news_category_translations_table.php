@@ -22,8 +22,8 @@ class CreateNewsCategoryTranslationsTable extends Migration
         }
         Schema::create('news_category_translations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('news_category_id')->references('id')->on('news_categories');
-            $table->foreignId('translation_id')->references('id')->on('translations');
+            $table->foreignId('news_category_id')->references('id')->on('news_categories')->cascadeOnDelete();
+            $table->foreignId('translation_id')->references('id')->on('translations')->cascadeOnDelete();
             $table->string('name');
             $table->timestamps();
         });

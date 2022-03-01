@@ -32,6 +32,7 @@
                             that search on specific columns.</span>
                     </div>
                     <div class="card-body">
+                        <x-action.create-button :route="route('menu.create')"></x-action.create-button>
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
@@ -43,7 +44,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($menus as $menu)
-                                        <tr>=
+                                        <tr>
                                             <td>
                                                 <x-table.cell.language :items="$menu" key="category.name" />
                                             </td>

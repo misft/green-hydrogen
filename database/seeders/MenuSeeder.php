@@ -49,11 +49,13 @@ class MenuSeeder extends Seeder
         $contents = [
             'heading' => [
                 'type' => 'title',
-                'value' => 'Hello world!'
+                'value' => 'Hello world!',
+                'form' => 'text'
             ],
             'banner' => [
                 'type' => 'image',
-                'value' => '/storage/image/hello-world.png'
+                'value' => '/storage/image/hello-world.png',
+                'form' => 'image'
             ],
             'carousel' => [
                 'type' => 'slideshow',
@@ -61,6 +63,10 @@ class MenuSeeder extends Seeder
                     '/storage/image/image1.png',
                     '/storage/image/image2.png',
                     '/storage/image/image3.png',
+                ],
+                'form' => 'image',
+                'props' => [
+                    'multiple' => 1
                 ]
             ]
         ];
@@ -75,7 +81,9 @@ class MenuSeeder extends Seeder
                 'order' => $i
             ]);
             $content_type = ContentType::create([
-                'name' => array_values($contents)[$i]["type"]
+                'name' => array_values($contents)[$i]["type"],
+                'form' => array_values($contents)[$i]["form"],
+                'props' => json_encode(@array_values($contents)[$i]["props"]),
             ]);
             $slotHasContent = SlotHasContent::create([
                 'menu_has_slot_id' => $menuHasSlot->id,

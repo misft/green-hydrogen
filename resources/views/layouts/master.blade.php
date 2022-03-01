@@ -19,13 +19,13 @@
 
 </head>
 
-<body class="@if (url()->current() == route('button-builder'))  button-builder @endif">
+<body class="button-builder">
     <!-- Loader starts-->
-    <div class="loader-wrapper">
+    {{-- <div class="loader-wrapper">
         <div class="typewriter">
             <h1>New Era Admin Loading..</h1>
         </div>
-    </div>
+    </div> --}}
     <!-- Loader ends-->
     <!-- page-wrapper Start-->
     <div class="page-wrapper">
@@ -57,6 +57,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="container-fluid">
+                    @if(session('success') || session('danger'))
+                    <x-card.page-notification/>
+                    @endif
                 </div>
                 @yield('content')
                 <div class="welcome-popup modal fade" id="loadModal" tabindex="-1" role="dialog" aria-hidden="true">

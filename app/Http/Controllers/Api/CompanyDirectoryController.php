@@ -10,6 +10,7 @@ use App\Traits\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis;
 
 class CompanyDirectoryController extends Controller
 {
@@ -18,7 +19,7 @@ class CompanyDirectoryController extends Controller
     public function register(RegisterCompanyDirectoryRequest $request) {
         $companyDirectory = CompanyDirectory::create(array_merge($request->validated(), [
             'password' => Hash::make($request->get('password')),
-            'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('/public/company') : null
+            'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company') : null
         ]));
 
         return $this->success(body: [
@@ -49,5 +50,17 @@ class CompanyDirectoryController extends Controller
         return $this->success(body: [
             'user' => $request->user()
         ]);
+    }
+
+    public function show(Request $request, $slug) {
+        [$id, $name] = explode("-", $slug);
+
+        return $this->success(body: [
+            'company_directory' => CompanyDirectory::where('id', $id)->where('name', $name)->first()
+        ]);
+    }
+
+    public function upload(Request $request) {
+        
     }
 }

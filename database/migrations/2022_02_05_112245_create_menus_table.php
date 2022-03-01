@@ -15,7 +15,7 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('menu_group_id')->references('id')->on('menu_groups');
+            $table->foreignId('menu_group_id')->references('id')->on('menu_groups')->cascadeOnDelete();
             $table->timestamps();
         });
     }

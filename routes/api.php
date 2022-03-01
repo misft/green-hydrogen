@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\CompanyDirectoryController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\MenuGroupController;
+use App\Http\Controllers\Api\NewsController;
+use App\Http\Controllers\Api\SponsorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,23 @@ Route::group([
 ], function() {
     Route::post('/register', 'register');
     Route::post('/login', 'login');
+    Route::get('/{id}', 'show');
 
     Route::middleware('auth:sanctum')->get('/profile', 'profile');
+    Route::middleware('auth:sanctum')->post('/upload', 'upload');
+});
+
+Route::group([
+    'controller' => NewsController::class,
+    'prefix' => 'news'
+], function() {
+    Route::get('/news', 'index');
+    Route::get('/{id}', 'show');
+});
+
+Route::group([ 
+    'controller' => SponsorController::class,
+    'prefix' => 'sponsor'
+], function() {
+    Route::get('/', 'index');
 });

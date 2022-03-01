@@ -33,6 +33,7 @@
                             that search on specific columns.</span>
                     </div>
                     <div class="card-body">
+                        <x-action.create-button :route="route('slot.create')"></x-create-button>
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
@@ -48,10 +49,8 @@
                                                 <h6>{{ $slot->name }}</h6>
                                             </td>
                                             <td>
-                                                <button class="btn btn-danger btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                                                <button class="btn btn-success btn-xs" type="button"
-                                                    data-original-title="btn btn-danger btn-xs" title="">Edit</button>
+                                                <x-action.delete-row :action="route('slot.destroy', $slot->id)" />
+                                                <x-action.edit-row :route="route('slot.edit', $slot->id)" />
                                             </td>
                                         </tr>
                                     @endforeach

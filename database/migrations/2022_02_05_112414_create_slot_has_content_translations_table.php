@@ -15,8 +15,8 @@ class CreateSlotHasContentTranslationsTable extends Migration
     {
         Schema::create('slot_has_content_translations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('slot_has_content_id')->references('id')->on('slot_has_contents');
-            $table->foreignId('translation_id')->references('id')->on('translations');
+            $table->foreignId('slot_has_content_id')->references('id')->on('slot_has_contents')->cascadeOnDelete();
+            $table->foreignId('translation_id')->references('id')->on('translations')->cascadeOnDelete();
             $table->json('content');
             $table->timestamps();
         });

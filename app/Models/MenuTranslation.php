@@ -15,4 +15,8 @@ class MenuTranslation extends Model
     protected $hidden = [
         'created_at', 'updated_at', 'id', 'menu_id'
     ];
+
+    protected $fillable = [
+        'menu_id', 'translation_id', 'name'
+    ];  
 }

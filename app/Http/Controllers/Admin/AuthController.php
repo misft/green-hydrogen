@@ -21,13 +21,13 @@ class AuthController extends Controller
             'error'=>'User not found'
         ]);
 
-        $auth = Auth::attempt([
+        $auth = Auth::guard('web')->attempt([
             'email' => $request->get('email'),
             'password'=> $request->get('password')
         ], $request->get('remember'));
 
         if($auth) {
-            return redirect()->route('dashboard.');
+            return redirect(route('menu.index'));
         }
 
         return redirect(route('login'))->with([

@@ -18,7 +18,7 @@ class Localization extends Component
      */
     public function __construct($value)
     {
-        $this->translations = Translation::pluck('code', 'id');
+        $this->translations = Translation::pluck('name', 'id');
         $this->value = $value;
     }
 

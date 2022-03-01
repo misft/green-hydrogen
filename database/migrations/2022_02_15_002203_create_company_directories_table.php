@@ -15,6 +15,8 @@ class CreateCompanyDirectoriesTable extends Migration
     {
         Schema::create('company_directories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('region_id')->references('id')->on('regions')->cascadeOnDelete();
+            $table->foreignId('company_directory_topic_id')->references('id')->on('company_directory_topics')->cascadeOnDelete();
             $table->string('email');
             $table->string('password');
             $table->string('remember_token');

@@ -15,8 +15,8 @@ class CreateEventTranslationsTable extends Migration
     {
         Schema::create('event_translations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('event_id')->references('id')->on('events');
-            $table->foreignId('translation_id')->references('id')->on('translations');
+            $table->foreignId('event_id')->references('id')->on('events')->cascadeOnDelete();
+            $table->foreignId('translation_id')->references('id')->on('translations')->cascadeOnDelete();
             $table->text('title');
             $table->string('speaker_name');
             $table->string('speaker_title');

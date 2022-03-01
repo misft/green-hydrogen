@@ -16,8 +16,9 @@ class CreateContentTypesTable extends Migration
         Schema::create('content_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('form');
-            $table->text('description');
+            $table->string('form')->nullable();
+            $table->json('props')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

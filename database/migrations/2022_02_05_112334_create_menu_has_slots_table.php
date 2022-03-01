@@ -15,8 +15,8 @@ class CreateMenuHasSlotsTable extends Migration
     {
         Schema::create('menu_has_slots', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('menu_id')->references('id')->on('menus');
-            $table->foreignId('slot_id')->references('id')->on('slots');
+            $table->foreignId('menu_id')->references('id')->on('menus')->cascadeOnDelete();
+            $table->foreignId('slot_id')->references('id')->on('slots')->cascadeOnDelete();
             $table->integer('order');
             $table->timestamps();
         });

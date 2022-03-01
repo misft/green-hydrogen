@@ -15,7 +15,7 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('news_category_id')->references('id')->on('news_categories');
+            $table->foreignId('news_category_id')->references('id')->on('news_categories')->cascadeOnDelete();
             $table->json('embed');
             $table->timestamps();
         });

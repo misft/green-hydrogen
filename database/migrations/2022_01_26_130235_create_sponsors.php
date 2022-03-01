@@ -15,7 +15,7 @@ class CreateSponsors extends Migration
     {
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sponsor_group_id')->references('id')->on('sponsor_groups');
+            $table->foreignId('sponsor_group_id')->references('id')->on('sponsor_groups')->cascadeOnDelete();
             $table->string('name');
             $table->string('image');
             $table->string('link');
