@@ -17,7 +17,7 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->foreignId('country_id')->nullable()->references('id')->on('countries')->nullOnDelete();
             $table->foreignId('region_id')->nullable()->references('id')->on('regions')->nullOnDelete();
-            $table->foreignId('project_category_id')->nullable()->references('id')->on('projct_categories')->nullOnDelete();
+            $table->foreignId('project_category_id')->nullable()->references('id')->on('project_categories')->nullOnDelete();
             $table->string('name');
             $table->string('status');
             $table->string('contact');
