@@ -46,7 +46,7 @@
                                     @foreach ($menus as $menu)
                                         <tr>
                                             <td>
-                                                <x-table.cell.language :items="$menu" key="category.name" />
+                                                <h6>Test</h6>
                                             </td>
                                             <td>
                                                 <x-table.cell.language :items="$menu" key="name" />

@@ -24,6 +24,8 @@ class RegisterCompanyDirectoryRequest extends FormRequest
     public function rules()
     {
         return [
+            'company_directory_topic_id' => 'required',
+            'region_id' => 'required',
             'email' => 'required|string|email:rfc,dns',
             'password' => 'required|string|min:8|max:16',
             'name' => 'required|string',

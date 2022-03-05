@@ -18,8 +18,6 @@ class CreateEventTranslationsTable extends Migration
             $table->foreignId('event_id')->references('id')->on('events')->cascadeOnDelete();
             $table->foreignId('translation_id')->references('id')->on('translations')->cascadeOnDelete();
             $table->text('title');
-            $table->string('speaker_name');
-            $table->string('speaker_title');
             $table->text('description');
             $table->timestamps();
         });

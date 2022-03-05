@@ -6,21 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginCompanyDirectoryRequest;
 use App\Http\Requests\Api\RegisterCompanyDirectoryRequest;
 use App\Models\CompanyDirectory;
+use App\Models\CompanyDocument;
 use App\Traits\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Storage;
+use Whoops\Run;
 
 class CompanyDirectoryController extends Controller
 {
     use Response;
 
     public function register(RegisterCompanyDirectoryRequest $request) {
-        $companyDirectory = CompanyDirectory::create(array_merge($request->validated(), [
-            'password' => Hash::make($request->get('password')),
-            'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company') : null
-        ]));
+        try {
+            $companyDirectory = CompanyDirectory::create(array_merge($request->validated(), [
+                'password' => Hash::make($request->get('password')),
+                'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company') : null
+            ]));
+        } catch(\Exception $e) {
+            dd($e->getMessage());
+            return $this->badRequest(message: __('auth.register_failed'));
+        }
 
         return $this->success(body: [
             'company_directory' => $companyDirectory
@@ -38,6 +47,8 @@ class CompanyDirectoryController extends Controller
 
             $user->remember_token = $plain_token;
             $user->save();
+        } else {
+            return $this->badRequest(message: __('auth.failed'));
         }
 
         return $this->success(body: [
@@ -53,7 +64,7 @@ class CompanyDirectoryController extends Controller
     }
 
     public function show(Request $request, $slug) {
-        [$id, $name] = explode("-", $slug);
+        [$id, $name] = explode("-", $slug, 2);
 
         return $this->success(body: [
             'company_directory' => CompanyDirectory::where('id', $id)->where('name', $name)->first()
@@ -61,6 +72,30 @@ class CompanyDirectoryController extends Controller
     }
 
     public function upload(Request $request) {
+        $companyDirectory = $request->user();
+
+        foreach($request->file('documents') as $file) {
+            $documents[] = $file->storePubliclyAs('company_document/'.$companyDirectory->id, $file->getClientOriginalName());
+        }
+
+        $companyDirectory->documents()->create(array_merge($request->all(), [
+            'documents' => json_encode($documents)
+        ]));
+
+        return $this->success(body: [
+            'documents' => $companyDirectory->documents
+        ]);
+    }
+
+    public function deleteDocument(Request $request) {
+        $document = CompanyDocument::where('company_directory_id', $request->user()->id)->find($request->get('id'));
+
+        foreach(json_decode($document->documents) as $file) {
+            Storage::disk('public')->delete($file);
+        }
         
+        $document->delete();
+
+        return $this->success();
     }
 }

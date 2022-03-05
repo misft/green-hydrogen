@@ -12,8 +12,8 @@ class NewsController extends Controller
 {
     use Response;
 
-    public function index(Request $request) {
-        $news = News::localize()->when($request->get('news_category_id'), function($query) use ($request) {
+    public function home(Request $request) {
+        $news = News::localize()->with('category.translation')->when($request->get('news_category_id'), function($query) use ($request) {
                 $query->where('news_category_id', $request->get('news_category_id'));
             })->when($request->get('name') || $request->get('description'), function($query) use ($request) {
                 $query->whereHas('translation', function($query) use ($request) {
@@ -21,8 +21,23 @@ class NewsController extends Controller
                 });
             })->orderBy('created_at', 'desc')
             ->paginate(7);
-        $categories = NewsCategory::localize()->all();
 
-        return $this->success(body: compact('news', 'categories'));
+        $latests = News::localize()->orderBy('created_at', 'desc')->limit(3)->get();
+        $categories = NewsCategory::localize()->get();
+
+        return $this->success(body: compact('news', 'categories', 'latests'));
+    }
+
+    public function carousel(Request $request) {
+        $news = News::localize()->with('category.translation')->when($request->get('news_category_id'), function($query) use ($request) {
+                $query->where('news_category_id', $request->get('news_category_id'));
+            })->when($request->get('name') || $request->get('description'), function($query) use ($request) {
+                $query->whereHas('translation', function($query) use ($request) {
+                    $query->where('name', 'ilike', "%{$request->get('name')}%")->where('description', 'ilike', "%{$request->get('description')}%");
+                });
+            })->orderBy('created_at', 'desc')
+            ->paginate(3);
+        
+        return $this->success(body: compact('news'));
     }
 }

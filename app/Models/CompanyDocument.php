@@ -13,7 +13,7 @@ class CompanyDocument extends Model
         'title', 'documents', 'description', 'company_document_category_id'
     ];
 
-    public function category() {
-        return $this->belongsTo(CompanyDocumentCategory::class);
+    public function categories() {
+        return $this->belongsToMany(CompanyDocumentHasCategory::class, 'company_document_has_categories', 'document_id', 'category_id', 'id', 'id', 'company_document_categories');
     }
 }

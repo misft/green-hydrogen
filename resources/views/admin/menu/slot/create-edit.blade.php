@@ -33,6 +33,10 @@
                     <x-form.put-method  />
                     <x-form.text name="name" :value="@$slot->name" label="Name" placeholder="Pick a name" />
                 </form>
+                <x-slot name="footer">
+                    <button form="form" class="btn btn-primary btn-pill">Submit</button>
+                    <button form="form" class="btn btn-secondary btn-pill">Cancel</button>
+                </x-slot>
             </x-form.wizard>
         </div>
     </div>

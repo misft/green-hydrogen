@@ -27,7 +27,7 @@ class NewsController extends Controller
     } 
     
     public function store(Request $request) {
-        $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('public/news')) : "";
+        $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('news')) : "";
 
         $news = News::create(array_merge($request->toArray(), [
             'embed' => $file
@@ -35,7 +35,7 @@ class NewsController extends Controller
 
         $news->translation()->create($request->toArray());
 
-        return redirect(route('news.index'))->with('success', 'Success inserting news');
+        return redirect(route('news.edit', $news->id))->with('success', 'Success inserting news');
     } 
     
     public function edit(Request $request, News $news) {
@@ -47,7 +47,7 @@ class NewsController extends Controller
     } 
     
     public function update(Request $request, News $news) {
-        $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('public/news')) : $news->embed;
+        $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('news')) : $news->embed;
 
         $news->update(array_merge($request->toArray(), [
             'embed' => $file

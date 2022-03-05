@@ -27,10 +27,10 @@ class MenuController extends Controller
     }
 
     public function store(Request $request) {
-        Menu::create($request->all());
+        $menu = Menu::create($request->all());
         MenuTranslation::updateOrCreate([
             'translation_id' => $request->get('translation_id'),
-            'menu_group_id' => $request->get('menu_group_id')
+            'menu_id' => $menu->id
         ], $request->all());
 
         return back()->with([
@@ -51,7 +51,7 @@ class MenuController extends Controller
     public function update(Request $request, $id) {
         $menu = Menu::find($id);
 
-        $menu->update($request->all());
+        $menu->update($request->only('menu_group_id'));
 
         $menu->translations()->updateOrCreate([
             'translation_id' => $request->get('translation_id'),
@@ -62,4 +62,14 @@ class MenuController extends Controller
             'success' => 'Data is successfully created'
         ]);
     }
+
+    public function destroy(Request $request, $id) {
+        $menu = Menu::find($id);
+
+        $menu->delete();
+
+        return back()->with([
+            'success' => 'Data is successfully deleted'
+        ]);
+    }    
 }

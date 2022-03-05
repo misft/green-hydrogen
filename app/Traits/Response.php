@@ -11,6 +11,14 @@ trait Response {
         ], $code);
     }
 
+    public function unauthorized(int $code = 401, string $message = '', array $errors = []) {
+        return response([
+            'code' => $code,
+            'message' => $message,
+            'errors' => $errors   
+        ], $code);
+    }
+
     public function badRequest(int $code = 400, string $message = '', array $errors = []) {
         return response([
             'code' => $code,

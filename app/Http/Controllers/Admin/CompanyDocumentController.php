@@ -28,7 +28,7 @@ class CompanyDocumentController extends Controller
         $documents = array();
 
         foreach($files as $file) {
-            $documents[] = $file->storePublicly('public/company_document');
+            $documents[] = $file->storePublicly('company_document');
         }
 
         CompanyDocument::create(array_merge($request->all(), [
@@ -49,7 +49,7 @@ class CompanyDocumentController extends Controller
         $documents = array();
 
         foreach($files as $file) {
-            $documents[] = $file->storePublicly('public/company_document');
+            $documents[] = $file->storePublicly('company_document');
         }
 
         $companyDocument->update(array_merge($request->all(), [

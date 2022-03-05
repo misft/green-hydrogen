@@ -16,7 +16,8 @@ class CreateContactSupportsTable extends Migration
         Schema::create('contact_supports', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('type');
+            $table->string('logo');
+            $table->string('value');
             $table->timestamps();
         });
     }

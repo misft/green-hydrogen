@@ -30,7 +30,7 @@ class NewsCategoryController extends Controller
         $newsCategory = NewsCategory::create($request->all());
         $newsCategory->translation()->create($request->all());
 
-        return redirect(route('news_category.index'))->with('success', 'Success inserting news');
+        return redirect(route('news_category', $newsCategory->id))->with('success', 'Success inserting news');
     } 
     
     public function edit(Request $request, NewsCategory $newsCategory) {

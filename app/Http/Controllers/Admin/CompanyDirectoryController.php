@@ -30,7 +30,7 @@ class CompanyDirectoryController extends Controller
     public function store(Request $request) {
         CompanyDirectory::create(array_merge($request->toArray(), [
             'password' => Hash::make($request->get('password')),
-            'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('public/company_directory') : null
+            'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company_directory') : null
         ]));
 
         return redirect(route('company_directory.index'))->with('success', "Company Directory created!");
@@ -43,7 +43,7 @@ class CompanyDirectoryController extends Controller
     public function update(Request $request, CompanyDirectory $companyDirectory) {
         $companyDirectory->update(array_merge($request->toArray(), [
             'password' => !empty($request->get('password')) ? Hash::make($request->get('password')) : $companyDirectory->password,
-            'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('public/company_directory') : $companyDirectory->photo
+            'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company_directory') : $companyDirectory->photo
         ]));
 
         return redirect(route('company_directory.edit'))->with('success', "Company Directory created!");

@@ -23,7 +23,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <x-page.grid :headers="['Name']" :create-route="route('content_type.create')">
+            <x-page.grid :headers="['Name']">
                 <x-slot name="title">
                     Content Type
                 </x-slot>

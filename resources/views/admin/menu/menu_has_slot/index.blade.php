@@ -33,12 +33,14 @@
                             that search on specific columns.</span>
                     </div>
                     <div class="card-body">
+                        <x-action.create-button :route="route('menu_slot.create')"></x-action.create-button >
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
                                     <tr>
                                         <th>Menu</th>
                                         <th>Slot</th>
+                                        <th>Order</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -46,10 +48,17 @@
                                     @foreach ($items as $item)
                                         <tr>
                                             <td>
-                                                <x-table.cell.language :items="$item->menu" key="name" />
+                                                <h6>
+                                                    {{ $item->menu->translation->name }}
+                                                </h6>
                                             </td>
                                             <td>
-                                                <h6>{{ $item->slot->name }}</h6>
+                                                <h6>
+                                                    {{ $item->slot->name }}
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <h6>{{ $item->order }}</h6>
                                             </td>
                                             <td>
                                                 <button class="btn btn-danger btn-xs" type="button"

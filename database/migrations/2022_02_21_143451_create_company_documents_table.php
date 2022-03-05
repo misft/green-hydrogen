@@ -15,6 +15,7 @@ class CreateCompanyDocumentsTable extends Migration
     {
         Schema::create('company_documents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_directory_id')->references('id')->on('company_directories')->cascadeOnDelete();
             $table->string('title');
             $table->json('documents');
             $table->text('description');

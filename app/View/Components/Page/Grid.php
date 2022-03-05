@@ -15,7 +15,7 @@ class Grid extends Component
      *
      * @return void
      */
-    public function __construct($headers, $createRoute)
+    public function __construct($headers, $createRoute = null)
     {
         $this->headers = array_merge($headers, ['Action']);
         $this->createRoute = $createRoute;

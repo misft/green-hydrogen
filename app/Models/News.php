@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\HasTranslation;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +19,11 @@ class News extends Model
         'news_category_id', 'embed'
     ];
 
-    public function category() {
-        return $this->belongsTo(NewsCategory::class);
+    protected $hidden = [
+        'updated_at'
+    ];
+
+    public function categories() {
+        return $this->belongsToMany(NewsHasCategory::class);
     }
 }

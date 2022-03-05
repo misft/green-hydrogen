@@ -15,6 +15,10 @@ class MenuHasSlot extends Model
 
     protected $guarded = [];
 
+    protected $fillable = [
+        'menu_id', 'slot_id', 'order'
+    ];
+
     public function menu() {
         return $this->belongsTo(Menu::class);
     }

@@ -12,16 +12,19 @@ class Language extends Component
 
     public bool $encode;
 
+    public bool $html;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($items, string $key, bool $encode = false)
+    public function __construct($items, string $key, bool $encode = false, $html = false)
     {
         $this->items = $items;
         $this->key = $key;
         $this->encode = $encode;
+        $this->html = $html;
     }
 
     /**

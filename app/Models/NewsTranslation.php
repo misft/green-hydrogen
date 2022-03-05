@@ -15,4 +15,8 @@ class NewsTranslation extends Model
     protected $fillable = [
         'title', 'description', 'news_id', 'translation_id'
     ];
+
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
 }

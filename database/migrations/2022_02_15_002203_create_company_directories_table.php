@@ -22,8 +22,10 @@ class CreateCompanyDirectoriesTable extends Migration
             $table->string('remember_token');
             $table->string('name')->nullable();
             $table->text('description')->nullable();
+            $table->string('image')->nullable();
             $table->string('photo')->nullable();
             $table->string('contact')->nullable();
+            $table->string('contact_person')->nullable();
             $table->string('website')->nullable();
             $table->string('address')->nullable();
             $table->double('lat')->nullable();

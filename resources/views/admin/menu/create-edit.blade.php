@@ -33,7 +33,7 @@
                     @csrf
                     <x-form.put-method  />
                     <x-form.localization :value="@$translation->translation_id" />
-                    <x-form.select :items="$groups" name="group" :value="@$group->id" label="Group" placeholder="Select Group" />
+                    <x-form.select :items="$groups" name="menu_group_id" :value="@$group->id" label="Group" placeholder="Select Group" />
                     <x-form.text name="name" placeholder="Input menu name" :value="@$translation->name" label="Name" />
                 </form>
                 <x-slot name="footer">

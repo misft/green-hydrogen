@@ -1,9 +1,14 @@
 <?php
 
 use App\Http\Controllers\Api\CompanyDirectoryController;
+use App\Http\Controllers\Api\ContactSupportController;
+use App\Http\Controllers\Api\EngagedUserController;
+use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\MenuGroupController;
 use App\Http\Controllers\Api\NewsController;
+use App\Http\Controllers\Api\NewsletterSubscriberController;
+use App\Http\Controllers\Api\SocialMediaController;
 use App\Http\Controllers\Api\SponsorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -45,23 +50,62 @@ Route::group([
 ], function() {
     Route::post('/register', 'register');
     Route::post('/login', 'login');
+    Route::get('/profile', 'profile');
     Route::get('/{id}', 'show');
 
     Route::middleware('auth:sanctum')->get('/profile', 'profile');
     Route::middleware('auth:sanctum')->post('/upload', 'upload');
+    Route::middleware('auth:sanctum')->delete('/document/delete', 'deleteDocument');
 });
 
 Route::group([
     'controller' => NewsController::class,
     'prefix' => 'news'
 ], function() {
-    Route::get('/news', 'index');
+    Route::get('/home', 'home');
+    Route::get('/carousel', 'carousel');
     Route::get('/{id}', 'show');
 });
 
 Route::group([ 
     'controller' => SponsorController::class,
     'prefix' => 'sponsor'
+], function() {
+    Route::get('/', 'index');
+});
+
+Route::group([
+    'controller' => NewsletterSubscriberController::class,
+    'prefix' => 'newsletter'
+], function() {
+    Route::post('/subscribe', 'store');
+});
+
+Route::group([
+    'controller' => EngagedUserController::class,
+    'prefix' => 'contact_us'
+], function() {
+    Route::post('/', 'store');
+});
+
+Route::group([
+    'controller' => EventController::class,
+    'prefix' => 'event'
+], function() {
+    Route::get('categories', 'categories');
+    Route::get('home', 'home');
+});
+
+Route::group([
+    'controller' => ContactSupportController::class,
+    'prefix' => 'contact_support'
+], function() {
+    Route::get('/', 'index');
+});
+
+Route::group([
+    'controller' => SocialMediaController::class,
+    'prefix' => 'social_media'
 ], function() {
     Route::get('/', 'index');
 });

@@ -5,7 +5,7 @@
             <span>{{ $description }}</span>
         </div>
         <div class="card-body">
-            @if($create)
+            @if($createRoute)
             <x-action.create-button :route="$createRoute" />
             @endif
             <div class="table-responsive product-table">
