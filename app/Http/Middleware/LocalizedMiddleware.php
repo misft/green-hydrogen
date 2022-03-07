@@ -18,7 +18,7 @@ class LocalizedMiddleware
     public function handle(Request $request, Closure $next)
     {
         if($request->header('Accept-Language')) {
-            App::setLocale($request->header('Accept-Language'));
+            App::setLocale($request->header('Accept-Language', null));
         }
         
         return $next($request);

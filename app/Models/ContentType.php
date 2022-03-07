@@ -13,4 +13,7 @@ class ContentType extends Model
     
     protected $hidden = ['created_at', 'updated_at'];
 
+    protected $fillable = [
+        'name', 'props', 'descriptions', 'form'
+    ];
 }

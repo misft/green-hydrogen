@@ -14,7 +14,7 @@ class EventController extends Controller
     use Response;
 
     public function categories(Request $request) {
-        $categories = EventCategory::localize()->get();
+        $categories = EventCategory::with('translation')->get();
 
         return $this->success(body: [
             'categories' => $categories
@@ -22,7 +22,7 @@ class EventController extends Controller
     }
 
     public function home(Request $request) {
-        $events = Event::with(['category.translation'])->localize()->where('date', '>=', date('Y-m-d'))->orderBy('date', 'desc')->get()->groupBy(function($item, $key) {
+        $events = Event::with(['category.translation'])->with('translation')->where('date', '>=', date('Y-m-d'))->orderBy('date', 'desc')->get()->groupBy(function($item, $key) {
             return date('d-M-Y', strtotime($item->date));
         })->toArray();
 

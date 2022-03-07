@@ -30,8 +30,4 @@ class MenuHasSlot extends Model
     public function content() {
         return $this->hasMany(SlotHasContent::class);
     }
-
-    public function translatedContent() {
-        return $this->hasMany(SlotHasContent::class)->localize();
-    }
 }

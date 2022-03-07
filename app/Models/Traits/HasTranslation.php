@@ -4,11 +4,26 @@ namespace App\Models\Traits;
 
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\App;
 
 trait HasTranslation {
     public function translation() {
         if($this->translation) {
-            return $this->hasOne($this->translation);
+            $code = $language ?? App::getLocale();
+
+            if (!$code) {
+                return $this->hasOne($this->translation);
+            }
+
+            return $this->hasOne($this->translation)->ofMany([], function ($query) use ($code) {
+                $query->when($code, function($subquery) use ($code) {
+                    $subquery->with(['translation' => function($q) use ($code) {
+                        $q->whereHas('translation', function($q) use ($code) {
+                            $q->whereCode($code);
+                        });
+                    }])->whereRelation('translation', 'code', $code);
+                });
+            });
         }
 
         throw new Exception('Translation model has not been set');
@@ -20,19 +35,5 @@ trait HasTranslation {
         }
 
         throw new Exception('Translation model has not been set');
-    }
-
-    public function scopeLocalize($query, $language = null) {
-        $code = $language ?? request()->header('Accept-Language');
-        
-        if(empty($code)) {
-            return $query->with('translation');
-        }
-
-        return $query->whereRelation('translation.translation', 'code', $code)->with(['translation' => function($query) use ($code) {
-            $query->whereHas('translation', function($subquery) use ($code) {
-                $subquery->whereCode($code);
-            });
-        }]);
     }
 }

@@ -23,7 +23,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <x-page.grid :headers="['Name']">
+            <x-page.grid :headers="['Name']" :createRoute="route('content_type.create')">
                 <x-slot name="title">
                     Content Type
                 </x-slot>
@@ -37,10 +37,8 @@
                             <h6>{{ $item->name }}</h6>
                         </td>
                         <td>
-                            <button class="btn btn-danger btn-xs" type="button"
-                                data-original-title="btn btn-danger btn-xs" title="">Delete</button>
-                            <button class="btn btn-success btn-xs" type="button"
-                                data-original-title="btn btn-danger btn-xs" title="">Edit</button>
+                            <x-action.delete-row :action="route('content_type.destroy', $item->id)" />
+                            <x-action.edit-row :route="route('content_type.edit', $item->id)" />
                         </td>
                     </tr>
                     @endforeach

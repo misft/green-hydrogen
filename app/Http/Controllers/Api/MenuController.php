@@ -12,7 +12,7 @@ class MenuController extends Controller
     use Response;
 
     public function index(Request $request) {
-        $menus = Menu::localize()
+        $menus = Menu::with('translation')
             ->when($request->get('menu_group_id'), function($query) use($request) {
                 $query->where('menu_group_id', $request->get('menu_group_id'));
             })
@@ -24,8 +24,8 @@ class MenuController extends Controller
     }
 
     public function show(Menu $menu) {
-        $menu = $menu->localize()
-            ->with(['slots.slot', 'slots.translatedContent.contentType:id,name', 'slots.translatedContent'])
+        $menu = $menu->with('translation')
+            ->with(['slots.slot', 'slots.content.contentType:id,name', 'slots.content'])
             ->first();
 
         return $this->success(200, body: [

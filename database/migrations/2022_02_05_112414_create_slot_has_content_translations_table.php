@@ -17,7 +17,7 @@ class CreateSlotHasContentTranslationsTable extends Migration
             $table->id();
             $table->foreignId('slot_has_content_id')->references('id')->on('slot_has_contents')->cascadeOnDelete();
             $table->foreignId('translation_id')->references('id')->on('translations')->cascadeOnDelete();
-            $table->json('content');
+            $table->json('content')->nullable();
             $table->timestamps();
         });
     }

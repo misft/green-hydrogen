@@ -10,15 +10,18 @@ class Grid extends Component
 
     public $createRoute;
 
+    public $actionHeader;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($headers, $createRoute = null)
+    public function __construct($headers, $createRoute = null, $actionHeader = true)
     {
-        $this->headers = array_merge($headers, ['Action']);
+        $this->headers = array_merge($headers, $actionHeader ? ['Action'] : []);
         $this->createRoute = $createRoute;
+        $this->actionHeader = $actionHeader;
     }
 
     /**

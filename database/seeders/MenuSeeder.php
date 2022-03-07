@@ -46,53 +46,28 @@ class MenuSeeder extends Seeder
             'name' => $faker->name()
         ]);
 
-        $contents = [
-            'heading' => [
-                'type' => 'title',
-                'value' => 'Hello world!',
-                'form' => 'text'
-            ],
-            'banner' => [
-                'type' => 'image',
-                'value' => '/storage/image/hello-world.png',
-                'form' => 'image'
-            ],
-            'carousel' => [
-                'type' => 'slideshow',
-                'value' => [
-                    '/storage/image/image1.png',
-                    '/storage/image/image2.png',
-                    '/storage/image/image3.png',
-                ],
-                'form' => 'image',
-                'props' => [
-                    'multiple' => 1
-                ]
-            ]
-        ];
+        $slots = Slot::all();
+        $contentTypes = ContentType::all();
+        $translations = Translation::all();
 
-        for ($i=0; $i < 3; $i++) { 
-            $slot = Slot::create([
-                'name' => array_keys($contents)[$i]
-            ]);
+        foreach($slots as $index => $slot) {
             $menuHasSlot = MenuHasSlot::create([
-                'slot_id' => $slot->id,
                 'menu_id' => $menu->id,
-                'order' => $i
+                'slot_id' => $slot->id,
+                'order' => $index
             ]);
-            $content_type = ContentType::create([
-                'name' => array_values($contents)[$i]["type"],
-                'form' => array_values($contents)[$i]["form"],
-                'props' => json_encode(@array_values($contents)[$i]["props"]),
-            ]);
+
+            $contentType = $contentTypes->random();
+
             $slotHasContent = SlotHasContent::create([
                 'menu_has_slot_id' => $menuHasSlot->id,
-                'content_type_id' => $content_type->id
+                'content_type_id' => $contentType->id,
             ]);
+
             SlotHasContentTranslation::create([
                 'slot_has_content_id' => $slotHasContent->id,
-                'translation_id' => Translation::first()->id,
-                'content' => array_values($contents)[$i]["value"]
+                'translation_id' => $translations->random()->id,
+                'content' => null
             ]);
         }
     }

@@ -24,6 +24,7 @@ class NewsSeeder extends Seeder
             $category = NewsCategory::create();
             NewsCategoryTranslation::create([
                 'translation_id' => Translation::first()->id,
+                'news_category_id' => $category->id,
                 'name' => $faker->colorName
             ]);
         } else {

@@ -25,7 +25,9 @@ class ContentTypeController extends Controller
     } 
     
     public function store(Request $request) {
-    
+        ContentType::create($request->all());
+
+        return back()->with('success', 'Sucessfully adding content type');
     } 
     
     public function edit(Request $request, $id) {

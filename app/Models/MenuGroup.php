@@ -19,8 +19,4 @@ class MenuGroup extends Model
     public function menus() {
         return $this->hasMany(Menu::class);
     }
-
-    public function translatedMenus() {
-        return $this->hasMany(Menu::class)->localize();
-    }
 }
