@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SponsorSeeder::class);
         $this->call(ContactSupportSeeder::class);
         $this->call(NewsSeeder::class);
+        $this->call(ActivitySeeder::class);
 
 
         $this->call(SlotSeeder::class);

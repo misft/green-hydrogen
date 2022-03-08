@@ -49,6 +49,6 @@ Route::resource('/news_category', NewsCategoryController::class);
 Route::resource('/company_directory', CompanyDirectoryController::class);
 Route::resource('/company_directory_topic', CompanyDirectoryTopicController::class);
 Route::resource('/company_document_category', CompanyDocumentCategoryController::class);
-Route::resource('/company_document', CompanyDocumenqtController::class);
+Route::resource('/company_document', CompanyDocumentController::class);
 Route::resource('/region', RegionController::class);
 Route::resource('/language', TranslationController::class);

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ActivityCategoryController;
+use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\CompanyDirectoryController;
 use App\Http\Controllers\Api\ContactSupportController;
 use App\Http\Controllers\Api\EngagedUserController;
@@ -106,6 +108,20 @@ Route::group([
 Route::group([
     'controller' => SocialMediaController::class,
     'prefix' => 'social_media'
+], function() {
+    Route::get('/', 'index');
+});
+
+Route::group([
+    'controller' => ActivityController::class,
+    'prefix' => 'activity'
+], function() {
+    Route::get('/', 'index');
+});
+
+Route::group([
+    'controller' => ActivityCategoryController::class,
+    'prefix' => 'activity_category'
 ], function() {
     Route::get('/', 'index');
 });

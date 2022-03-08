@@ -6,12 +6,12 @@ use App\Models\Traits\IsTranslation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityTranslation extends Model
+class ActivityCategoryTranslation extends Model
 {
     use HasFactory, IsTranslation;
 
     protected $fillable = [
-        'activity_id', 'translation_id', 'title', 'description'
+        'translation_id', 'activity_category_id'
     ];
 
     protected $hidden = [

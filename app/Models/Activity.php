@@ -15,4 +15,12 @@ class Activity extends Model
     protected $fillable = [
         'type', 'embed'
     ];
+
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
+    public function category() {
+        return $this->belongsTo(ActivityCategory::class, 'activity_category_id', 'id');
+    }
 }
