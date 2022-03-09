@@ -24,6 +24,8 @@ class CreateEventsTable extends Migration
             $table->date('date')->nullable();
             $table->time('start_at')->nullable();
             $table->time('end_at')->nullable();
+            $table->string('embed');
+            $table->string('embed_type');            
             $table->timestamps();
         });
     }

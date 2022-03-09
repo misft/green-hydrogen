@@ -59,6 +59,15 @@
                     <li><a href="{{ route('language.index') }}">Language</a></li>
                 </ul>
             </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-home"></i><span>Event / Schedule </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('event.index') }}">Event</a></li>
+                    <li><a href="{{ route('event_category.index') }}">Category</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

@@ -26,13 +26,20 @@ class EventSeeder extends Seeder
             'event_category_id' => $category->id
         ]);
 
+        $random = random_int(0, 1);
+
         $event = Event::create([
             'event_category_id' => $category->id,
             'speaker_name' => $faker->name,
             'speaker_title' => $faker->title,
             'lat' => $faker->latitude,
             'lng' => $faker->longitude,
-            'location' => $faker->address
+            'location' => $faker->address,
+            'date' => $faker->date('Y-m-d'),
+            'start_at' => $faker->time(),
+            'end_at' => $faker->time(),
+            'embed_type' => $random == 0 ? 'LINK' : 'FILE',
+            'embed' => $random == 0 ? 'https://www.youtube.com/watch?v=Kp7eSUU9oy8' : 'image/image.png'
         ]);
         EventTranslation::create([
             'translation_id' => 1,

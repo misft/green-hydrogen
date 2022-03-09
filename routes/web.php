@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\CompanyDocumentCategoryController;
 use App\Http\Controllers\Admin\CompanyDocumentController;
 use App\Http\Controllers\Admin\ContentTypeController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EventCategoryController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuGroupController;
 use App\Http\Controllers\Admin\MenuHasSlotController;
@@ -52,3 +54,5 @@ Route::resource('/company_document_category', CompanyDocumentCategoryController:
 Route::resource('/company_document', CompanyDocumentController::class);
 Route::resource('/region', RegionController::class);
 Route::resource('/language', TranslationController::class);
+Route::resource('/event', EventController::class);
+Route::resource('/event_category', EventCategoryController::class);

@@ -12,6 +12,10 @@ class Event extends Model
 
     protected $translation = EventTranslation::class;
 
+    protected $fillable = [
+        'event_category_id', 'speaker_name', 'speaker_title', 'lat', 'lng', 'location', 'date', 'start_at', 'end_at', 'embed_type', 'embed'
+    ];
+
     public function category() {
         return $this->belongsTo(EventCategory::class, 'event_category_id', 'id');
     }
