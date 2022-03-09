@@ -15,7 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('event_category_id')->references('id')->on('event_categories');
+            $table->foreignId('event_category_id')->nullable()->references('id')->on('event_categories')->nullOnDelete();
             $table->string('speaker_name')->nullable();
             $table->string('speaker_title')->nullable();
             $table->double('lat')->nullable();

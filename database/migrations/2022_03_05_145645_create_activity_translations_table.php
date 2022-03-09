@@ -16,7 +16,7 @@ class CreateActivityTranslationsTable extends Migration
         Schema::create('activity_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('activity_id')->references('id')->on('activities')->cascadeOnDelete();
-            $table->foreignId('translation_id')->references('id')->on('translations')->cascadeOnDelete();
+            $table->foreignId('translation_id')->nullable()->references('id')->on('translations')->nullOnDelete();
             $table->string('title');
             $table->text('description');
             $table->timestamps();

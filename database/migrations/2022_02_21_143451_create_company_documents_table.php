@@ -19,7 +19,7 @@ class CreateCompanyDocumentsTable extends Migration
             $table->string('title');
             $table->json('documents');
             $table->text('description');
-            $table->foreignId('company_document_category_id')->references('id')->on('company_document_categories');
+            $table->foreignId('company_document_category_id')->nullable()->references('id')->on('company_document_categories')->nullOnDelete();
             $table->timestamps();
         });
     }

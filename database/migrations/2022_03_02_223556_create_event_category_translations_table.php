@@ -15,8 +15,8 @@ class CreateEventCategoryTranslationsTable extends Migration
     {
         Schema::create('event_category_translations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('translation_id')->nullable()->references('id')->on('translations');
-            $table->foreignId('event_category_id')->nullable()->references('id')->on('event_categories');
+            $table->foreignId('translation_id')->nullable()->references('id')->on('translations')->nullOnDelete();
+            $table->foreignId('event_category_id')->nullable()->references('id')->on('event_categories')->nullOnDelete();
             $table->string('name');
             $table->timestamps();
         });

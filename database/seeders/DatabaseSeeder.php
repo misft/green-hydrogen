@@ -14,6 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        if(config('app.env') != 'local') {
+            $this->call(TranslationSeeder::class);
+            $this->call(ContentTypeSeeder::class);
+
+            return;
+        }
         $this->call(TranslationSeeder::class);
         $this->call(CompanyDirectoryBaseSeeder::class);
         $this->call(EventSeeder::class);

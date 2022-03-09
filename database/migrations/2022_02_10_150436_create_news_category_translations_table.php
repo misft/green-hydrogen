@@ -13,17 +13,10 @@ class CreateNewsCategoryTranslationsTable extends Migration
      */
     public function up()
     {
-        try {
-            Schema::table('news_categories', function(Blueprint $table) {
-                $table->dropColumn('name');
-            }); 
-        } catch(\Exception $e) {
-
-        }
         Schema::create('news_category_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('news_category_id')->references('id')->on('news_categories')->cascadeOnDelete();
-            $table->foreignId('translation_id')->references('id')->on('translations')->cascadeOnDelete();
+            $table->foreignId('translation_id')->nullable()->references('id')->on('translations')->nullOnDelete();
             $table->string('name');
             $table->timestamps();
         });

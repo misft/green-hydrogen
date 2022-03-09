@@ -15,8 +15,8 @@ class CreateSlotHasContentTable extends Migration
     {
         Schema::create('slot_has_contents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('menu_has_slot_id')->references('id')->on('menu_has_slots');
-            $table->foreignId('content_type_id')->references('id')->on('content_types');
+            $table->foreignId('menu_has_slot_id')->nullable()->references('id')->on('menu_has_slots')->nullOnDelete();
+            $table->foreignId('content_type_id')->nullable()->references('id')->on('content_types')->nullOnDelete();
             $table->timestamps();
         });
     }

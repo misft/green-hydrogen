@@ -18,13 +18,13 @@ class CreateProjectsTable extends Migration
             $table->foreignId('country_id')->nullable()->references('id')->on('countries')->nullOnDelete();
             $table->foreignId('region_id')->nullable()->references('id')->on('regions')->nullOnDelete();
             $table->foreignId('project_category_id')->nullable()->references('id')->on('project_categories')->nullOnDelete();
-            $table->string('name');
-            $table->string('status');
-            $table->string('contact');
-            $table->string('email');
-            $table->string('website');
-            $table->string('city');
-            $table->integer('total_budget');
+            $table->string('name')->nullable();
+            $table->string('status')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->string('city')->nullable();
+            $table->integer('total_budget')->nullable();
             $table->timestamps();
         });
     }

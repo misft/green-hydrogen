@@ -16,7 +16,7 @@ class CreateEventTranslationsTable extends Migration
         Schema::create('event_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('event_id')->references('id')->on('events')->cascadeOnDelete();
-            $table->foreignId('translation_id')->references('id')->on('translations')->cascadeOnDelete();
+            $table->foreignId('translation_id')->nullable()->references('id')->on('translations')->nullOnDelete();
             $table->text('title');
             $table->text('description');
             $table->timestamps();
