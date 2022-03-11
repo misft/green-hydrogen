@@ -33,34 +33,25 @@
                             that search on specific columns.</span>
                     </div>
                     <div class="card-body">
-                        <x-action.create-button :route="route('event.create')" />
+                        <x-action.create-button :route="route('event_category.create')" />
                         
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
                                     <tr>
-                                        <th>Category</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
+                                        <th>Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($events as $item)
+                                    @foreach ($categories as $item)
                                         <tr>
                                             <td>
-                                                <h6>{{ $item->category->translation->name }}</h6>
+                                                <x-table.cell.language :items="$item" key="name" />
                                             </td>
                                             <td>
-                                                <x-table.cell.language :items="$item" key="title" />
-                                            </td>
-                                            <td>
-                                                <x-table.cell.language :items="$item" key="description" />
-                                            </td>
-                                            <td class="row">
-                                                <x-action.external-link :route="$item->google_maps_url" label="Open Maps" />
-                                                <x-action.delete-row :action="route('event.destroy', $item->id)" />
-                                                <x-action.edit-row :route="route('event.edit', $item->id)" />
+                                                <x-action.delete-row :action="route('event_category.destroy', $item->id)" />
+                                                <x-action.edit-row :route="route('event_category.edit', $item->id)" />
                                             </td>
                                         </tr>
                                     @endforeach

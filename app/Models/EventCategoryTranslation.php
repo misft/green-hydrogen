@@ -11,6 +11,10 @@ class EventCategoryTranslation extends Model
 {
     use HasFactory, IsTranslation;
 
+    protected $fillable = [
+        'event_category_id', 'translation_id', 'name'
+    ];
+
     protected $hidden = [
         'created_at', 'updated_at'
     ];
