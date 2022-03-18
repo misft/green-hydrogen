@@ -21,13 +21,13 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            @foreach ($event->translation ?? [0] as $key => $translation)
+            @foreach ($event->translations ?? [0] as $key => $translation)
             <x-form.wizard>
                 <x-slot name="header">
                     {{ request()->routeIs('event.create') ? 'Create Event' : 'Update Event' }}
                 </x-slot>
                 <form id="form-{{ $key }}"
-                    action="{{ request()->routeIs('event.create') ? route('event.store'): route('event.update', $event->id) }}"
+                    action="{{ request()->routeIs('event.create') ? route('event.store') : route('event.update', $event->id) }}"
                     class="theme-form mega-form" method="post"
                     enctype="multipart/form-data">
                     @csrf
@@ -38,7 +38,12 @@
                     <x-form.text :value="@$event->speaker_title" label="Speaker Title" name="speaker_title" /> 
                     <x-form.text :value="@$translation->title" label="Title" name="title" /> 
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
-                    <x-form.file label="File" name="embed" multiple />
+                    <x-form.embed label="File" name="embed" value="{{ @$event->embed }}" isFile="{{ @$event->embed_type == 'FILE' }}" name="embed" placeholder="Link" />
+                    <x-form.text :value="@$event->location" placeholder="Address" label="Address" name="location"/>
+                    <x-form.maps identifier="event" lat-name="lat" lng-name="lng" :lat="@$event->lat" :lng="@$event->lng"></x-form.maps>
+                    <x-form.date label="Date" value="{{ @$event->date }}" name="date"/>
+                    <x-form.time label="Start At" value="{{ @$event->start_at }}" name="start_at"/>
+                    <x-form.time label="End At" value="{{ @$event->end_at }}" name="end_at"/>
                 </form>
                 <x-slot name="footer">
                     <button form="form-{{ $key }}" class="btn btn-primary btn-pill">Submit</button>

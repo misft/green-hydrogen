@@ -4,15 +4,21 @@ namespace App\View\Components\Form;
 
 use Illuminate\View\Component;
 
-class Embed extends Component
+class Time extends Component
 {
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
     public function __construct(
-        public $value,
         public $name,
-        public $placeholder,
-        public $label,
-        public $isFile
-    ) {}
+        public $value,
+        public $label
+    )
+    {
+        //
+    }
 
     /**
      * Get the view / contents that represent the component.
@@ -21,6 +27,6 @@ class Embed extends Component
      */
     public function render()
     {
-        return view('components.form.embed');
+        return view('components.form.time');
     }
 }

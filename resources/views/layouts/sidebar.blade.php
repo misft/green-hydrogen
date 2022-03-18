@@ -68,6 +68,23 @@
                     <li><a href="{{ route('event_category.index') }}">Category</a></li>
                 </ul>
             </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-home"></i><span>Our Activities </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('activity.index') }}">Activity</a></li>
+                    <li><a href="{{ route('activity_category.index') }}">Category</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-home"></i><span>Projects </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('project.index') }}">Our Project</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

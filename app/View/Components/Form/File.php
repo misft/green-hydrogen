@@ -13,7 +13,7 @@ class File extends Component
 
     public $label;
 
-    public function __construct($label, $name, $multiple)
+    public function __construct($label, $name, $multiple = null)
     {
         $this->label = $label;
         $this->name = $name;

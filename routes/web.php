@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityCategoryController;
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CompanyDirectoryController;
@@ -15,6 +17,8 @@ use App\Http\Controllers\Admin\MenuGroupController;
 use App\Http\Controllers\Admin\MenuHasSlotController;
 use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\ProjectCategoryController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
@@ -56,3 +60,7 @@ Route::resource('/region', RegionController::class);
 Route::resource('/language', TranslationController::class);
 Route::resource('/event', EventController::class);
 Route::resource('/event_category', EventCategoryController::class);
+Route::resource('/project_category', PzrojectCategoryController::class);
+Route::resource('/project', ProjectController::class);
+Route::resource('/activity', ActivityController::class);
+Route::resource('/activity_category', ActivityCategoryController::class);

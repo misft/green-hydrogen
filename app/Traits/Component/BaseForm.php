@@ -8,10 +8,13 @@ trait BaseForm {
     public $label;
 
     public $name;
+
+    public $placeholder;
     
-    public function __construct($value, $label, $name) {
+    public function __construct($value, $label, $name, $placeholder = '') {
         $this->value = $value;
         $this->label = $label;
         $this->name = $name;
+        $this->placeholder = $placeholder;
     }
 }

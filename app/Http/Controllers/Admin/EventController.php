@@ -28,18 +28,28 @@ class EventController extends Controller
     } 
     
     public function store(Request $request) {
+        $embed = $request->hasFile('embed');
+
+        if($embed) {
+            $embed = $request->file('embed')->storePublicly('event');
+        } else if ($request->get('embed')) {
+            $embed = $request->get('embed');
+        } else {
+            $embed = null;
+        }
+
         $event = Event::create(array_merge($request->all(), [
-            'embed' => $request->get('embed_type') == 'LINK' ? $request->get('embed') : $request->file('embed')->storePublicly('event')
+            'embed' => $embed,
         ]));
         
         $event->translation()->create($request->all());
 
-        return redirect('event.index')->with('success', 'Successfully adding event');
+        return redirect(route('event.edit', $event->id))->with('success', 'Successfully adding event');
     } 
     
     public function edit(Request $request, $id) {
         $event = Event::with(['translations', 'category.translations'])->find($id);
-        $categories = EventCategory::with('translations')->get();
+        $categories = EventCategory::with('translation')->get()->pluck('translation.name', 'id');
         
         return view('admin.event.create-edit', [
             'event' => $event,
@@ -50,15 +60,23 @@ class EventController extends Controller
     public function update(Request $request, $id) {
         $event = Event::with(['translations', 'category.translations'])->find($id);
         
-        $embed = $request->get('embed') ?? $request->file('embed');
+        $embed = $request->hasFile('embed');
+        
+        if($embed) {
+            $embed = $request->file('embed')->storePublicly('event');
+        } else if ($request->get('embed')) {
+            $embed = $request->get('embed');
+        } else {
+            $embed = $event->embed;
+        }
 
         $event->update(array_merge($request->all(), [
-            'embed' => $request->get('embed_type') == 'LINK' ? $request->get('embed') : (!$embed ?: $request->file('embed')->storePublicly('event'))
+            'embed' => $embed
         ]));
         
         $event->translation()->create($request->all());
 
-        return redirect('event.index')->with('success', 'Successfully adding event');
+        return redirect(route('event.index'))->with('success', 'Successfully adding event');
     } 
     
     public function destroy(Request $request, $id) {

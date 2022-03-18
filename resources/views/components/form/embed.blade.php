@@ -1,12 +1,18 @@
-<div class="mb-2">
-    <label class="col-form-label">{{ $label }}</label>
+<div class="row justify-content-between">
+    <div class="col-12">
     <div class="row">
-        <input id="embed-file-{{ $name }}" class="form-control col" type="file" name="{{ $name }}">
-        <input id="embed-link-{{ $name }}" class="form-control col" type="text" name="{{ $name }}" value="{{ $value }}">
-        <button class="btn btn-primary col-auto">Switch</button>
+        <x-form.file class="col-6" id="embed-file-{{ $name }}" name="{{ $name }}" label="{{ $label }}"/>
+        <x-form.text class="col-6" id="embed-text-{{ $name }}" label="Or Link" placeholder="{{ $placeholder }}" name="{{ $name }}" value="{{ $value }}"/>
     </div>
- </div>
+    </div>
+</div>
 
 @push('script')
-
+<script>
+    function toggle(event, name) {
+        event.preventDefault();
+    
+        console.log($(`#embed-file-${name}`).is('visible'))
+    }
+</script>
 @endpush
