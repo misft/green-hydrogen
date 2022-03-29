@@ -1,6 +1,37 @@
 <div class="iconsidebar-menu">
     <div class="sidebar">
         <ul class="iconMenu-bar custom-scrollbar">
+            @if(Auth::guard('company')->check())
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-home"></i><span>Company Directory </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('company_directory.index') }}">Registered Companies</a></li>
+                    <li><a href="{{ route('company_document.index') }}">Documents</a></li>
+                </ul>
+            </li>
+            @endif
+            @if(Auth::guard('web')->check())
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-home"></i><span>Company Directory </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('company_directory_topic.index') }}">Company Topic</a></li>
+                    <li><a href="{{ route('company_directory.index') }}">Registered Companies</a></li>
+                    <li><a href="{{ route('company_document_category.index') }}">Document Category</a></li>
+                    <li><a href="{{ route('company_document.index') }}">Documents</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-home"></i><span>Projects </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('project.index') }}">Our Project</a></li>
+                </ul>
+            </li>
             <li>
                 <a class="bar-icons" href="#">
                     <i class="pe-7s-home"></i><span>General </span>
@@ -30,17 +61,6 @@
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('news_category.index') }}">News Category</a></li>
                     <li><a href="{{ route('news.index') }}">News</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>Company Directory </span>
-                </a>
-                <ul class="iconbar-mainmenu custom-scrollbar">
-                    <li><a href="{{ route('company_directory_topic.index') }}">Company Topic</a></li>
-                    <li><a href="{{ route('company_directory.index') }}">Registered Companies</a></li>
-                    <li><a href="{{ route('company_document_category.index') }}">Document Category</a></li>
-                    <li><a href="{{ route('company_document.index') }}">Documents</a></li>
                 </ul>
             </li>
             <li>
@@ -77,14 +97,7 @@
                     <li><a href="{{ route('activity_category.index') }}">Category</a></li>
                 </ul>
             </li>
-            <li>
-                <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>Projects </span>
-                </a>
-                <ul class="iconbar-mainmenu custom-scrollbar">
-                    <li><a href="{{ route('project.index') }}">Our Project</a></li>
-                </ul>
-            </li>
+            @endif
         </ul>
     </div>
 </div>

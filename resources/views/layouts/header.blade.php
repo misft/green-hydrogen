@@ -78,18 +78,8 @@
                         </li>
                         <li>
                             <div class="row">
-                                <div class="col-sm-4 col-6 droplet-main"><i data-feather="file-text"></i><span
-                                        class="d-block">Content</span></div>
-                                <div class="col-sm-4 col-6 droplet-main"><i data-feather="activity"></i><span
-                                        class="d-block">Activity</span></div>
-                                <div class="col-sm-4 col-6 droplet-main"><i data-feather="users"></i><span
-                                        class="d-block">Contacts</span></div>
-                                <div class="col-sm-4 col-6 droplet-main"><i data-feather="clipboard"></i><span
-                                        class="d-block">Reports</span></div>
-                                <div class="col-sm-4 col-6 droplet-main"><i data-feather="anchor"></i><span
-                                        class="d-block">Automation</span></div>
-                                <div class="col-sm-4 col-6 droplet-main"><i data-feather="settings"></i><span
-                                        class="d-block">Settings</span></div>
+                                <div class="col-sm-4 col-6 droplet-main">
+                                    <i data-feather="file-text"></i><a class="d-block" href="{{ url('logout') }}">Logout</span></div>
                             </div>
                         </li>
                         <li class="text-center">
@@ -134,10 +124,7 @@
                         <li class="gradient-primary">
                             <h5 class="f-w-600 mb-0">Elana Saint</h5><span>Web Designer</span>
                         </li>
-                        <li><i data-feather="user"> </i>Profile</li>
-                        <li><i data-feather="message-square"> </i>Inbox</li>
-                        <li><i data-feather="file-text"> </i>Taskboard</li>
-                        <li><i data-feather="settings"> </i>Settings </li>
+                        <li><i data-feather="settings"> </i><a  href="{{ url('logout') }}">Logout</span> </li>
                     </ul>
                 </li>
             </ul>

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Premium Admin Template')
+@section('title', 'Green Hydrogen')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/prism.css">

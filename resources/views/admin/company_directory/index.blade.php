@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Premium Admin Template')
+@section('title', 'Green Hydrogen')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/prism.css">
@@ -64,8 +64,8 @@
                                                 <h6>{{ $company->website }}</h6>
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('menu.destroy', $menu->id)" />
-                                                <x-action.edit-row :route="route('menu.edit', $menu->id)" />
+                                                <x-action.delete-row :action="route('company_directory.destroy', $company->id)" />
+                                                <x-action.edit-row :route="route('company_directory.edit', $company->id)" />
                                             </td>
                                         </tr>
                                     @endforeach

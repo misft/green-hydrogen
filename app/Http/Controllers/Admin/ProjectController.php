@@ -9,12 +9,15 @@ use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\Region;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
     public function index(Request $request) {
-        $projects = Project::with('translations','category')->get();
+        $projects = Project::with('translations','category')->when(Auth::guard('company')->check(), function($query) {
+            $query->where('company_directory_id', Auth::guard('company')->user()->id);
+        })->get();
 
         return view('admin.project.index', [
             'projects' => $projects

@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\RegionController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
 use App\Http\Controllers\Admin\TranslationController;
+use App\Http\Controllers\Company\CompanyDirectoryController as CompanyCompanyDirectoryController;
+use App\Http\Controllers\Company\CompanyDocumentController as CompanyCompanyDocumentController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -39,28 +41,40 @@ Route::get('/clear-cache', function() {
     return "Cache is cleared";
 })->name('clear.cache');
 
-Route::get('login', [AuthController::class, 'index']);
+Route::get('login', [AuthController::class, 'index'])->name('login.index');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('company/login', [AuthController::class, 'companyIndex'])->name('login.company');
+Route::post('company/login', [AuthController::class, 'companyLogin'])->name('login.company.index');
 
-Route::resource('/menu_group', MenuGroupController::class);
-Route::resource('/slot', SlotController::class);
-Route::resource('/content_type', ContentTypeController::class);
-Route::resource('/menu_slot', MenuHasSlotController::class);
-Route::resource('/slot_content', SlotHasContentController::class);
-Route::resource('/menu', MenuController::class);
-Route::resource('/news', NewsController::class);
-Route::resource('/news_category', NewsCategoryController::class);
-Route::resource('/company_directory', CompanyDirectoryController::class);
-Route::resource('/company_directory_topic', CompanyDirectoryTopicController::class);
-Route::resource('/company_document_category', CompanyDocumentCategoryController::class);
-Route::resource('/company_document', CompanyDocumentController::class);
-Route::resource('/region', RegionController::class);
-Route::resource('/language', TranslationController::class);
-Route::resource('/event', EventController::class);
-Route::resource('/event_category', EventCategoryController::class);
-Route::resource('/project_category', PzrojectCategoryController::class);
-Route::resource('/project', ProjectController::class);
-Route::resource('/activity', ActivityController::class);
-Route::resource('/activity_category', ActivityCategoryController::class);
+Route::get('logout', [AuthController::class, 'logout']);
+
+
+Route::middleware(['admin'])->group(function() {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/menu_group', MenuGroupController::class);
+    Route::resource('/slot', SlotController::class);
+    Route::resource('/content_type', ContentTypeController::class);
+    Route::resource('/menu_slot', MenuHasSlotController::class);
+    Route::resource('/slot_content', SlotHasContentController::class);
+    Route::resource('/menu', MenuController::class);
+    Route::resource('/news', NewsController::class);
+    Route::resource('/news_category', NewsCategoryController::class);
+    Route::resource('/company_directory_topic', CompanyDirectoryTopicController::class);
+    Route::resource('/company_document_category', CompanyDocumentCategoryController::class);
+    Route::resource('/region', RegionController::class);
+    Route::resource('/language', TranslationController::class);
+    Route::resource('/event', EventController::class);
+    Route::resource('/event_category', EventCategoryController::class);
+    Route::resource('/project_category', ProjectCategoryController::class);
+    Route::resource('/activity', ActivityController::class);
+    Route::resource('/activity_category', ActivityCategoryController::class);    
+    Route::resource('/company_directory', CompanyDirectoryController::class);
+    Route::resource('/project', ProjectController::class);
+    Route::resource('/company_document', CompanyDocumentController::class);
+});
+
+Route::middleware(['company'])->group(function() {
+    Route::resource('/company/company_directory', CompanyCompanyDirectoryController::class);
+    Route::resource('/company/company_document', CompanyCompanyDocumentController::class);
+});

@@ -18,7 +18,7 @@
                             <div class="card-body p-0">
                                 <div class="cont text-center">
                                     <div class="w-100">
-                                        <form class="theme-form w-100" action="{{ route('login') }}" method="post">
+                                        <form class="theme-form w-100" action="{{ request()->routeIs('login.index') ? route('login') : route('login.company.index') }}" method="post">
                                             @csrf
                                             <h4>LOGIN</h4>
                                             <h6>Enter your Username and Password</h6>
@@ -57,5 +57,5 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/js/login.js') }}"></script>
+    <script src="{{ url('assets/js/login.js') }}"></script>
 @endsection

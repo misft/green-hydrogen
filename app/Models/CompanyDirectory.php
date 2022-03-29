@@ -26,6 +26,10 @@ class CompanyDirectory extends Authenticatable
         return $query->whereEmail($email);
     }
 
+    public function region() {
+        return $this->belongsTo(Region::class);
+    }
+
     public function documents() {
         return $this->hasMany(CompanyDocument::class);
     }

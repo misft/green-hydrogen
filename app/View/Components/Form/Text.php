@@ -7,7 +7,23 @@ use Illuminate\View\Component;
 
 class Text extends Component
 {
-    use BaseForm;
+    public $value;
+
+    public $label;
+
+    public $name;
+
+    public $placeholder;
+
+    public $password;
+    
+    public function __construct($value, $label, $name, $placeholder = '', $password = false) {
+        $this->value = $value;
+        $this->label = $label;
+        $this->name = $name;
+        $this->placeholder = $placeholder;
+        $this->password = $password;
+    }
 
     /**
      * Get the view / contents that represent the component.

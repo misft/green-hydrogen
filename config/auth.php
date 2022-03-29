@@ -41,10 +41,9 @@ return [
             'provider' => 'admins',
         ],
 
-        'landing_page' => [
-            'driver' => 'token',
-            'provider' => 'company_directory',
-            'hash' => true
+        'company' => [
+            'driver' => 'session',
+            'provider' => 'company',
         ],
 
         'api' => [
@@ -82,7 +81,7 @@ return [
             'model' => App\Models\Admin::class,
         ],
 
-        'company_directory' => [
+        'company' => [
             'driver' => 'eloquent',
             'model' => App\Models\CompanyDirectory::class
         ]
