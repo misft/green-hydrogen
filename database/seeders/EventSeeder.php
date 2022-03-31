@@ -38,7 +38,7 @@ class EventSeeder extends Seeder
             'date' => $faker->date('Y-m-d'),
             'start_at' => $faker->time(),
             'end_at' => $faker->time(),
-            'embed_type' => $random == 0 ? 'LINK' : 'FILE',
+            // 'embed_type' => $random == 0 ? 'LINK' : 'FILE',
             'embed' => $random == 0 ? 'https://www.youtube.com/watch?v=Kp7eSUU9oy8' : 'image/image.png'
         ]);
         EventTranslation::create([

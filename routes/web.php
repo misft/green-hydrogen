@@ -68,13 +68,13 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/event_category', EventCategoryController::class);
     Route::resource('/project_category', ProjectCategoryController::class);
     Route::resource('/activity', ActivityController::class);
-    Route::resource('/activity_category', ActivityCategoryController::class);    
+    Route::resource('/activity_category', ActivityCategoryController::class);
     Route::resource('/company_directory', CompanyDirectoryController::class);
     Route::resource('/project', ProjectController::class);
     Route::resource('/company_document', CompanyDocumentController::class);
 });
 
 Route::middleware(['company'])->group(function() {
-    Route::resource('/company/company_directory', CompanyCompanyDirectoryController::class);
-    Route::resource('/company/company_document', CompanyCompanyDocumentController::class);
+    Route::resource('/company/company_directory', CompanyDirectoryController::class, ['as' => 'company']);
+    Route::resource('/company/company_document', CompanyDocumentController::class, ['as' => 'company']);
 });
