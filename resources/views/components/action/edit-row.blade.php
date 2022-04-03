@@ -1,2 +1,2 @@
-<a href="{{ $route }}" class="btn btn-success btn-sm btn-pill"
+<a href="{{ $route }}" class="btn col-6 my-1 btn-success btn-sm btn-pill"
     title="">Edit</a>

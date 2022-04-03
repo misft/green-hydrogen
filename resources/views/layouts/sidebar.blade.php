@@ -15,7 +15,15 @@
             @if(Auth::guard('web')->check())
             <li>
                 <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>Company Directory </span>
+                    <i class="pe-7s-helm"></i><span>Manage Admin</span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('manage_admin.index') }}">Admin</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-network"></i><span>Company Directory </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('company_directory_topic.index') }}">Company Topic</a></li>
@@ -26,7 +34,7 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>Projects </span>
+                    <i class="pe-7s-box1"></i><span>Projects </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('project.index') }}">Our Project</a></li>
@@ -43,7 +51,7 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>User Menu </span>
+                    <i class="pe-7s-user"></i><span>User Menu </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('menu.index') }}">Menu</a></li>
@@ -56,7 +64,7 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>News </span>
+                    <i class="pe-7s-news-paper"></i><span>News </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('news_category.index') }}">News Category</a></li>
@@ -65,7 +73,7 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>Region </span>
+                    <i class="pe-7s-map-2"></i><span>Region </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('region.index') }}">Region</a></li>
@@ -73,7 +81,7 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>Language </span>
+                    <i class="pe-7s-server"></i><span>Language </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('language.index') }}">Language</a></li>
@@ -81,7 +89,7 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>Event / Schedule </span>
+                    <i class="pe-7s-link"></i><span>Event / Schedule </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('event.index') }}">Event</a></li>
@@ -90,7 +98,7 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
-                    <i class="pe-7s-home"></i><span>Our Activities </span>
+                    <i class="pe-7s-science"></i><span>Our Activities </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('activity.index') }}">Activity</a></li>

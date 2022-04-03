@@ -72,6 +72,7 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/company_directory', CompanyDirectoryController::class);
     Route::resource('/project', ProjectController::class);
     Route::resource('/company_document', CompanyDocumentController::class);
+    Route::resource('/manage_admin', AdminController::class)->parameter('manage_admin', 'admin');
 });
 
 Route::middleware(['company'])->group(function() {

@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="container-fluid">
-                    @if(session('success') || session('danger'))
+                    @if(session('success') || session('error'))
                     <x-card.page-notification/>
                     @endif
                 </div>
@@ -85,7 +85,7 @@
         </div>
     </div>
     @include('layouts.script')
-    
+
     @stack('script')
 </body>
 

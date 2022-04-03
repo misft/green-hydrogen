@@ -12,6 +12,10 @@ class Admin extends Authenticatable
 
     protected $guarded = [];
 
+    protected $fillable = [
+        'email', 'password', 'name', 'created_at', 'updated_at'
+    ];
+
     public function scopeEmail($query, string $email) {
         return $query->where('email', $email)->first();
     }
