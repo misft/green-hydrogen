@@ -60,10 +60,10 @@ class AuthController extends Controller
         ], $request->get('remember'));
 
         if($auth) {
-            return redirect(route('company_directory.index'));
+            return redirect('/company/company_directory');
         }
 
-        return redirect(route('login'))->with([
+        return redirect(route('logina.company.index'))->with([
             'error'=>'Email and password not match'
         ])->withInput();
     } 
