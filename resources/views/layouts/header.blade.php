@@ -29,7 +29,7 @@
                 </li>
                 <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i
                             data-feather="maximize"></i></a></li>
-                <li class="onhover-dropdown"><img class="img-fluid img-shadow-warning"
+                {{-- <li class="onhover-dropdown"><img class="img-fluid img-shadow-warning"
                         src="{{ route('/') }}/assets/images/dashboard/bookmark.png" alt="">
                     <div class="onhover-show-div bookmark-flip">
                         <div class="flip-card">
@@ -117,12 +117,12 @@
                     </ul>
                 </li>
                 <li><a class="right_side_toggle" href="#"><img class="img-fluid img-shadow-success"
-                            src="{{ route('/') }}/assets/images/dashboard/chat.png" alt=""></a></li>
+                            src="{{ route('/') }}/assets/images/dashboard/chat.png" alt=""></a></li> --}}
                 <li class="onhover-dropdown"> <span class="media user-header"><img class="img-fluid"
                             src="{{ route('/') }}/assets/images/dashboard/user.png" alt=""></span>
                     <ul class="onhover-show-div profile-dropdown">
                         <li class="gradient-primary">
-                            <h5 class="f-w-600 mb-0">Elana Saint</h5><span>Web Designer</span>
+                            <h5 class="f-w-600 mb-0">{{ Auth::user()->name }}</h5><span>{{ Auth::guard('web')->check() ? 'Admin' : 'Company User'}}</span>
                         </li>
                         <li><i data-feather="settings"> </i><a  href="{{ url('logout') }}">Logout</span> </li>
                     </ul>
@@ -131,7 +131,7 @@
             <div class="d-lg-none mobile-toggle pull-right"><i data-feather="more-horizontal"></i></div>
         </div>
         <script id="result-template" type="text/x-handlebars-template">
-            <div class="ProfileCard u-cf">                        
+            <div class="ProfileCard u-cf">
               <div class="ProfileCard-avatar"><i class="pe-7s-home"></i></div>
               <div class="ProfileCard-details">
               <div class="ProfileCard-realName">Indra</div>

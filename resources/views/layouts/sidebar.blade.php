@@ -98,6 +98,14 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
+                    <i class="pe-7s-way"></i><span>Social Media</span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('social_media.index') }}">Link</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="bar-icons" href="#">
                     <i class="pe-7s-science"></i><span>Our Activities </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">

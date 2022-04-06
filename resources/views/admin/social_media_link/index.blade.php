@@ -12,7 +12,7 @@
 @endsection
 
 @section('breadcrumb-title')
-<h2>Menu<span> Management</span></h2>
+<h2>Social Media<span> Management</span></h2>
 @endsection
 
 @section('breadcrumb-items')
@@ -33,25 +33,33 @@
                         that search on specific columns.</span>
                 </div>
                 <div class="card-body">
-                    <x-action.create-button :route="route('company_directory_topic.create')" />
+                    <x-action.create-button :route="route('social_media.create')" />
 
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Source</th>
+                                    <th>Link</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($companyDirectoryTopics as $item)
+                                @foreach ($data as $item)
                                 <tr>
                                     <td>
                                         <h6>{{ $item->name }}</h6>
                                     </td>
                                     <td>
-                                        <x-action.delete-row :action="route('company_directory_topic.destroy', $item->id)" />
-                                        <x-action.edit-row :route="route('company_directory_topic.edit', $item->id)" />
+                                        <h6>{{ $item->source }}</h6>
+                                    </td>
+                                    <td>
+                                        <a href="{{ $item->link }}" target="_blank" class="h6">{{ $item->link }}</a>
+                                    </td>
+                                    <td>
+                                        <x-action.delete-row :action="route('social_media.destroy', $item->id)" />
+                                        <x-action.edit-row :route="route('social_media.edit', $item->id)" />
                                     </td>
                                 </tr>
                                 @endforeach
