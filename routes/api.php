@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\MenuGroupController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\NewsletterSubscriberController;
 use App\Http\Controllers\Api\SocialMediaController;
+use App\Http\Controllers\Api\SocialMediaLinkController;
 use App\Http\Controllers\Api\SponsorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -69,7 +70,7 @@ Route::group([
     Route::get('/{id}', 'show');
 });
 
-Route::group([ 
+Route::group([
     'controller' => SponsorController::class,
     'prefix' => 'sponsor'
 ], function() {
@@ -122,6 +123,13 @@ Route::group([
 Route::group([
     'controller' => ActivityCategoryController::class,
     'prefix' => 'activity_category'
+], function() {
+    Route::get('/', 'index');
+});
+
+Route::group([
+    'controller' => SocialMediaLinkController::class,
+    'prefix' => 'social_media'
 ], function() {
     Route::get('/', 'index');
 });
