@@ -101,7 +101,7 @@
                     <i class="pe-7s-way"></i><span>Social Media</span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
-                    <li><a href="{{ route('social_media.index') }}">Link</a></li>
+                    <li><a href="{{ route('social_media.index') }}">Manage Link</a></li>
                 </ul>
             </li>
             <li>
