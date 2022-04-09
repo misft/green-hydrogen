@@ -20,7 +20,7 @@ class NewsController extends Controller
                     $query->where('name', 'ilike', "%{$request->get('name')}%")->where('description', 'ilike', "%{$request->get('description')}%");
                 });
             })->orderBy('created_at', 'desc')
-            ->paginate(7);
+            ->get();
 
         $latests = News::with('translation', 'category.translation')->orderBy('created_at', 'desc')->limit(3)->get();
         $categories = NewsCategory::with('translation')->get();
