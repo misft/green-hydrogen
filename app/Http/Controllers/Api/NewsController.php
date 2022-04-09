@@ -22,7 +22,7 @@ class NewsController extends Controller
             })->orderBy('created_at', 'desc')
             ->paginate(7);
 
-        $latests = News::with('translation')->orderBy('created_at', 'desc')->limit(3)->get();
+        $latests = News::with('translation', 'category.translation')->orderBy('created_at', 'desc')->limit(3)->get();
         $categories = NewsCategory::with('translation')->get();
 
         return $this->success(body: compact('news', 'categories', 'latests'));
