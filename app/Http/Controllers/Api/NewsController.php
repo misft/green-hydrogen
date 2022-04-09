@@ -40,4 +40,10 @@ class NewsController extends Controller
         
         return $this->success(body: compact('news'));
     }
+
+    public function show($id) {
+        $news = News::with(['translation', 'category.translation'])->find($id);
+
+        return $this->success(body: compact('news'));
+    }
 }
