@@ -20,9 +20,9 @@ class NewsController extends Controller
                     $query->where('name', 'ilike', "%{$request->get('name')}%")->where('description', 'ilike', "%{$request->get('description')}%");
                 });
             })->orderBy('created_at', 'desc')
-            ->paginate(7);
+            ->get();
 
-        $latests = News::with('translation')->orderBy('created_at', 'desc')->limit(3)->get();
+        $latests = News::with('translation', 'category.translation')->orderBy('created_at', 'desc')->limit(3)->get();
         $categories = NewsCategory::with('translation')->get();
 
         return $this->success(body: compact('news', 'categories', 'latests'));
@@ -38,6 +38,12 @@ class NewsController extends Controller
             })->orderBy('created_at', 'desc')
             ->paginate(3);
         
+        return $this->success(body: compact('news'));
+    }
+
+    public function show($id) {
+        $news = News::with(['translation', 'category.translation'])->find($id);
+
         return $this->success(body: compact('news'));
     }
 }
