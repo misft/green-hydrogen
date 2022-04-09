@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-body">
                         <x-action.create-button :route="route('project.create')" />
-                        
+
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
@@ -95,8 +95,8 @@
                                             </td>
                                             <td class="row">
                                                 <x-action.external-link :route="$item->google_maps_url" label="Open Maps" />
-                                                <x-action.delete-row :action="route('event.destroy', $item->id)" />
-                                                <x-action.edit-row :route="route('event.edit', $item->id)" />
+                                                <x-action.delete-row :action="route('project.destroy', $item->id)" />
+                                                <x-action.edit-row :route="route('project.edit', $item->id)" />
                                             </td>
                                         </tr>
                                     @endforeach

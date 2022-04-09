@@ -24,18 +24,19 @@
     <div class="container-fluid">
         <div class="row">
             {{-- Profile --}}
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
                         <h5>Profile</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            <form id="form-profile" action="{{ route('company.company_directory.update', $company->id) }}" method="post" enctype="multipart/form-data">
                             <div class="col-12">
                                 <label for="">Image</label>
                             </div>
-                            <div class="col-auto">
-                                <img src="{{ asset($company->image) }}" width="150" height="150" alt="">
+                            <div class="col-auto mb-2">
+                                <img class="img-thumbnail" src="{{ asset('storage/'.$company->image) }}" width="200" height="200" alt="">
                             </div>
                             <div class="col-auto">
                                 <input type="file" name="image" class="form-control">
@@ -44,21 +45,21 @@
                             <div class="col-12">
                                 <label for="">Photo</label>
                             </div>
-                            <div class="col-auto">
-                                <img src="{{ asset($company->photo) }}" width="150" height="150" alt="">
+                            <div class="col-auto mb-2">
+                                <img class="img-thumbnail" src="{{ asset('storage/'.$company->photo) }}" width="200" height="200" alt="">
                             </div>
                             <div class="col-auto">
                                 <input type="file" name="photo" class="form-control">
                             </div>
 
-                            <div class="col-8">
-                                <form id="form-profile" action="{{ route('company_directory.update', $company->id) }}" method="post">
+                            <div class="col-12">
+
                                     @csrf
                                     @method('put')
                                     <x-form.text label="Name" name="name" :value="$company->email" placeholder=""/>
                                     <x-form.textarea label="Description" name="description" :value="$company->description" placeholder=""/>
                                     <x-form.select :items="$regions" label="Region" name="region_id" :value="$company->region_id"/>
-                                    <x-form.text label="Address" name="address" :value="$company->address" placeholder="johndoe@gmail.com"/>
+                                    <x-form.text label="Address" name="address" :value="$company->address" placeholder="Jl. Gas Energy"/>
                                     <x-form.maps label="Location" :lat="$company->lat" :lng="$company->lng" lat-name="lat" lng-name="lng"/>
                                 </form>
                             </div>
@@ -70,7 +71,7 @@
                 </div>
             </div>
             {{-- Contact --}}
-            <div class="col-6">
+            <div class="col-md-6">
                 <div class="row">
                     <div class="col">
                         <div class="card">
@@ -78,7 +79,7 @@
                                 <h5>Contact Information</h5>
                             </div>
                             <div class="card-body">
-                                <form id="form-action" action="{{ route('company_directory.update', $company->id) }}" method="post">
+                                <form id="form-action" action="{{ route('company.company_directory.update', $company->id) }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
                                     <div class="row">
@@ -102,7 +103,7 @@
                                 </form>
                             </div>
                             <div class="card-footer">
-                                <button form="form-contact" type="submit" class="btn btn-info">Save</button>
+                                <button form="form-action" type="submit" class="btn btn-info">Save</button>
                             </div>
                         </div>
                         <div class="card">
@@ -110,7 +111,7 @@
                                 <h5>Login</h5>
                             </div>
                             <div class="card-body">
-                                <form id="form-login" action="{{ route('company_directory.update', $company->id) }}" method="post">
+                                <form id="form-login" action="{{ route('company.company_directory.update', $company->id) }}" method="post">
                                     @csrf
                                     @method('put')
                                     <x-form.text label="E-mail" name="email" :value="$company->email" placeholder=""/>

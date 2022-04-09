@@ -122,7 +122,7 @@
                             src="{{ route('/') }}/assets/images/dashboard/user.png" alt=""></span>
                     <ul class="onhover-show-div profile-dropdown">
                         <li class="gradient-primary">
-                            <h5 class="f-w-600 mb-0">{{ Auth::user()->name }}</h5><span>{{ Auth::guard('web')->check() ? 'Admin' : 'Company User'}}</span>
+                            <h5 class="f-w-600 mb-0 text-wrap">{{ Auth::guard('web')->user()->name ?? Auth::guard('company')->user()->name }}</h5><span>{{ Auth::guard('web')->check() ? 'Admin' : 'Company User'}}</span>
                         </li>
                         <li><i data-feather="settings"> </i><a  href="{{ url('logout') }}">Logout</span> </li>
                     </ul>

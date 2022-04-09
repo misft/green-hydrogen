@@ -7,8 +7,8 @@
                     <i class="pe-7s-home"></i><span>Company Directory </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
-                    <li><a href="{{ route('company_directory.index') }}">Registered Companies</a></li>
-                    <li><a href="{{ route('company_document.index') }}">Documents</a></li>
+                    <li><a href="{{ route('company.company_directory.index') }}">Registered Companies</a></li>
+                    <li><a href="{{ route('company.company_document.index') }}">Documents</a></li>
                 </ul>
             </li>
             @endif
@@ -38,6 +38,8 @@
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('project.index') }}">Our Project</a></li>
+                    <li><a href="{{ route('project_category.index') }}">Project Category</a></li>
+
                 </ul>
             </li>
             <li>
@@ -76,7 +78,9 @@
                     <i class="pe-7s-map-2"></i><span>Region </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('country.index') }}">Country</a></li>
                     <li><a href="{{ route('region.index') }}">Region</a></li>
+                    <li><a href="{{ route('city.index') }}">City</a></li>
                 </ul>
             </li>
             <li>

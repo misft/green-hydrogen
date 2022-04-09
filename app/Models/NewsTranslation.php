@@ -19,4 +19,13 @@ class NewsTranslation extends Model
     protected $hidden = [
         'created_at', 'updated_at'
     ];
+
+    public function news(){
+        return $this->belongsTo(News::class, 'news_id');
+    }
+
+    public function translation()
+    {
+        return $this->belongsTo(Translation::class, 'translation_id');
+    }
 }

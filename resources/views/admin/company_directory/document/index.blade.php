@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-body">
                         <x-action.create-button :route="route('company_document.create')" />
-                        
+
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
@@ -49,10 +49,10 @@
                                 <tbody>
                                     @foreach ($documents as $item)
                                         <tr>
-                                            <td> 
+                                            <td>
                                                 <h6>{{ $item->category->name }}</h6>
                                             </td>
-                                            <td> 
+                                            <td>
                                                 <h6>{{ $item->title }}</h6>
                                             </td>
                                             <td>
@@ -60,12 +60,12 @@
                                             </td>
                                             <td>
                                                 <h6>
-                                                    {{ count($item->documents) }}   
+                                                    {{ count(json_decode($item->documents)) }}
                                                 </h6>
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('company_document_category.destroy', $item->id)" />
-                                                <x-action.edit-row :route="route('company_document_category.edit', $item->id)" />
+                                                <x-action.delete-row :action="route('company_document.destroy', $item->id)" />
+                                                <x-action.edit-row :route="route('company_document.edit', $item->id)" />
                                             </td>
                                         </tr>
                                     @endforeach

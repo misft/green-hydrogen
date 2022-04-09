@@ -34,7 +34,7 @@
                     <x-form.put-method  />
                     <x-form.localization :value="@$translation->translation->code" />
                     <x-form.news-category.select />
-                    <x-form.text :value="@$translation->title" label="Title" name="title" /> 
+                    <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
                     <x-form.file label="File" name="embed" multiple />
                 </form>

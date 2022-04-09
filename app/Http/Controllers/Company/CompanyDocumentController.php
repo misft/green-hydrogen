@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanyDocument;
+use App\Models\CompanyDocumentCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyDocumentController extends Controller
 {
@@ -14,7 +17,9 @@ class CompanyDocumentController extends Controller
      */
     public function index()
     {
-        //
+        $companyDocument = Auth::guard('company')->user();
+        $documents = CompanyDocument::with('category')->whereCompanyDirectoryId($companyDocument->id)->get();
+        return view('company.document.index', compact('documents'));
     }
 
     /**
@@ -22,64 +27,50 @@ class CompanyDocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $request) {
+        $companyDocumentCategories = CompanyDocumentCategory::pluck('name', 'id');
+        return view('company.document.create-edit', compact('companyDocumentCategories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $files = $request->file('documents') ?? [];
+        $documents = array();
+
+        foreach($files as $file) {
+            $documents[] = $file->storePublicly('company_document');
+        }
+        CompanyDocument::create(array_merge($request->all(), [
+            'documents' => json_encode($documents)
+        ]));
+
+        return back()->with('success', 'Successfully adding document');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function edit(Request $request, CompanyDocument $companyDocument) {
+        $companyDocumentCategories = CompanyDocumentCategory::pluck('name', 'id');
+        return view('admin.company_directory.document.create-edit', [
+            'companyDocument' => $companyDocument,
+            'companyDocumentCategories' => $companyDocumentCategories
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function update(Request $request, CompanyDocument $companyDocument) {
+        $files = $request->file('documents') ?? [];
+        $documents = array();
+
+        foreach($files as $file) {
+            $documents[] = $file->storePublicly('company_document');
+        }
+        $companyDocument->update(array_merge($request->all(), [
+            'documents' => json_encode($documents)
+        ]));
+
+        return back()->with('success', 'Successfully updating document');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function destroy(Request $request, CompanyDocument $companyDocument) {
+        $companyDocument->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return back()->with('success', 'Successfully deleting document');
     }
 }

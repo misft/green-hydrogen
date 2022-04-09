@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyDocumentCategory extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['name'];
+
+    public function document()
+    {
+        return $this->hasMany(CompanyDocument::class);
+    }
 }

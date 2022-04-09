@@ -82,11 +82,10 @@ class CompanyDirectoryController extends Controller
             $request->hasFile('image') ? $request->file('image')->storePublicly('company_directory/image') : $company->image,
             $request->hasFile('photo') ? $request->file('photo')->storePublicly('company_directory/photo') : $company->photo
         ];
-
         $password = $company->password;
         if (
-            $request->has('password') 
-            && Hash::check($request->get('current_password'), $company->password) 
+            $request->has('password')
+            && Hash::check($request->get('current_password'), $company->password)
             && $request->get('password') == $request->get('confirm_password')
         ) {
             $password = Hash::make($request->get('password'));

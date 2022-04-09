@@ -15,17 +15,17 @@ class NewsController extends Controller
             'news' => $news
         ]);
     }
-    
+
     public function show(Request $request, News $news) {
         return view('admin.news.show', [
             'news' => $news
         ]);
-    } 
-    
+    }
+
     public function create(Request $request) {
         return view('admin.news.create-edit');
-    } 
-    
+    }
+
     public function store(Request $request) {
         $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('news')) : "";
 
@@ -36,16 +36,17 @@ class NewsController extends Controller
         $news->translation()->create($request->toArray());
 
         return redirect(route('news.edit', $news->id))->with('success', 'Success inserting news');
-    } 
-    
+    }
+
     public function edit(Request $request, News $news) {
         $news->load(['translation']);
+        // dd($news);
 
         return view('admin.news.create-edit', [
             'news' => $news
         ]);
-    } 
-    
+    }
+
     public function update(Request $request, News $news) {
         $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('news')) : $news->embed;
 
@@ -59,13 +60,13 @@ class NewsController extends Controller
         ], $request->all());
 
         return redirect(route('news.index'))->with('success', 'Success updating news');
-    } 
-    
+    }
+
     public function destroy(Request $request, News $news) {
         $news->delete();
 
         return redirect(route('news.index'))->with('success', 'Success deleting news');
-    } 
-    
-    
+    }
+
+
 }

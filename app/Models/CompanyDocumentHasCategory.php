@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyDocumentHasCategory extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['document_id', 'product_id'];
 }

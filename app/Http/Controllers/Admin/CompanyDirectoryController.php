@@ -58,4 +58,9 @@ class CompanyDirectoryController extends Controller
 
         return redirect(route('company_directory.index'))->with('success', "Company Directory deleted!");
     }
+
+    public function profile()
+    {
+        return view('admin.company_directory.index');
+    }
 }

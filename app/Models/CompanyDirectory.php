@@ -17,7 +17,7 @@ class CompanyDirectory extends Authenticatable
     ];
 
     protected $fillable = [
-        'company_directory_topic_id', 'region_id', 'name', 'email', 'password', 'description', 'photo', 'contact', 'website', 'lat', 'lng'
+        'company_directory_topic_id', 'contact_person','region_id', 'name', 'email', 'address','password', 'description', 'photo', 'image', 'contact', 'website', 'lat', 'lng'
     ];
 
     public static $scopes = [];

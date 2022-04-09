@@ -10,4 +10,11 @@ class Translation extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $fillable = ['name', 'code'];
+
+    public function news_translation()
+    {
+        return $this->hasMany(NewsTranslation::class);
+    }
 }

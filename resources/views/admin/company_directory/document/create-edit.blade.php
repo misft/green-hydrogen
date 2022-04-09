@@ -9,7 +9,7 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Default<span>Forms</span></h2>
+    <h2>Company Document <span>Forms</span></h2>
 @endsection
 
 @section('breadcrumb-items')
@@ -31,9 +31,11 @@
                     enctype="multipart/form-data">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.select :items="$companyDocumentCategories"></x-form.select>
+                    <x-form.select :items="$companyDirectories" placeholder="Pilih Company Directory" name="company_directory_id" label="Document Directory" :value="@$companyDocument->company_directory_id"></x-form.select>
+                    <x-form.select :items="$companyDocumentCategories" placeholder="Pilih Document Category" name="company_document_category_id" label="Document Category" :value="@$companyDocument->company_document_category_id"></x-form.select>
                     <x-form.text :value="@$companyDocument->title" label="Title" name="title" />
                     <x-form.textarea :value="@$companyDocument->description" label="Description" name="description" />
+                        <x-form.file name="documents[]" multiples label="File" />
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>

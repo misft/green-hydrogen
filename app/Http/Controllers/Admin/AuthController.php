@@ -43,15 +43,18 @@ class AuthController extends Controller
     }
 
     public function companyIndex(Request $request) {
-        return view('admin.login');
-    } 
+        if(!Auth::guard('company')->check()) {
+            return view('admin.login');
+        }
+        return redirect(route('company.company_directory.index'));
+    }
 
     public function companyLogin(Request $request) {
         $user = CompanyDirectory::email($request->get('email'))->first();
 
-        
+
         if (empty($user)) return back()->with([
-            'error'=>'User not found'
+            'error'=>'Company not found'
         ]);
 
         $auth = Auth::guard('company')->attempt([
@@ -60,17 +63,24 @@ class AuthController extends Controller
         ], $request->get('remember'));
 
         if($auth) {
-            return redirect(route('company_directory.index'));
+            return redirect(route('company.company_directory.index'));
         }
 
-        return redirect(route('login'))->with([
+        return redirect(route('login.company'))->with([
             'error'=>'Email and password not match'
         ])->withInput();
-    } 
+    }
 
     public function logout() {
-        Auth::logout();
-
-        return back();
+        if (Auth::guard('web')->check()) {
+			Auth::guard('web')->logout();
+			session()->flush();
+			return redirect(route('login'));
+		} elseif (Auth::guard('company')->check()) {
+			Auth::guard('company')->logout();
+			session()->flush();
+			return redirect(route('login.company'));
+		}
+        // return back();
     }
 }

@@ -22,12 +22,12 @@ class ProjectController extends Controller
         return view('admin.project.index', [
             'projects' => $projects
         ]);
-    } 
-    
+    }
+
     public function show(Request $request, $id) {
-    
-    } 
-    
+
+    }
+
     public function create(Request $request) {
         $categories = ProjectCategory::pluck('name', 'id');
         $countries = Country::pluck('name', 'id');
@@ -38,8 +38,8 @@ class ProjectController extends Controller
         ];
 
         return view('admin.project.create-edit', compact('categories', 'countries', 'regions', 'cities', 'statuses'));
-    } 
-    
+    }
+
     public function store(Request $request) {
         DB::beginTransaction();
         $project = Project::create(array_merge($request->all(), [
@@ -51,16 +51,22 @@ class ProjectController extends Controller
         $project->translations()->create($request->all());
 
         DB::commit();
-    
-        return redirect(route('project.edit', $project->id))->with('success', 'Successfully adding data');
-    } 
-    
+
+        return redirect(route('project.index'))->with('success', 'Successfully adding data');
+    }
+
     public function edit(Request $request, $id) {
         $project = Project::find($id);
+        $categories = ProjectCategory::pluck('name', 'id');
+        $countries = Country::pluck('name', 'id');
+        $regions = Region::pluck('name', 'id');
+        $cities = City::pluck('name', 'id');$statuses = [
+            "DONE" => "DONE"
+        ];
 
-        return view('admin.project.create-edit', compact('project'));
-    } 
-    
+        return view('admin.project.create-edit', compact('project', 'categories', 'countries', 'regions', 'cities', 'statuses'));
+    }
+
     public function update(Request $request, $id) {
         $project = Project::find($id);
 
@@ -76,14 +82,14 @@ class ProjectController extends Controller
         ], $request->all());
 
         return redirect(route('project.index'))->with('success', 'Successfully updating data');
-    }   
-    
+    }
+
     public function destroy(Request $request, $id) {
         $project = Project::find($id);
 
         $project->delete();
 
         return back()->with('success', 'Successfully deleting data');
-    } 
-    
+    }
+
 }

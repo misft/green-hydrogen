@@ -4,11 +4,13 @@ use App\Http\Controllers\Admin\ActivityCategoryController;
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CompanyDirectoryController;
 use App\Http\Controllers\Admin\CompanyDirectoryTopicController;
 use App\Http\Controllers\Admin\CompanyDocumentCategoryController;
 use App\Http\Controllers\Admin\CompanyDocumentController;
 use App\Http\Controllers\Admin\ContentTypeController;
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventCategoryController;
 use App\Http\Controllers\Admin\EventController;
@@ -24,6 +26,8 @@ use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
 use App\Http\Controllers\Admin\TranslationController;
+use App\Http\Controllers\Company\CompanyDirectoryController as CompanyCompanyDirectoryController;
+use App\Http\Controllers\Company\CompanyDocumentController as CompanyCompanyDocumentController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +66,8 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/company_directory_topic', CompanyDirectoryTopicController::class);
     Route::resource('/company_document_category', CompanyDocumentCategoryController::class);
     Route::resource('/region', RegionController::class);
+    Route::resource('/country', CountryController::class);
+    Route::resource('/city', CityController::class);
     Route::resource('/language', TranslationController::class);
     Route::resource('/event', EventController::class);
     Route::resource('/event_category', EventCategoryController::class);
@@ -76,6 +82,6 @@ Route::middleware(['admin'])->group(function() {
 });
 
 Route::middleware(['company'])->group(function() {
-    Route::resource('/company/company_directory', CompanyDirectoryController::class, ['as' => 'company']);
-    Route::resource('/company/company_document', CompanyDocumentController::class, ['as' => 'company']);
+    Route::resource('/company/company_directory', CompanyCompanyDirectoryController::class, ['as' => 'company']);
+    Route::resource('/company/company_document', CompanyCompanyDocumentController::class, ['as' => 'company']);
 });
