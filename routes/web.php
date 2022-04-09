@@ -79,3 +79,7 @@ Route::middleware(['company'])->group(function() {
     Route::resource('/company/company_directory', CompanyDirectoryController::class, ['as' => 'company']);
     Route::resource('/company/company_document', CompanyDocumentController::class, ['as' => 'company']);
 });
+
+Route::get('/_dev_/console/link', function() {
+    Artisan::call('storage:link');
+});
