@@ -22,12 +22,8 @@ class EventController extends Controller
     }
 
     public function home(Request $request) {
-        $events = Event::with(['category.translation'])->with('translation')->where('date', '>=', date('Y-m-d'))->orderBy('date', 'desc')->get()->groupBy(function($item, $key) {
-            return date('d-M-Y', strtotime($item->date));
-        })->toArray();
-
-        $events = new LengthAwarePaginator($events, count($events), 4, $request->get('page'));
-
+        $events = Event::with(['category.translation'])->with('translation')->where('date', '>=', date('Y-m-d'))->orderBy('date', 'desc')->get();
+        
         return $this->success(body: [
             'events' => $events
         ]);
