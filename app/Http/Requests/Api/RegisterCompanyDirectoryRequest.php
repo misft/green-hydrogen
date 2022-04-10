@@ -24,16 +24,16 @@ class RegisterCompanyDirectoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_directory_topic_id' => 'required',
-            'region_id' => 'required',
+            'company_directory_topic_id' => 'nullable',
+            'region_id' => 'nullable',
             'email' => 'required|string|email:rfc,dns',
             'password' => 'required|string|min:8|max:16',
             'name' => 'required|string',
             'description' => 'nullable|string|max:120',
             'photo' => 'nullable|image|max:2048',
             'website' => 'nullable|string|max:100',
-            'address' => 'required|string|max:100',
-            'contact' => 'required|string|max:90',
+            'address' => 'nullable|string|max:100',
+            'contact' => 'nullables|string|max:90',
             'lat' => 'nullable|numeric',
             'lng' => 'nullable|numeric'
         ];
