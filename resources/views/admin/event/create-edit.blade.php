@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Default Forms')
+@section('title', 'Event Management')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/select2.css">
@@ -9,13 +9,13 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Default<span>Forms</span></h2>
+    <h2>Event<span>Forms</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Forms</li>
-    <li class="breadcrumb-item">Form Layout</li>
-    <li class="breadcrumb-item active">Default Forms</li>
+    <li class="breadcrumb-item active">Event</li>
+    {{-- <li class="breadcrumb-item active">Index</li> --}}
 @endsection
 
 @section('content')
@@ -34,9 +34,9 @@
                     <x-form.put-method  />
                     <x-form.localization :value="@$translation->translation_id" />
                     <x-form.select :items="$categories" label="Category" name="event_category_id" :value="@$event->event_category_id" />
-                    <x-form.text :value="@$event->speaker_name" label="Speaker Name" name="speaker_name" /> 
-                    <x-form.text :value="@$event->speaker_title" label="Speaker Title" name="speaker_title" /> 
-                    <x-form.text :value="@$translation->title" label="Title" name="title" /> 
+                    <x-form.text :value="@$event->speaker_name" label="Speaker Name" name="speaker_name" />
+                    <x-form.text :value="@$event->speaker_title" label="Speaker Title" name="speaker_title" />
+                    <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
                     <x-form.embed label="File" name="embed" value="{{ @$event->embed }}" isFile="{{ @$event->embed_type == 'FILE' }}" name="embed" placeholder="Link" />
                     <x-form.text :value="@$event->location" placeholder="Address" label="Address" name="location"/>

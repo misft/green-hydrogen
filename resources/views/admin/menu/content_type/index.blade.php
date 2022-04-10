@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Green Hydrogen')
+@section('title', 'Content Type Menu')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/prism.css">
@@ -12,12 +12,12 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Menu<span> Management</span></h2>
+    <h2>Content Type Menu<span> Management</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">Default</li>
+    <li class="breadcrumb-item active">Menu</li>
 @endsection
 
 @section('content')

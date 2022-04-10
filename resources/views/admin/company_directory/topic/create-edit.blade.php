@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Default Forms')
+@section('title', 'Company Directory Management')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/select2.css">
@@ -9,13 +9,13 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Default<span>Forms</span></h2>
+    <h2>Company Directory<span>Forms</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Forms</li>
-    <li class="breadcrumb-item">Form Layout</li>
-    <li class="breadcrumb-item active">Default Forms</li>
+    <li class="breadcrumb-item active">Company Directory</li>
+    {{-- <li class="breadcrumb-item active">Index</li> --}}
 @endsection
 
 @section('content')

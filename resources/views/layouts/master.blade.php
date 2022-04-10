@@ -11,7 +11,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{ route('/') }}/assets/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="{{ route('/') }}/assets/images/favicon.png" type="image/x-icon">
-    <title>@yield('title')</title>
+    <title>@yield('title') | Green Hydrogen</title>
     @include('layouts.css')
     @yield('style')
     @stack('style')

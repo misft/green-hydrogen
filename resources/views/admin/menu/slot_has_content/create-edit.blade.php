@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Default Forms')
+@section('title', 'Menu Management')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/select2.css">
@@ -9,13 +9,13 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Default<span>Forms</span></h2>
+    <h2>Slot Menu<span>Forms</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Forms</li>
-    <li class="breadcrumb-item">Form Layout</li>
-    <li class="breadcrumb-item active">Default Forms</li>
+    <li class="breadcrumb-item active">Slot Menu</li>
+    {{-- <li class="breadcrumb-item active">Index</li> --}}
 @endsection
 
 @section('content')
@@ -36,7 +36,7 @@
                                         @if(request()->routeIs('slot_content.edit'))
                                         @method('put')
                                         @endif
-                                        @csrf 
+                                        @csrf
                                         <x-form.localization :value="@$translation->translation_id" />
                                         <x-form.select label="Menu" :value="@$slot_content->menuSlot->menu_id" placeholder="Select Menu" name="menu_id" :items="$menus" />
                                         <x-form.select label="Slot" :value="@$slot_content->menuSlot->slot_id" placeholder="Select Slot" name="slot_id" :items="$slots" />

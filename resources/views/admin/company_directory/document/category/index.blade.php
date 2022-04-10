@@ -12,12 +12,12 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Menu<span> Management</span></h2>
+    <h2>Company Directory<span> Management</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">Default</li>
+    <li class="breadcrumb-item active">Company Directory</li>
 @endsection
 
 @section('content')
@@ -26,15 +26,15 @@
             <!-- Individual column searching (text inputs) Starts-->
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
+                    {{-- <div class="card-header">
                         <h5>Individual column searching (text inputs) </h5>
                         <span>The searching functionality provided by DataTables is useful for quickly search through the
                             information in the table - however the search is global, and you may wish to present controls
                             that search on specific columns.</span>
-                    </div>
+                    </div> --}}
                     <div class="card-body">
                         <x-action.create-button :route="route('company_document_category.create')" />
-                        
+
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
@@ -46,7 +46,7 @@
                                 <tbody>
                                     @foreach ($categories as $item)
                                         <tr>
-                                            <td> 
+                                            <td>
                                                 <h6>{{ $item->name }}</h6>
                                             </td>
                                             <td>

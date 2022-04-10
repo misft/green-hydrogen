@@ -12,12 +12,12 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Menu<span> Management</span></h2>
+    <h2>Company<span> Management</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">Default</li>
+    <li class="breadcrumb-item active">Company</li>
 @endsection
 
 @section('content')

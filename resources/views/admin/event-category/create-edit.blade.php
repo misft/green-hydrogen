@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Default Forms')
+@section('title', 'Event Management')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/select2.css">
@@ -9,13 +9,13 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Default<span>Forms</span></h2>
+    <h2>Event Category<span>Forms</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Forms</li>
-    <li class="breadcrumb-item">Form Layout</li>
-    <li class="breadcrumb-item active">Default Forms</li>
+    <li class="breadcrumb-item active">Event Category</li>
+    {{-- <li class="breadcrumb-item active">Index</li> --}}
 @endsection
 
 @section('content')
@@ -33,7 +33,7 @@
                     @csrf
                     <x-form.put-method  />
                     <x-form.localization :value="@$translation->translation_id" />
-                    <x-form.text :value="@$translation->name" label="Name" name="name" /> 
+                    <x-form.text :value="@$translation->name" label="Name" name="name" />
                 </form>
                 <x-slot name="footer">
                     <button form="form-{{ $key }}" class="btn btn-primary btn-pill">Submit</button>
