@@ -37,6 +37,7 @@
                     <x-form.select :items="$regions" :value="@$project->region_id" label="Region" name="region_id"/>
                     <x-form.select :items="$cities" :value="@$project->city_id" label="City" name="city_id"/>
                     <x-form.text label="Project Name" name="name" :value="@$project->name" placeholder="Insert a name"/>
+                    <x-form.text label="Company Name" name="company_name" :value="@$project->company_name" placeholder="Insert a name"/>
                     <x-form.textarea label="Description" name="description" :value="@$project->description" rows="12" placeholder="Insert description"/>
                     <x-form.select :items="$statuses" label="Status" name="status" :value="@$project->status"/>
                     <x-form.text label="E-mail" name="email" :value="@$project->email" placeholder="johndoe@gmail.com"/>
