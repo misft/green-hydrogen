@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SocialMediaController;
 use App\Http\Controllers\Api\SocialMediaLinkController;
 use App\Http\Controllers\Api\SponsorController;
+use App\Http\Controllers\Api\CompanyDocumentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -142,4 +143,12 @@ Route::group([
     Route::get('/', 'index');
     Route::get('/names', 'names');
     Route::get('/status', 'status');
+});
+
+Route::group([
+    'controller' => CompanyDocumentController::class,
+    'prefix' => 'publication'
+], function() {
+    Route::get('/', 'index');
+    Route::get('/latest', 'latest');
 });

@@ -21,4 +21,8 @@ class CompanyDocument extends Model
     {
         return $this->belongsTo(CompanyDocumentCategory::class, 'company_document_category_id');
     }
+
+    public function company() {
+        return $this->belongsTo(CompanyDirectory::class, 'company_directory_id');
+    }
 }
