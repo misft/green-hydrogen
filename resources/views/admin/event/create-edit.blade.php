@@ -32,7 +32,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.localization :value="@$translation->translation->code" />
+                    <x-form.localization :value="@$translation->translation_id" />
                     <x-form.select :items="$categories" label="Category" name="event_category_id" :value="@$event->event_category_id" />
                     <x-form.text :value="@$event->speaker_name" label="Speaker Name" name="speaker_name" /> 
                     <x-form.text :value="@$event->speaker_title" label="Speaker Title" name="speaker_title" /> 

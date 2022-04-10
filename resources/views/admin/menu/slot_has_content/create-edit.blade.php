@@ -37,7 +37,7 @@
                                         @method('put')
                                         @endif
                                         @csrf 
-                                        <x-form.localization :value="@$translation->translation->code" />
+                                        <x-form.localization :value="@$translation->translation_id" />
                                         <x-form.select label="Menu" :value="@$slot_content->menuSlot->menu_id" placeholder="Select Menu" name="menu_id" :items="$menus" />
                                         <x-form.select label="Slot" :value="@$slot_content->menuSlot->slot_id" placeholder="Select Slot" name="slot_id" :items="$slots" />
                                         <x-form.select label="Content Type" :value="@$slot_content->contentType->id" placeholder="Select Content Type" name="content_type_id" :items="$contentTypes" />
