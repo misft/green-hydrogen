@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\Api\MenuGroupController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\NewsletterSubscriberController;
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SocialMediaController;
 use App\Http\Controllers\Api\SocialMediaLinkController;
 use App\Http\Controllers\Api\SponsorController;
@@ -132,4 +133,13 @@ Route::group([
     'prefix' => 'social_media'
 ], function() {
     Route::get('/', 'index');
+});
+
+Route::group([
+    'controller' => ProjectController::class,
+    'prefix' => 'project'
+], function() {
+    Route::get('/', 'index');
+    Route::get('/names', 'names');
+    Route::get('/status', 'status');
 });

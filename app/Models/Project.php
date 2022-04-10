@@ -17,7 +17,7 @@ class Project extends Model
 
     protected $fillable = [
         'country_id', 'region_id', 'project_category_id', 'name', 'status', 'contact', 'email', 'website', 'total_budget', 'city_id',
-        'lat', 'lng', 'image', 'logo', 'member_of_image'
+        'lat', 'lng', 'image', 'logo', 'member_of_image', 'company_name'
     ];
 
     protected $appends = [
