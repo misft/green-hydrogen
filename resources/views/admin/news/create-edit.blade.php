@@ -21,7 +21,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            @foreach ($news->translation ?? [0] as $key => $translation)
+            @foreach ($news->translations ?? [0] as $key => $translation)
             <x-form.wizard>
                 <x-slot name="header">
                     {{ request()->routeIs('news.create') ? 'Create News' : 'Update News' }}
