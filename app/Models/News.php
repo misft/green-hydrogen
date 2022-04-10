@@ -16,7 +16,7 @@ class News extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'news_category_id', 'embed'
+        'news_category_id', 'embed', 'admin_id'
     ];
 
     protected $hidden = [
@@ -30,5 +30,9 @@ class News extends Model
     public function news_translation()
     {
         return $this->hasMany(NewsTranslation::class);
+    }
+
+    public function admin() {
+        return $this->belongsTo(Admin::class);
     }
 }

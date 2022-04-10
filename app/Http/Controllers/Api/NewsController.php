@@ -13,7 +13,7 @@ class NewsController extends Controller
     use Response;
 
     public function home(Request $request) {
-        $news = News::with(['translation', 'category.translation'])->when($request->get('news_category_id'), function($query) use ($request) {
+        $news = News::with(['translation', 'category.translation', 'admin:id,name'])->when($request->get('news_category_id'), function($query) use ($request) {
                 $query->where('news_category_id', $request->get('news_category_id'));
             })->when($request->get('name') || $request->get('description'), function($query) use ($request) {
                 $query->whereHas('translation', function($query) use ($request) {
@@ -22,14 +22,14 @@ class NewsController extends Controller
             })->orderBy('created_at', 'desc')
             ->get();
 
-        $latests = News::with('translation', 'category.translation')->orderBy('created_at', 'desc')->limit(3)->get();
+        $latests = News::with('translation', 'category.translation', 'admin:id,name')->orderBy('created_at', 'desc')->limit(3)->get();
         $categories = NewsCategory::with('translation')->get();
 
         return $this->success(body: compact('news', 'categories', 'latests'));
     }
 
     public function carousel(Request $request) {
-        $news = News::with(['translation', 'category.translation'])->when($request->get('news_category_id'), function($query) use ($request) {
+        $news = News::with(['translation', 'category.translation', 'admin:id,name'])->when($request->get('news_category_id'), function($query) use ($request) {
                 $query->where('news_category_id', $request->get('news_category_id'));
             })->when($request->get('name') || $request->get('description'), function($query) use ($request) {
                 $query->whereHas('translation', function($query) use ($request) {
@@ -42,7 +42,7 @@ class NewsController extends Controller
     }
 
     public function show($id) {
-        $news = News::with(['translation', 'category.translation'])->find($id);
+        $news = News::with(['translation', 'category.translation', 'admin:id,name'])->find($id);
 
         return $this->success(body: compact('news'));
     }
