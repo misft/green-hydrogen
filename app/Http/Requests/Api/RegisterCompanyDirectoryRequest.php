@@ -33,7 +33,7 @@ class RegisterCompanyDirectoryRequest extends FormRequest
             'photo' => 'nullable|image|max:2048',
             'website' => 'nullable|string|max:100',
             'address' => 'nullable|string|max:100',
-            'contact' => 'nullables|string|max:90',
+            'contact' => 'nullable|string|max:90',
             'lat' => 'nullable|numeric',
             'lng' => 'nullable|numeric'
         ];
