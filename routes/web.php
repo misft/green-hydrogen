@@ -89,3 +89,7 @@ Route::middleware(['company'])->group(function() {
 Route::get('/_dev_/console/link', function() {
     Artisan::call('storage:link');
 });
+
+Route::get('/_dev_/console/migrate', function() {
+    Artisan::call('migrate');
+});
