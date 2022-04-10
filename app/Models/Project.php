@@ -16,7 +16,7 @@ class Project extends Model
     protected $translation = ProjectTranslation::class;
 
     protected $fillable = [
-        'country_id', 'region_id', 'project_category_id', 'name', 'status', 'contact', 'email', 'website', 'total_budget', 'city_id',
+        'country_id', 'region_id', 'project_category_id', 'name', 'description', 'status', 'contact', 'email', 'website', 'total_budget', 'city_id',
         'lat', 'lng', 'image', 'logo', 'member_of_image', 'company_name'
     ];
 
