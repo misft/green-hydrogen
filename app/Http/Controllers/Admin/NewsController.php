@@ -30,7 +30,8 @@ class NewsController extends Controller
         $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('news')) : "";
 
         $news = News::create(array_merge($request->toArray(), [
-            'embed' => $file
+            'embed' => $file,
+            'admin_id' => $request->user()->id
         ]));
 
         $news->translation()->create($request->toArray());
@@ -51,7 +52,8 @@ class NewsController extends Controller
         $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('news')) : $news->embed;
 
         $news->update(array_merge($request->toArray(), [
-            'embed' => $file
+            'embed' => $file,
+            'admin_id' => $request->user()->id
         ]));
 
         $news->translation()->updateOrCreate([
