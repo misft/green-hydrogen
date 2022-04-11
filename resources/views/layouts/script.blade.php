@@ -14,5 +14,4 @@
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{route('/')}}/assets/js/script.js"></script>
-<script src="{{route('/')}}/assets/js/theme-customizer/customizer.js"></script>
 <!-- login js-->

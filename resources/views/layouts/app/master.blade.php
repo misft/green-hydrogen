@@ -14,12 +14,6 @@
       @yield('style')
    </head>
    <body>
-      <!-- Loader starts-->
-      <div class="loader-wrapper">
-         <div class="typewriter">
-            <h1>New Era Admin Loading..</h1>
-         </div>
-      </div>
       <!-- Loader ends-->
       <!-- page-wrapper Start-->
       <div class="page-wrapper">

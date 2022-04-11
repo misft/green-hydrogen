@@ -74,7 +74,10 @@ class EventController extends Controller
             'embed' => $embed
         ]));
         
-        $event->translation()->create($request->all());
+        $event->translation()->updateOrCreate([
+            'event_id' => $event->id,
+            'translation_id' => $request->get('translation_id')
+        ], $request->all());
 
         return redirect(route('event.index'))->with('success', 'Successfully adding event');
     } 
