@@ -20,6 +20,15 @@ class CompanyDirectoryController extends Controller
 {
     use Response;
 
+    public function index(Request $request) {
+        $companyDirectories = CompanyDirectory::with(['region:id,name'])
+            ->get();
+
+        return $this->success(body: [
+            'company_directories' => $companyDirectories
+        ]);
+    }
+
     public function register(RegisterCompanyDirectoryRequest $request) {
         try {
             $companyDirectory = CompanyDirectory::create(array_merge($request->validated(), [

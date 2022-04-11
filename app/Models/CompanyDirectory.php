@@ -13,7 +13,7 @@ class CompanyDirectory extends Authenticatable
     public $guarded = [];
 
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 'remember_token', 'api_token'
     ];
 
     protected $fillable = [

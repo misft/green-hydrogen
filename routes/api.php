@@ -53,6 +53,7 @@ Route::group([
     'controller' => CompanyDirectoryController::class,
     'prefix' => 'company_directory'
 ], function() {
+    Route::get('/', 'index');
     Route::post('/register', 'register');
     Route::post('/login', 'login');
     Route::get('/profile', 'profile');
