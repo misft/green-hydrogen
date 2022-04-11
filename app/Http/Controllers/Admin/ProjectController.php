@@ -75,7 +75,7 @@ class ProjectController extends Controller
     public function update(Request $request, $id) {
         $project = Project::find($id);
 
-        $project = Project::create(array_merge($request->all(), [
+        $project = $project->update(array_merge($request->all(), [
             'image' => $request->has('image') ? $request->file('image')->storePublicly('project/image') : $project->image,
             'logo' => $request->has('logo') ? $request->file('logo')->storePublicly('project/logo') : $project->logo,
             'member_of_image' => $request->has('member_of_image') ? $request->file('logo')->storePublicly('project/member_of_image') : $project->member_of_image,
