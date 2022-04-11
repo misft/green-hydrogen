@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\SocialMediaController;
 use App\Http\Controllers\Api\SocialMediaLinkController;
 use App\Http\Controllers\Api\SponsorController;
 use App\Http\Controllers\Api\CompanyDocumentController;
+use App\Http\Controllers\Api\RegionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -152,4 +153,11 @@ Route::group([
 ], function() {
     Route::get('/', 'index');
     Route::get('/latest', 'latest');
+});
+
+Route::group([
+    'controller' => RegionController::class,
+    'prefix' => 'region'
+], function() {
+    Route::get('/', 'index');
 });

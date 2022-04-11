@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class TranslationController extends Controller
 {
-    //
+    public function index() {
+        
+    }
 }
