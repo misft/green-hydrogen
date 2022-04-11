@@ -53,7 +53,7 @@
                                         <h6>{{ $company->name }}</h6>
                                     </td>
                                     <td>
-                                        <h6>{{ $company->region->name }}</h6>
+                                        <h6>{{ $company->region?->name }}</h6>
                                     </td>
                                     <td>
                                         <h6>{{ $company->contact }}</h6>
