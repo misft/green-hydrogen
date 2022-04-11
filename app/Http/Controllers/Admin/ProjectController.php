@@ -62,8 +62,11 @@ class ProjectController extends Controller
         $categories = ProjectCategory::pluck('name', 'id');
         $countries = Country::pluck('name', 'id');
         $regions = Region::pluck('name', 'id');
-        $cities = City::pluck('name', 'id');$statuses = [
-            "DONE" => "DONE"
+        $cities = City::pluck('name', 'id');
+        $statuses = [
+            "PROJECT" => "PROJECT",
+            "PILOT_PROJECT" => "PILOT PROJECT",
+            "FEASIBILITY_STUDY" => "FEASIBILITY STUDY"
         ];
 
         return view('admin.project.create-edit', compact('project', 'categories', 'countries', 'regions', 'cities', 'statuses'));
