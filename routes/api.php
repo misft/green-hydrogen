@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\VideoPublicationController;
 use App\Http\Controllers\Api\ActivityCategoryController;
 use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\CompanyDirectoryController;
@@ -158,6 +159,13 @@ Route::group([
 Route::group([
     'controller' => RegionController::class,
     'prefix' => 'region'
+], function() {
+    Route::get('/', 'index');
+});
+
+Route::group([
+    'controller' => VideoPublicationController::class,
+    'prefix' => 'video_publication'
 ], function() {
     Route::get('/', 'index');
 });

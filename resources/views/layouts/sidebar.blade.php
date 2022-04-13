@@ -117,6 +117,14 @@
                     <li><a href="{{ route('activity_category.index') }}">Category</a></li>
                 </ul>
             </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-science"></i><span>Video Publication </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('video_publication.index') }}">Publication</a></li>
+                </ul>
+            </li>
             @endif
         </ul>
     </div>
