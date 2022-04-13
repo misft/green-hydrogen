@@ -65,7 +65,7 @@
                                                 <x-table.cell.language :items="$item" key="content" :encode="true" />
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('slot_content.destroy', $item->id)" />
+                                                <x-action.delete-row :idform="$item->id" :action="route('slot_content.destroy', $item->id)" />
                                                 <x-action.edit-row :route="route('slot_content.edit', $item->id)" />
                                             </td>
                                         </tr>

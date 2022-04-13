@@ -51,7 +51,7 @@
                                                 <h6>{{ $item->name }}</h6>
                                             </td>
                                             <td class="col-4">
-                                                <x-action.delete-row :action="route('project_category.destroy', $item->id)" />
+                                                <x-action.delete-row :idform="$item->id" :action="route('project_category.destroy', $item->id)" />
                                                 <x-action.edit-row :route="route('project_category.edit', $item->id)" />
                                                 </td>
                                             </div>

@@ -95,7 +95,7 @@
                                             </td>
                                             <td class="row">
                                                 <x-action.external-link :route="$item->google_maps_url" label="Open Maps" />
-                                                <x-action.delete-row :action="route('project.destroy', $item->id)" />
+                                                <x-action.delete-row :idform="$item->id" :action="route('project.destroy', $item->id)" />
                                                 <x-action.edit-row :route="route('project.edit', $item->id)" />
                                             </td>
                                         </tr>

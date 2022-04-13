@@ -50,7 +50,7 @@
                                                 <x-table.cell.language :items="$item" key="name" />
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('event_category.destroy', $item->id)" />
+                                                <x-action.delete-row :idform="$item->id" :action="route('event_category.destroy', $item->id)" />
                                                 <x-action.edit-row :route="route('event_category.edit', $item->id)" />
                                             </td>
                                         </tr>

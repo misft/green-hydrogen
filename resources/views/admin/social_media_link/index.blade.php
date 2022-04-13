@@ -58,7 +58,7 @@
                                         <a href="{{ $item->link }}" target="_blank" class="h6">{{ $item->link }}</a>
                                     </td>
                                     <td>
-                                        <x-action.delete-row :action="route('social_media.destroy', $item->id)" />
+                                        <x-action.delete-row :idform="$item->id" :action="route('social_media.destroy', $item->id)" />
                                         <x-action.edit-row :route="route('social_media.edit', $item->id)" />
                                     </td>
                                 </tr>

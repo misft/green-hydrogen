@@ -51,7 +51,7 @@
 
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('menu_group.destroy', $group->id)" />
+                                                <x-action.delete-row :idform="$item->id" :action="route('menu_group.destroy', $group->id)" />
                                                 <x-action.edit-row :route="route('menu_group.edit', $group->id)" />
                                             </td>
                                         </tr>
