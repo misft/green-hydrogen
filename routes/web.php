@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
 use App\Http\Controllers\Admin\TranslationController;
+use App\Http\Controllers\Admin\VideoPublicationController;
 use App\Http\Controllers\Company\CompanyDirectoryController as CompanyCompanyDirectoryController;
 use App\Http\Controllers\Company\CompanyDocumentController as CompanyCompanyDocumentController;
 use Illuminate\Support\Facades\Artisan;
@@ -81,6 +82,7 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/manage_admin', AdminController::class)->parameter('manage_admin', 'admin');
     Route::resource('/social_media', SocialMediaLinkController::class)->parameter('social_media', 'socialMediaLink');
     Route::resource('/setting', SettingController::class)->only('store');
+    Route::resource('/video_publication', VideoPublicationController::class);
 });
 
 Route::middleware(['company'])->group(function() {
