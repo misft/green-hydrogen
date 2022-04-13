@@ -31,6 +31,6 @@ class Maps extends Component
      */
     public function render()
     {
-        return view('components.form.maps');
+        if($this->identifier == 'event_1') return view('components.form.maps'); else return view('components.form.maps2');
     }
 }

@@ -40,7 +40,7 @@
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
                     <x-form.embed label="File" name="embed" value="{{ @$event->embed }}" isFile="{{ @$event->embed_type == 'FILE' }}" name="embed" placeholder="Link" />
                     <x-form.text :value="@$event->location" placeholder="Address" label="Address" name="location"/>
-                    <x-form.maps identifier="event" lat-name="lat" lng-name="lng" :lat="@$event->lat" :lng="@$event->lng"></x-form.maps>
+                    <x-form.maps identifier="event_{{ $key }}" lat-name="lat" lng-name="lng" :lat="@$event->lat" :lng="@$event->lng"></x-form.maps>
                     <x-form.date label="Date" value="{{ @$event->date }}" name="date"/>
                     <x-form.time label="Start At" value="{{ @$event->start_at }}" name="start_at"/>
                     <x-form.time label="End At" value="{{ @$event->end_at }}" name="end_at"/>

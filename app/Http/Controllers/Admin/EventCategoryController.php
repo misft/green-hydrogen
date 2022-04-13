@@ -31,7 +31,8 @@ class EventCategoryController extends Controller
             'translation_id' => $request->get('translation_id')
         ], $request->all());
 
-        return back()->with('success', 'Successfully adding event category');
+        // return back()->with('success', 'Successfully adding event category');
+        return redirect(route('event_category.edit', $category->id))->with('success', 'Successfully adding event category');
     } 
     
     public function edit(Request $request, $id) {
@@ -49,7 +50,8 @@ class EventCategoryController extends Controller
             'translation_id' => $request->get('translation_id')
         ], $request->all());
 
-        return back()->with('success', 'Successfully updating event category');
+        // return back()->with('success', 'Successfully updating event category');
+        return redirect(route('event_category.index'))->with('success', 'Successfully updating event category');
     } 
     
     public function destroy(Request $request, $id) {
