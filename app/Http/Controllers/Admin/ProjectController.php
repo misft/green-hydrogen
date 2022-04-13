@@ -11,6 +11,7 @@ use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
@@ -43,6 +44,56 @@ class ProjectController extends Controller
     }
 
     public function store(Request $request) {
+        $rules = [
+            'project_category_id'=>'required',
+            'country_id'=>'required',
+            'region_id'=>'required',
+            'city_id'=>'required',
+            'name'=>'required',
+            'company_name'=>'required',
+            'description'=>'required',
+            'status'=>'required',
+            'email'=>'required',
+            'contact'=>'required',
+            'website'=>'required',
+            'total_budget'=>'required',
+            'lat'=>'required',
+            'lng'=>'required',
+            'image'=>'required|max:1024',
+            'logo'=>'required|max:1024',
+            'member_of_image'=>'required|max:1024',
+        ];
+
+        $message = [
+            'project_category_id.required'=>'Kolom Project Category dibutuhkan',
+            'country_id.required'=>'Kolom Country dibutuhkan',
+            'region_id.required'=>'Kolom Region dibutuhkan',
+            'city_id.required'=>'Kolom City dibutuhkan',
+            'name.required'=>'Kolom Name dibutuhkan',
+            'company_name.required'=>'Kolom Company Name dibutuhkan',
+            'description.required'=>'Kolom Description dibutuhkan',
+            'status.required'=>'Kolom Status dibutuhkan',
+            'email.required'=>'Kolom Email dibutuhkan',
+            'contact.required'=>'Kolom Contact dibutuhkan',
+            'website.required'=>'Kolom Website dibutuhkan',
+            'total_budget.required'=>'Kolom Todal Budget dibutuhkan',
+            'lat.required'=>'Kolom Latitude dibutuhkan',
+            'lng.required'=>'Kolom Longitude dibutuhkan',
+            'image.required'=>'Image dibutuhkan',
+            'image.max'=>'batas ukuran Image maximal 1MB',
+            'logo.required'=>'Logo dibutuhkan',
+            'logo.max'=>'batas ukuran logo maximal 1MB',
+            'member_of_image.required'=>'Member of dibutuhkan',
+            'member_of_image.max'=>'batas ukuran Member of maximal 1MB',
+        ];
+
+        $data = $request->all();
+        $validate = Validator::make($data, $rules, $message);
+        if ($validate->fails()) {
+            return back()
+                        ->withErrors($validate)
+                        ->withInput();
+        }
         DB::beginTransaction();
         $project = Project::create(array_merge($request->all(), [
             'image' => $request->has('image') ? $request->file('image')->storePublicly('project/image') : null,

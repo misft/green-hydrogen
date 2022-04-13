@@ -61,6 +61,16 @@
                     @if(session('success') || session('error'))
                     <x-card.page-notification/>
                     @endif
+
+                    @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible show fade">
+                        <ul>
+                            @foreach ($errors->all() as $now => $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                 </div>
                 @yield('content')
                 <div class="welcome-popup modal fade" id="loadModal" tabindex="-1" role="dialog" aria-hidden="true">

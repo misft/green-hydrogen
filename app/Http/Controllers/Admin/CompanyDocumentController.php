@@ -7,6 +7,7 @@ use App\Models\CompanyDirectory;
 use App\Models\CompanyDocument;
 use App\Models\CompanyDocumentCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CompanyDocumentController extends Controller
 {
@@ -28,6 +29,28 @@ class CompanyDocumentController extends Controller
     }
 
     public function store(Request $request) {
+
+        $data = $request->all();
+        $rules = [
+            'company_directory_id'=>'required',
+            'company_document_category_id'=>'required',
+            'title'=>'required',
+            'description'=>'required',
+            'documents'=>'required|max:1024',
+        ];
+        $message = [
+            'company_directory_id.required' => 'Document Directory dibutuhkan',
+            'company_document_category_id.required' => 'Document Category dibutuhkan',
+            'title.required' => 'Title dibutuhkan',
+            'description.required' => 'Description dibutuhkan',
+            'documents.required' => 'Document dibutuhkan',
+            'documents.max' => 'batas ukuran Document File maksimal adalah 1MB',
+        ];
+
+        $validate = Validator::make($data, $rules, $message);
+        if($validate->fails()){
+            return back()->withErrors($validate)->withInput();
+        }
         $files = $request->file('documents') ?? [];
         $documents = array();
 
