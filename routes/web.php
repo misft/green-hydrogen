@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProjectCategoryController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\RegionController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
@@ -79,6 +80,7 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/company_document', CompanyDocumentController::class);
     Route::resource('/manage_admin', AdminController::class)->parameter('manage_admin', 'admin');
     Route::resource('/social_media', SocialMediaLinkController::class)->parameter('social_media', 'socialMediaLink');
+    Route::resource('/setting', SettingController::class)->only('store');
 });
 
 Route::middleware(['company'])->group(function() {

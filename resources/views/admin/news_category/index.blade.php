@@ -33,15 +33,26 @@
                             that search on specific columns.</span>
                     </div> --}}
                     <div class="card-body">
-                        <x-action.create-button :route="route('news_category.create')" />
+                        <button type="button" class="btn btn-primary mb-2">
+                            Category Terpilih di Publish : <span class="badge badge-light">{{ $category ?? 'Belum Dipilih' }}</span>
+                          </button>
+                          <x-action.create-button :route="route('news_category.create')" />
+                        {{-- <div class="row justify-content-between">
+                            <div class="col-6">
+                                <x-action.create-button :route="route('news_category.create')" />
+                            </div>
+                            <div class="col align-self-end">
+                                <button class="btn btn-outline-success ">Published Category : {{ $category ?? 'Belum Dipilih' }}</button>
+                            </div>
+                        </div> --}}
 
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
                                     <tr>
                                         <th>Category</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
+                                        {{-- <th>Title</th>
+                                        <th>Description</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -52,8 +63,9 @@
                                                 <x-table.cell.language :items="$item" key="name" />
                                             </td>
                                             <td>
+                                                <x-action.default-button :action="route('setting.store')" :value="$item->id" params="NEWSCAT" idform="itemdefault{{$item->id}}"/>
                                                 <x-action.delete-row :action="route('news_category.destroy', $item->id)" />
-                                                <x-action.edit-row :route="route('news_category.edit', $item->id)" />
+                                                    <x-action.edit-row :route="route('news_category.edit', $item->id)" />
                                             </td>
                                         </tr>
                                     @endforeach
