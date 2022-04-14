@@ -36,6 +36,7 @@ class CompanyDocumentController extends Controller
             'company_document_category_id'=>'required',
             'title'=>'required',
             'description'=>'required',
+            'coverImage'=>'required|max:1024',
             'documents'=>'required|max:1024',
         ];
         $message = [
@@ -43,6 +44,8 @@ class CompanyDocumentController extends Controller
             'company_document_category_id.required' => 'Document Category dibutuhkan',
             'title.required' => 'Title dibutuhkan',
             'description.required' => 'Description dibutuhkan',
+            'coverImage.required' => 'Image dibutuhkan',
+            'coverImage.max' => 'batas ukuran Document File maksimal adalah 1MB',
             'documents.required' => 'Document dibutuhkan',
             'documents.max' => 'batas ukuran Document File maksimal adalah 1MB',
         ];
@@ -51,17 +54,27 @@ class CompanyDocumentController extends Controller
         if($validate->fails()){
             return back()->withErrors($validate)->withInput();
         }
+
+        $images = $request->file('coverImage') ?? [];
+        $covers = array();
+
+        foreach($images as $image) {
+            $covers[] = $image->storePublicly('company_document/cover');
+        }
+
         $files = $request->file('documents') ?? [];
         $documents = array();
 
         foreach($files as $file) {
             $documents[] = $file->storePublicly('company_document');
         }
+
         CompanyDocument::create(array_merge($request->all(), [
-            'documents' => json_encode($documents)
+            'documents' => json_encode($documents),
+            'cover' => json_encode($covers)
         ]));
 
-        return back()->with('success', 'Successfully adding document');
+        return redirect()->route('company_document.index')->with('success', 'Successfully adding document');
     }
 
     public function edit(Request $request, CompanyDocument $companyDocument) {
@@ -75,18 +88,47 @@ class CompanyDocumentController extends Controller
     }
 
     public function update(Request $request, CompanyDocument $companyDocument) {
-        $files = $request->file('documents') ?? [];
-        $documents = array();
+        if($request->file('coverImage')){
+            $images = $request->file('coverImage') ?? [];
+            $covers = array();
 
-        foreach($files as $file) {
-            $documents[] = $file->storePublicly('company_document');
+            foreach($images as $image) {
+                $covers[] = $image->storePublicly('company_document/cover');
+            }
+
+            if($request->file('documents')){
+                $files = $request->file('documents') ?? [];
+                $documents = array();
+    
+                foreach($files as $file) {
+                    $documents[] = $file->storePublicly('company_document');
+                }
+
+                $companyDocument->update(array_merge($request->all(), [
+                    'documents' => json_encode($documents),
+                    'cover' => json_encode($covers)
+                ]));
+            } else {
+                $companyDocument->update(array_merge($request->all(), [
+                    'cover' => json_encode($covers)
+                ]));
+            }
+        } else {
+            if($request->file('documents')){
+                $files = $request->file('documents') ?? [];
+                $documents = array();
+    
+                foreach($files as $file) {
+                    $documents[] = $file->storePublicly('company_document');
+                }
+
+                $companyDocument->update(array_merge($request->all(), [
+                    'documents' => json_encode($documents)
+                ]));
+            }
         }
 
-        $companyDocument->update(array_merge($request->all(), [
-            'documents' => json_encode($documents)
-        ]));
-
-        return back()->with('success', 'Successfully updating document');
+        return redirect()->route('company_document.index')->with('success', 'Successfully updating document');
     }
 
     public function destroy(Request $request, CompanyDocument $companyDocument) {

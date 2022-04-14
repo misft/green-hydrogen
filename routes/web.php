@@ -37,6 +37,11 @@ Route::get('/', function(){
     return redirect()->route('dashboard');
 })->name('/');
 
+Route::get('/create_storage_link', function () {
+    Artisan::call('storage:link');
+    return "Link has been created";
+});
+
 Route::get('/clear-cache', function() {
     Artisan::call('config:cache');
     Artisan::call('cache:clear');
