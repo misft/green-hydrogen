@@ -12,11 +12,9 @@ class NewsCategoryController extends Controller
 {
     public function index(Request $request) {
         $newsCategory = NewsCategory::with(['translation'])->get();
-        $category = NewsCategoryTranslation::whereNewsCategoryId(Setting::whereParams('NEWSCAT')->first()->value)->first()->name ?? 'Belum Dipilih';
 
         return view('admin.news_category.index', [
             'newsCategory' => $newsCategory,
-            'category' => $category
         ]);
     }
 
@@ -59,6 +57,23 @@ class NewsCategoryController extends Controller
         $newsCategory->delete();
 
         return redirect(route('news_category.index'))->with('success', 'Success deleting news');
+    }
+
+    public function sidebar()
+    {
+        $newsCategory = NewsCategory::with(['translation'])->get();
+        $settSA = Setting::whereParams('NEWSCATSA')->first()->value ?? null;
+        $settSB = Setting::whereParams('NEWSCATSB')->first()->value ?? null;
+        $categorySA = NewsCategoryTranslation::whereNewsCategoryId($settSA)->first()->name ?? 'Belum Dipilih';
+        $categorySB = NewsCategoryTranslation::whereNewsCategoryId($settSB)->first()->name ?? 'Belum Dipilih';
+
+        return view('admin.news_category.sidebar', [
+            'newsCategory' => $newsCategory,
+            'categorySA' => $categorySA,
+            'categorySB' => $categorySB,
+            'settSA' => $settSA,
+            'settSB' => $settSB
+        ]);
     }
 
 }

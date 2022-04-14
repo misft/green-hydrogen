@@ -57,6 +57,9 @@ Route::get('logout', [AuthController::class, 'logout']);
 
 Route::middleware(['admin'])->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/news_category/sidebar', [NewsCategoryController::class, 'sidebar'])->name('news_category.sidebar');
+
     Route::resource('/menu_group', MenuGroupController::class);
     Route::resource('/slot', SlotController::class);
     Route::resource('/content_type', ContentTypeController::class);

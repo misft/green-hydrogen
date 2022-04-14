@@ -14,7 +14,6 @@ class NewsController extends Controller
     use Response;
 
     public function home(Request $request) {
-        $reqCat = $request->get('news_category_id') ?? Setting::whereParams('NEWSCAT')->first()->value;
         $news = News::with(['translation', 'category.translation', 'admin:id,name'])->when($request->get('news_category_id'), function($query) use ($request) {
             $query->where('news_category_id', $request->get('news_category_id'));
         })->when($request->get('name') || $request->get('description'), function($query) use ($request) {
@@ -24,12 +23,21 @@ class NewsController extends Controller
             })->orderBy('created_at', 'desc')
             ->get();
 
-        $latests = News::with('translation', 'category.translation', 'admin:id,name')->when( $reqCat , function($query) use ($reqCat) {
-            $query->where('news_category_id', $reqCat);
+        $latests = News::with('translation', 'category.translation', 'admin:id,name')->orderBy('created_at', 'desc')->limit(3)->get();
+
+        $reqCatSA = $request->get('news_category_id') ?? Setting::whereParams('NEWSCATSA')->first()->value ?? null;
+        $reqCatSB = $request->get('news_category_id') ?? Setting::whereParams('NEWSCATSB')->first()->value ?? null;
+
+        $sidebar_up = News::with('translation', 'category.translation', 'admin:id,name')->when( $reqCatSA , function($query) use ($reqCatSA) {
+            $query->where('news_category_id', $reqCatSA);
         })->orderBy('created_at', 'desc')->limit(3)->get();
+        $sidebar_down = News::with('translation', 'category.translation', 'admin:id,name')->when( $reqCatSB , function($query) use ($reqCatSB) {
+            $query->where('news_category_id', $reqCatSB);
+        })->orderBy('created_at', 'desc')->limit(3)->get();
+
         $categories = NewsCategory::with('translation')->get();
 
-        return $this->success(body: compact('news', 'categories', 'latests'));
+        return $this->success(body: compact('news', 'categories', 'latests', 'sidebar_up', 'sidebar_down'));
     }
 
     public function carousel(Request $request) {

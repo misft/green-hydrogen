@@ -33,9 +33,9 @@
                             that search on specific columns.</span>
                     </div> --}}
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary mb-2">
+                        {{-- <button type="button" class="btn btn-primary mb-2">
                             Category Terpilih di Publish : <span class="badge badge-light">{{ $category ?? 'Belum Dipilih' }}</span>
-                          </button>
+                          </button> --}}
                           <x-action.create-button :route="route('news_category.create')" />
                         {{-- <div class="row justify-content-between">
                             <div class="col-6">
@@ -63,7 +63,7 @@
                                                 <x-table.cell.language :items="$item" key="name" />
                                             </td>
                                             <td>
-                                                <x-action.default-button :action="route('setting.store')" :value="$item->id" params="NEWSCAT" idform="itemdefault{{$item->id}}"/>
+                                                {{-- <x-action.default-button :action="route('setting.store')" :value="$item->id" params="NEWSCAT" idform="itemdefault{{$item->id}}"/> --}}
                                                 <x-action.delete-row :action="route('news_category.destroy', $item->id)" />
                                                     <x-action.edit-row :route="route('news_category.edit', $item->id)" />
                                             </td>

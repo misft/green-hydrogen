@@ -71,6 +71,7 @@
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('news_category.index') }}">News Category</a></li>
                     <li><a href="{{ route('news.index') }}">News</a></li>
+                    <li><a href="{{ route('news_category.sidebar') }}">Headline Category</a></li>
                 </ul>
             </li>
             <li>
