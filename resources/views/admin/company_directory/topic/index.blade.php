@@ -50,7 +50,7 @@
                                         <h6>{{ $item->name }}</h6>
                                     </td>
                                     <td>
-                                        <x-action.delete-row :action="route('company_directory_topic.destroy', $item->id)" />
+                                        <x-action.delete-row :idform="$item->id" :action="route('company_directory_topic.destroy', $item->id)" />
                                         <x-action.edit-row :route="route('company_directory_topic.edit', $item->id)" />
                                     </td>
                                 </tr>

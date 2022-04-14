@@ -69,7 +69,7 @@
                                         <h6>{{ $company->website }}</h6>
                                     </td>
                                     <td>
-                                        <x-action.delete-row
+                                        <x-action.delete-row :idform="$company->id" 
                                             :action="route('company_directory.destroy', $company->id)" />
                                         <x-action.edit-row :route="route('company_directory.edit', $company->id)" />
                                     </td>

@@ -64,8 +64,8 @@
                                             </td>
                                             <td>
                                                 {{-- <x-action.default-button :action="route('setting.store')" :value="$item->id" params="NEWSCAT" idform="itemdefault{{$item->id}}"/> --}}
-                                                <x-action.delete-row :action="route('news_category.destroy', $item->id)" />
-                                                    <x-action.edit-row :route="route('news_category.edit', $item->id)" />
+                                                <x-action.delete-row :idform="$item->id" :action="route('news_category.destroy', $item->id)" />
+                                                    <x-action.edit-row :idform="$item->id" :route="route('news_category.edit', $item->id)" />
                                             </td>
                                         </tr>
                                     @endforeach

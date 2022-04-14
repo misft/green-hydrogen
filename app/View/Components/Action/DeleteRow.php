@@ -7,15 +7,17 @@ use Illuminate\View\Component;
 class DeleteRow extends Component
 {
     public $action;
+    public $idform;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($action)
+    public function __construct($action,$idform)
     {
         $this->action = $action;
+        $this->idform = $idform;
     }
 
     /**

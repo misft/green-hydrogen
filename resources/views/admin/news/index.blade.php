@@ -58,7 +58,7 @@
                                                 <x-table.cell.language :items="$item" key="description" :html="true" />
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('news.destroy', $item->id)" />
+                                                <x-action.delete-row :idform="$item->id" :action="route('news.destroy', $item->id)" />
                                                 <x-action.edit-row :route="route('news.edit', $item->id)" />
                                             </td>
                                         </tr>

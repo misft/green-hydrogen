@@ -54,7 +54,7 @@
                                     <td>{{$item->scopes ?? ''}}</td>
                                     <td>{{date("d-m-Y", strtotime($item->created_at))}}</td>
                                     <td>
-                                        <x-action.delete-row :action="route('manage_admin.destroy', $item->id)" />
+                                        <x-action.delete-row :idform="$item->id" :action="route('manage_admin.destroy', $item->id)" />
                                         <x-action.edit-row :route="route('manage_admin.edit', $item->id)" />
                                     </td>
                                 </tr>

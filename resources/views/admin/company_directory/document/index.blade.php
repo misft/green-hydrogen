@@ -42,6 +42,7 @@
                                         <th>Category</th>
                                         <th>Title</th>
                                         <th>Description</th>
+                                        <th>Cover Image</th>
                                         <th>Document</th>
                                         <th>Action</th>
                                     </tr>
@@ -60,11 +61,16 @@
                                             </td>
                                             <td>
                                                 <h6>
-                                                    {{ count(json_decode($item->documents)) }}
+                                                    <a href="{{ asset('storage/'.json_decode($item->cover)[0]) }}" target="_blank" rel="noopener noreferrer">View</a>
                                                 </h6>
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('company_document.destroy', $item->id)" />
+                                                <h6>
+                                                    <a href="{{ asset('storage/'.json_decode($item->documents)[0]) }}" target="_blank" rel="noopener noreferrer">View</a>
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <x-action.delete-row :idform="$item->id" :action="route('company_document.destroy', $item->id)" />
                                                 <x-action.edit-row :route="route('company_document.edit', $item->id)" />
                                             </td>
                                         </tr>

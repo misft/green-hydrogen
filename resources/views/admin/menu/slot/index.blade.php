@@ -49,7 +49,7 @@
                                                 <h6>{{ $slot->name }}</h6>
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('slot.destroy', $slot->id)" />
+                                                <x-action.delete-row :idform="$slot->id" :action="route('slot.destroy', $slot->id)" />
                                                 <x-action.edit-row :route="route('slot.edit', $slot->id)" />
                                             </td>
                                         </tr>

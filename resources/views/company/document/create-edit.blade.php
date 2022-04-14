@@ -35,7 +35,8 @@
                     <x-form.select :items="$companyDocumentCategories" placeholder="Pilih Document Category" name="company_document_category_id" label="Document Category" :value="@$companyDocument->company_document_category_id"></x-form.select>
                     <x-form.text :value="@$companyDocument->title" label="Title" name="title" />
                     <x-form.textarea :value="@$companyDocument->description" label="Description" name="description" />
-                        <x-form.file name="documents[]" multiples label="File" />
+                    <x-form.file name="coverImage[]" multiples label="Cover Image" />    
+                    <x-form.file name="documents[]" multiples label="File" />
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>

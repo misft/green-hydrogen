@@ -46,7 +46,7 @@
                                     <div class="col-form-label text-muted">Category</div>
                                     <select class="form-control" data-placeholder="Select Category" name="value">
                                         @foreach ($newsCategory as $id => $name)
-                                            <option value="{{ $name->translation->id }}" @if (@$settSA == $name->translation->id) selected @endif>{{ $name->translation->name }}</option>
+                                            <option value="{{ $name->translation->news_category_id }}" @if (@$settSA == $name->translation->news_category_id) selected @endif>{{ $name->translation->name }}</option>
                                         @endforeach
                                     </select>
                                     </div>
@@ -72,7 +72,7 @@
                                         <div class="col-form-label text-muted">Category</div>
                                         <select class="form-control" data-placeholder="Select Category" name="value">
                                             @foreach ($newsCategory as $id => $name)
-                                                <option value="{{ $name->translation->id }}" @if (@$settSB == $name->translation->id) selected @endif>{{ $name->translation->name }}</option>
+                                                <option value="{{ $name->translation->news_category_id }}" @if (@$settSB == $name->translation->news_category_id) selected @endif>{{ $name->translation->name }}</option>
                                             @endforeach
                                         </select>
                                         </div>

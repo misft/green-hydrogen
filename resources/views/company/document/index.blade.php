@@ -60,11 +60,16 @@
                                             </td>
                                             <td>
                                                 <h6>
-                                                    {{ count(json_decode($item->documents)) }}
+                                                    <a href="{{ asset('storage/'.json_decode($item->cover)[0]) }}" target="_blank" rel="noopener noreferrer">View</a>
                                                 </h6>
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('company.company_document.destroy', $item->id)" />
+                                                <h6>
+                                                    <a href="{{ asset('storage/'.json_decode($item->documents)[0]) }}" target="_blank" rel="noopener noreferrer">View</a>
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <x-action.delete-row :idform="$item->id" :action="route('company.company_document.destroy', $item->id)" />
                                                 <x-action.edit-row :route="route('company.company_document.edit', $item->id)" />
                                             </td>
                                         </tr>
