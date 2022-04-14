@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'News Management')
+@section('title', 'Video Publication Management')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/prism.css">
@@ -12,12 +12,12 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>News<span> Management</span></h2>
+    <h2>Video Publication<span> Management</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">News</li>
+    <li class="breadcrumb-item active">Video Publication</li>
 @endsection
 
 @section('content')
@@ -26,46 +26,34 @@
             <!-- Individual column searching (text inputs) Starts-->
             <div class="col-sm-12">
                 <div class="card">
-                    {{-- <div class="card-header">
-                        <h5>Individual column searching (text inputs) </h5>
-                        <span>The searching functionality provided by DataTables is useful for quickly search through the
-                            information in the table - however the search is global, and you may wish to present controls
-                            that search on specific columns.</span>
-                    </div> --}}
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary mb-2">
-                            Category Terpilih di Publish : <span class="badge badge-light">{{ $category ?? 'Belum Dipilih' }}</span>
-                          </button>
-                          <x-action.create-button :route="route('news_category.create')" />
-                        {{-- <div class="row justify-content-between">
-                            <div class="col-6">
-                                <x-action.create-button :route="route('news_category.create')" />
-                            </div>
-                            <div class="col align-self-end">
-                                <button class="btn btn-outline-success ">Published Category : {{ $category ?? 'Belum Dipilih' }}</button>
-                            </div>
-                        </div> --}}
+                        <x-action.create-button :route="route('video_publication.create')" />
 
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
                                     <tr>
-                                        <th>Category</th>
-                                        {{-- <th>Title</th>
-                                        <th>Description</th> --}}
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Link</th>
+                                        <th>Created By</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($newsCategory as $item)
+                                    @foreach ($publications as $publication)
                                         <tr>
                                             <td>
-                                                <x-table.cell.language :items="$item" key="name" />
+                                                <x-table.cell.language :items="$publication" key="title" />
                                             </td>
                                             <td>
-                                                <x-action.default-button :action="route('setting.store')" :value="$item->id" params="NEWSCAT" idform="itemdefault{{$item->id}}"/>
-                                                <x-action.delete-row :idform="$item->id" :action="route('news_category.destroy', $item->id)" />
-                                                <x-action.edit-row :route="route('news_category.edit', $item->id)" />
+                                                <x-table.cell.language :items="$publication" key="description" />
+                                            </td>
+                                            <td>{{ $publication->embed }}</td>
+                                            <td>{{ $publication->admin?->name }}</td>
+                                            <td class="row">
+                                                <x-action.delete-row :action="route('video_publication.destroy', $publication->id)" />
+                                                <x-action.edit-row :route="route('video_publication.edit', $publication->id)" />
                                             </td>
                                         </tr>
                                     @endforeach
