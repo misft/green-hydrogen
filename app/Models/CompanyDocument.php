@@ -10,7 +10,7 @@ class CompanyDocument extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'documents', 'description', 'company_document_category_id', 'company_directory_id'
+        'title', 'cover', 'documents', 'description', 'company_document_category_id', 'company_directory_id'
     ];
 
     public function categories() {
