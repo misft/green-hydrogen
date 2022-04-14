@@ -12,6 +12,12 @@ class ActivityCategory extends Model
 
     protected $translation = ActivityCategoryTranslation::class;
 
+    protected $guarded = [];
+
+    protected $fillable = [
+        'created_at', 'updated_at'
+    ];
+
     protected $hidden = [
         'created_at', 'updated_at'
     ];

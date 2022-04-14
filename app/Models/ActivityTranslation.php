@@ -17,4 +17,13 @@ class ActivityTranslation extends Model
     protected $hidden = [
         'created_at', 'updated_at'
     ];
+
+    public function activities() {
+        return $this->hasMany(Activity::class);
+    }
+
+    public function translation()
+    {
+        return $this->belongsTo(Translation::class, 'translation_id');
+    }
 }

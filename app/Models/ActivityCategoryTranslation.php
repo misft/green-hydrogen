@@ -11,7 +11,7 @@ class ActivityCategoryTranslation extends Model
     use HasFactory, IsTranslation;
 
     protected $fillable = [
-        'translation_id', 'activity_category_id'
+        'translation_id', 'activity_category_id', 'name'
     ];
 
     protected $hidden = [
