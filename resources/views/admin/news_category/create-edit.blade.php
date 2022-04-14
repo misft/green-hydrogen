@@ -21,26 +21,24 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            @foreach ($newsCategory->translations ?? [0] as $key => $translation)
             <x-form.wizard>
                 <x-slot name="header">
                     {{ request()->routeIs('news_category.create') ? 'Create News Category' : 'Update News Category' }}
                 </x-slot>
-                <form id="form-{{ $key }}"
+                <form id="form-news-cat"
                     action="{{ request()->routeIs('news_category.create') ? route('news_category.store'): route('news_category.update', $newsCategory->id) }}"
                     class="theme-form mega-form" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.localization :value="@$translation->translation_id" />
-                    <x-form.text :value="@$translation->name" label="Name" name="name" />
+                    <x-form.localization :value="@$newsCategory->translation->translation_id" />
+                    <x-form.text :value="@$newsCategory->translation->name" label="Name" name="name" />
                 </form>
                 <x-slot name="footer">
-                    <button form="form-{{ $key }}" class="btn btn-primary btn-pill">Submit</button>
-                    <button form="form-{{ $key }}" class="btn btn-secondary btn-pill">Cancel</button>
+                    <button form="form-news-cat" class="btn btn-primary btn-pill">Submit</button>
+                    <button form="form-news-cat" class="btn btn-secondary btn-pill">Cancel</button>
                 </x-slot>
             </x-form.wizard>
-            @endforeach
         </div>
     </div>
 @endsection

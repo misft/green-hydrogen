@@ -64,7 +64,7 @@
                                                 </h6>
                                             </td>
                                             <td>
-                                                <x-action.delete-row :action="route('company_document.destroy', $item->id)" />
+                                                <x-action.delete-row :idform="$item->id" :action="route('company_document.destroy', $item->id)" />
                                                 <x-action.edit-row :route="route('company_document.edit', $item->id)" />
                                             </td>
                                         </tr>

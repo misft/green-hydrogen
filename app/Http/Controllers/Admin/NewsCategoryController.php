@@ -11,8 +11,11 @@ use Illuminate\Http\Request;
 class NewsCategoryController extends Controller
 {
     public function index(Request $request) {
-        $newsCategory = NewsCategory::with(['translation'])->get();
+        // $newsCategory = NewsCategory::with(['translation'])->get();
+        $newsCategory = NewsCategory::all();
+      
         $category = NewsCategoryTranslation::whereNewsCategoryId(Setting::whereParams('NEWSCAT')->first()->value)->first()->name ?? 'Belum Dipilih';
+
 
         return view('admin.news_category.index', [
             'newsCategory' => $newsCategory,
@@ -33,11 +36,12 @@ class NewsCategoryController extends Controller
     public function store(Request $request) {
         $newsCategory = NewsCategory::create($request->all());
         $newsCategory->translation()->create($request->all());
-
-        return redirect(route('news_category.edit', $newsCategory->id))->with('success', 'Success inserting news');
-    }
-
+      
+        return redirect(route('news_category.edit', $newsCategory->id))->with('success', 'Success inserting news category');
+    } 
+  
     public function edit(Request $request, NewsCategory $newsCategory) {
+        // return $newsCategory->translation;
         $newsCategory->load(['translation']);
 
         return view('admin.news_category.create-edit', [
@@ -52,13 +56,13 @@ class NewsCategoryController extends Controller
             'news_category_id' => $newsCategory->id
         ], $request->all());
 
-        return redirect(route('news_category.index'))->with('success', 'Success updating news');
-    }
-
+        return redirect(route('news_category.index'))->with('success', 'Success updating news category');
+    } 
+    
     public function destroy(Request $request, NewsCategory $newsCategory) {
         $newsCategory->delete();
 
-        return redirect(route('news_category.index'))->with('success', 'Success deleting news');
-    }
-
+        return redirect(route('news_category.index'))->with('success', 'Success deleting news category');
+    } 
+    
 }

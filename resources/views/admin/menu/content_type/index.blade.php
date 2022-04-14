@@ -37,7 +37,7 @@
                             <h6>{{ $item->name }}</h6>
                         </td>
                         <td>
-                            <x-action.delete-row :action="route('content_type.destroy', $item->id)" />
+                            <x-action.delete-row :idform="$item->id" :action="route('content_type.destroy', $item->id)" />
                             <x-action.edit-row :route="route('content_type.edit', $item->id)" />
                         </td>
                     </tr>
