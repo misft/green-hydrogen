@@ -26,6 +26,8 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
+use App\Http\Controllers\Admin\SponsorController;
+use App\Http\Controllers\Admin\SponsorGroupController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\VideoPublicationController;
 use App\Http\Controllers\Company\CompanyDirectoryController as CompanyCompanyDirectoryController;
@@ -91,6 +93,8 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/social_media', SocialMediaLinkController::class)->parameter('social_media', 'socialMediaLink');
     Route::resource('/setting', SettingController::class)->only('store');
     Route::resource('/video_publication', VideoPublicationController::class);
+    Route::resource('/sponsor/group', SponsorGroupController::class)->parameter('group', 'sponsorGroup');
+    Route::resource('/sponsor', SponsorController::class);
 });
 
 Route::middleware(['company'])->group(function() {

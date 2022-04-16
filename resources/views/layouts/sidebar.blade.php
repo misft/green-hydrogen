@@ -120,6 +120,15 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
+                    <i class="pe-7s-signal"></i><span>Our Sponsor</span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('sponsor.index') }}">Sponsor</a></li>
+                    <li><a href="{{ route('group.index') }}">Sponsor Group</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="bar-icons" href="#">
                     <i class="pe-7s-science"></i><span>Video Publication </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">

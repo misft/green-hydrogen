@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Green Hydrogen')
+@section('title', 'Sponsor Management')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/prism.css">
@@ -12,12 +12,12 @@
 @endsection
 
 @section('breadcrumb-title')
-<h2>Company Directory<span> Management</span></h2>
+<h2>Sponsor<span> Management</span></h2>
 @endsection
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">Dashboard</li>
-<li class="breadcrumb-item active">Company Directory</li>
+<li class="breadcrumb-item active">Sponsor</li>
 @endsection
 
 @section('content')
@@ -32,46 +32,38 @@
                         that search on specific columns.</span>
                 </div> --}}
                 <div class="card-body">
-                    <x-action.create-button :route="route('company_directory.create')" />
+                    <x-action.create-button :route="route('sponsor.create')" />
                     <div class="table-responsive product-table">
                         <table class="display" id="basic-1">
                             <thead>
                                 <tr>
-                                    <th>Company Name</th>
-                                    <th>Region</th>
-                                    <th>Contact</th>
-                                    <th>E-mail</th>
-                                    <th>Photo</th>
-                                    <th>Website</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Link</th>
+                                    <th>Group</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($companyDirectories as $company)
+                                @foreach ($sponsor as $each)
                                 <tr>
                                     <td>
-                                        <h6>{{ $company->name }}</h6>
+                                        <h6>{{ $each->name }}</h6>
                                     </td>
                                     <td>
-                                        <h6>{{ $company->region?->name }}</h6>
+                                        <img style="width: 200px;" class="rounded"
+                                            src="{{ asset('storage/'.$each->image) }}" alt="">
                                     </td>
                                     <td>
-                                        <h6>{{ $company->contact }}</h6>
+                                        <h6 class="text-wrap">{{ $each->link }}</h6>
                                     </td>
                                     <td>
-                                        <h6>{{ $company->email }}</h6>
+                                        <h6>{{ $each->group->name }}</h6>
                                     </td>
                                     <td>
-                                        <img style="max-width: 200px;" class="rounded"
-                                            src="{{ asset('storage/'.$company->photo) }}" alt="">
-                                    </td>
-                                    <td>
-                                        <h6>{{ $company->website }}</h6>
-                                    </td>
-                                    <td>
-                                        <x-action.delete-row :idform="$company->id"
-                                            :action="route('company_directory.destroy', $company->id)" />
-                                        <x-action.edit-row :route="route('company_directory.edit', $company->id)" />
+                                        <x-action.delete-row :idform="$each->id"
+                                            :action="route('sponsor.destroy', $each->id)" />
+                                        <x-action.edit-row :route="route('sponsor.edit', $each->id)" />
                                     </td>
                                 </tr>
                                 @endforeach
