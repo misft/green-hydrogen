@@ -126,6 +126,15 @@
                     <li><a href="{{ route('video_publication.index') }}">Publication</a></li>
                 </ul>
             </li>
+            <li>
+                <a class="bar-icons" href="#">
+                    <i class="pe-7s-mail"></i><span>Newsletter</span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('newsletter.index') }}">Send Newsletter</a></li>
+                    <li><a href="{{ route('subscriber.index') }}">List Subscriber</a></li>
+                </ul>
+            </li>
             @endif
         </ul>
     </div>
