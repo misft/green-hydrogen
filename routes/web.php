@@ -33,6 +33,8 @@ use App\Http\Controllers\Admin\SponsorGroupController;
 use App\Http\Controllers\Admin\SpotController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\VideoPublicationController;
+use App\Http\Controllers\Admin\NewsletterController;
+use App\Http\Controllers\Admin\NewsletterSubscriberController;
 use App\Http\Controllers\Company\CompanyDirectoryController as CompanyCompanyDirectoryController;
 use App\Http\Controllers\Company\CompanyDocumentController as CompanyCompanyDocumentController;
 use App\Models\Section;
@@ -105,7 +107,8 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/social_media', SocialMediaLinkController::class)->parameter('social_media', 'socialMediaLink');
     Route::resource('/setting', SettingController::class)->only('store');
     Route::resource('/video_publication', VideoPublicationController::class);
-
+    Route::resource('/newsletter/subscriber', NewsletterSubscriberController::class)->parameter('subscriber', 'newsletterSubscriber');
+    Route::resource('/newsletter', NewsletterController::class);
     Route::resource('/sponsor/group', SponsorGroupController::class)->parameter('group', 'sponsorGroup');
     Route::resource('/sponsor', SponsorController::class);
     Route::resource('/sections', SectionController::class);
