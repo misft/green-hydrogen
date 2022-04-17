@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CompanyDirectoryController;
 use App\Http\Controllers\Admin\CompanyDirectoryTopicController;
 use App\Http\Controllers\Admin\CompanyDocumentCategoryController;
 use App\Http\Controllers\Admin\CompanyDocumentController;
+use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\ContentTypeController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -22,14 +23,17 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\ProjectCategoryController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\RegionController;
+use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
+use App\Http\Controllers\Admin\SpotController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\VideoPublicationController;
 use App\Http\Controllers\Company\CompanyDirectoryController as CompanyCompanyDirectoryController;
 use App\Http\Controllers\Company\CompanyDocumentController as CompanyCompanyDocumentController;
+use App\Models\Section;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +44,11 @@ Route::get('/', function(){
 Route::get('/create_storage_link', function () {
     Artisan::call('storage:link');
     return "Link has been created";
+});
+
+Route::get('/menuseeder', function () {
+    Artisan::call('db:seed --class=SectionSeeder');
+    return "Menu has been seeding";
 });
 
 Route::get('/clear-cache', function() {
@@ -66,11 +75,14 @@ Route::middleware(['admin'])->group(function() {
     Route::get('/news_category/sidebar', [NewsCategoryController::class, 'sidebar'])->name('news_category.sidebar');
 
     Route::resource('/menu_group', MenuGroupController::class);
-    Route::resource('/slot', SlotController::class);
+    // Route::resource('/slot', SlotController::class);
     Route::resource('/content_type', ContentTypeController::class);
     Route::resource('/menu_slot', MenuHasSlotController::class);
     Route::resource('/slot_content', SlotHasContentController::class);
-    Route::resource('/menu', MenuController::class);
+    Route::resource('/menu', SectionController::class);
+    Route::resource('/slot', SpotController::class);
+    Route::resource('/content', ContentController::class);
+    // Route::resource('/menu', MenuController::class);
     Route::resource('/news', NewsController::class);
     Route::resource('/news_category', NewsCategoryController::class);
     Route::resource('/company_directory_topic', CompanyDirectoryTopicController::class);
@@ -91,6 +103,8 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/social_media', SocialMediaLinkController::class)->parameter('social_media', 'socialMediaLink');
     Route::resource('/setting', SettingController::class)->only('store');
     Route::resource('/video_publication', VideoPublicationController::class);
+
+    Route::resource('/sections', SectionController::class);
 });
 
 Route::middleware(['company'])->group(function() {

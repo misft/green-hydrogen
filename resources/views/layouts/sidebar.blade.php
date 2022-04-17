@@ -53,6 +53,16 @@
             </li>
             <li>
                 <a class="bar-icons" href="#">
+                    <i class="pe-7s-user"></i><span>Config Content </span>
+                </a>
+                <ul class="iconbar-mainmenu custom-scrollbar">
+                    <li><a href="{{ route('menu.index') }}">Menu</a></li>
+                    <li><a href="{{ route('slot.index') }}">Slot</a></li>
+                    <li><a href="{{ route('content.index') }}">Content</a></li>
+                </ul>
+            </li>
+            <!-- <li>
+                <a class="bar-icons" href="#">
                     <i class="pe-7s-user"></i><span>User Menu </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
@@ -63,7 +73,7 @@
                     <li><a href="{{ route('content_type.index') }}">Content Type</a></li>
                     <li><a href="{{ route('slot_content.index') }}">Menu Slot Content</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li>
                 <a class="bar-icons" href="#">
                     <i class="pe-7s-news-paper"></i><span>News </span>
