@@ -34,14 +34,14 @@
                     <x-form.text :value="@$newsletter->subject" label="Title" name="subject" />
                     <x-form.wysiwyg :value="@$newsletter->content" label="Description" name="content" />
                     @if (request()->routeIs('newsletter.create'))
-                    <div>
+                    {{-- <div>
                         <label for="send_at">Schedule Pengiriman</label><br />
                         <input type="date" value="{{@$newsletter->send_at}}"  name="send_at" id="send_at">
-                    </div>
+                    </div> --}}
                         <x-form.file label="File" name="attachments[]" multiple />
                     @else
                     <div>
-                        <label for="send_at">Schedule Pengiriman</label><br />
+                        <label for="send_at">Pengiriman</label><br />
                         <input type="text" value="{{@$newsletter->send_at}}"  name="send_at" id="send_at">
                     </div>
                     <div class="mt-3">

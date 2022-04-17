@@ -42,11 +42,13 @@ class NewsletterController extends Controller
     public function store(Request $request)
     {
         $email = NewsletterSubscriber::whereIsActive(1)->pluck('email')->toArray();
-
+        if(empty($email)){
+            return back()->with('error', 'Tidak ada subscriber aktif tersedia');
+        }
         $request->validate([
             'subject' => 'required',
             'content' => 'required',
-            'send_at' => 'required',
+            // 'send_at' => 'required',
             'attachments' => 'sometimes'
         ]);
 
@@ -57,7 +59,8 @@ class NewsletterController extends Controller
         }
 
         $newsletter = Newsletter::create(array_merge($request->toArray(), [
-            'attachments' => json_encode($saveFile)
+            'attachments' => json_encode($saveFile),
+            'send_at' => date('Y-m-d H:i:s')
         ]));
 
         $data = $request->all();
