@@ -12,12 +12,12 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Menu<span> Management</span></h2>
+    <h2>Content<span> Management</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">Menu</li>
+    <li class="breadcrumb-item active">Content</li>
 @endsection
 
 @section('content')
@@ -32,45 +32,62 @@
                             that search on specific columns.</span>
                     </div> --}}
                     <div class="card-body">
-                        <x-action.create-button :route="route('menu.create')"></x-action.create-button>
+                        <x-action.create-button :route="route('content.create')"></x-action.create-button>
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
                                     <tr>
+                                        <th>Slot</th>
                                         <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Position</th>
                                         <th>Level</th>
-                                        <th>Menu Parent</th>
-                                        <th>Link</th>
+                                        <th>Content</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($menus as $menu)
+                                    @foreach ($contents as $content)
                                         <tr>
                                             <td>
                                                 <h6>
-                                                    <span class="text-info">[{{ $menu->translation->code }}]</span>
-                                                    {!! $menu->name !!}
+                                                    {{ $content->spot->name }}
                                                 </h6>
                                             </td>
                                             <td>
-                                                <x-table.cell.basic :item="$menu" key="order"/>
+                                                <x-table.cell.basic :item="$content" key="name"/>
+                                            </td>
+                                            <td>
+                                                <x-table.cell.basic :item="$content" key="types"/>
+                                            </td>
+                                            <td>
+                                                <x-table.cell.basic :item="$content" key="positions"/>
+                                            </td>
+                                            <td>
+                                                <x-table.cell.basic :item="$content" key="order"/>
                                             </td>
                                             <td>
                                                 <h6>
-                                                    @if($menu->parent == 0 )
-                                                        {{ __('Main Menu')}}
-                                                    @else
-                                                        {{ $parent[$menu->parent] }}
-                                                    @endif
+                                                    @foreach($content->translation as $item)
+                                                        @if($content->name === "link")
+                                                            {{ $item->content }}
+                                                            @break
+                                                        @elseif($content->name === "picture" || $content->name === "video" || $content->name === "video_link")
+                                                            @if($content->name === "video_link")
+                                                                <a href="{{ $content->content }}" target="_blank">View</a>
+                                                            @else
+                                                                <a href="{{ asset('storage/'.$content->content) }}" target="_blank">View</a>
+                                                            @endif
+                                                        @else
+                                                            <span class="text-info">[{{ $item->language }}]</span>
+                                                            {{ $item->content }} <br>
+                                                        @endif
+                                                    @endforeach
                                                 </h6>
                                             </td>
                                             <td>
-                                                <x-table.cell.basic :item="$menu" key="link"/>
-                                            </td>
-                                            <td>
-                                                <x-action.delete-row :idform="$menu->id" :action="route('menu.destroy', $menu->id)" />
-                                                <x-action.edit-row :route="route('menu.edit', $menu->id)" />
+                                                <x-action.delete-row :idform="$content->id" :action="route('content.destroy', $content->id)" />
+                                                <x-action.edit-row :route="route('content.edit', $content->id)" />
                                             </td>
                                         </tr>
                                     @endforeach

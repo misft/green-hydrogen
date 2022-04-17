@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Slot Menu')
+@section('title', 'Sponsor Management')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/prism.css">
@@ -12,12 +12,12 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Slot Menu<span> Management</span></h2>
+    <h2>Sponsor<span> Management</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Dashboard</li>
-    <li class="breadcrumb-item active">Menu</li>
+    <li class="breadcrumb-item active">Sponsor</li>
 @endsection
 
 @section('content')
@@ -33,25 +33,30 @@
                             that search on specific columns.</span>
                     </div> --}}
                     <div class="card-body">
-                        <x-action.create-button :route="route('slot.create')"></x-create-button>
+                        <x-action.create-button :route="route('group.create')" />
+
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($slots as $slot)
+                                    @foreach ($sponsorGroup as $item)
                                         <tr>
-                                            <td>
-                                                <span class="text-info">[{{ $slot->translation->code }}]</span><h6>{{ $slot->name }}</h6>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <div class="row justify-content-between">
+                                            <td class="col-8">
+                                                <h6>{{ $item->name }}</h6>
                                             </td>
-                                            <td>
-                                                <x-action.delete-row :idform="$slot->id" :action="route('slot.destroy', $slot->id)" />
-                                                <x-action.edit-row :route="route('slot.edit', $slot->id)" />
-                                            </td>
+                                            <td class="col-4">
+                                                <x-action.delete-row :idform="$item->id" :action="route('group.destroy', $item->id)" />
+                                                <x-action.edit-row :route="route('group.edit', $item->id)" />
+                                                </td>
+                                            </div>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -16,7 +16,9 @@ use App\Http\Controllers\Api\SocialMediaController;
 use App\Http\Controllers\Api\SocialMediaLinkController;
 use App\Http\Controllers\Api\SponsorController;
 use App\Http\Controllers\Api\CompanyDocumentController;
+use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\RegionController;
+use App\Http\Controllers\Api\SectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,11 +46,19 @@ Route::group([
 });
 
 Route::group([
-    'controller' => MenuController::class,
+    'controller' => SectionController::class,
     'prefix' => 'menu'
 ], function() {
-    Route::get('/', 'index');
-    Route::get('/{menu}', 'show');
+    // Route::get('/', 'index');
+    Route::get('/{translation_code}', 'getMenu');
+});
+
+Route::group([
+    'controller' => ContentController::class,
+    'prefix' => 'content'
+], function() {
+    // Route::get('/', 'index');
+    Route::get('/{translation_code}/menu/{menu_id}', 'getContent');
 });
 
 Route::group([
