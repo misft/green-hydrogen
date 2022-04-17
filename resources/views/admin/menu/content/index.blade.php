@@ -74,10 +74,11 @@
                                                             @break
                                                         @elseif($content->name === "picture" || $content->name === "video" || $content->name === "video_link")
                                                             @if($content->name === "video_link")
-                                                                <a href="{{ $content->content }}" target="_blank">View</a>
+                                                                <a href="{{ $item->content }}" target="_blank">View</a>
                                                             @else
-                                                                <a href="{{ asset('storage/'.$content->content) }}" target="_blank">View</a>
+                                                                <a href="{{ asset('storage/'.$item->content) }}" target="_blank">View</a>
                                                             @endif
+                                                            @break
                                                         @else
                                                             <span class="text-info">[{{ $item->language }}]</span>
                                                             {{ $item->content }} <br>

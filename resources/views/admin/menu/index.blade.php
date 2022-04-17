@@ -49,8 +49,10 @@
                                         <tr>
                                             <td>
                                                 <h6>
-                                                    <span class="text-info">[{{ $menu->translation->code }}]</span>
-                                                    {!! $menu->name !!}
+                                                    @foreach($menu->translation as $item)
+                                                        <span class="text-info">[{{ $item->language }}]</span>
+                                                        {{ $item->name }} <br>
+                                                    @endforeach
                                                 </h6>
                                             </td>
                                             <td>

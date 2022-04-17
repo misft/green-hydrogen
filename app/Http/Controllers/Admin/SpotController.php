@@ -12,10 +12,38 @@ class SpotController extends Controller
 {
     public function index()
     {
-        $slots = Spot::with(['translation'])->where('translation_id', 2)->orderBy('section_id','ASC')->orderBy('order', 'ASC')->get();
+        // tidak boleh di sorting lagi
+        $slots = Spot::with(['translation'])->get();
+        $data = array();
+        $dataID = null;
+
+        foreach($slots as $item){
+            if($item->id % 2 == 1){
+                $dataID = $item;
+            } else if($item->id % 2 == 0){
+                $data[] = (object)[
+                    'id' => $item->id,
+                    'translation' => [
+                        (object)[
+                            'language' => 'id',
+                            'name' => $dataID->name
+                        ],
+                        (object)[
+                            'language' => 'en',
+                            'name' => $item->name
+                        ]
+                        
+                    ],
+                    'menu' => (object)[
+                        'name' => $item->section->name
+                    ],
+                    'order' => $item->order
+                ];
+            }
+        }
 
         return view('admin.menu.slot.index', [
-            'slots' => $slots,
+            'slots' => $data,
         ]);
     }
 

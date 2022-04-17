@@ -17,15 +17,40 @@ class SectionController extends Controller
     public function index()
     {
         $parent = array();
+        $menus = Section::all();
+        $data = array();
+        $dataID = null;
 
-        $menus = Section::with(['translation'])->where('translation_id', 2)->orderBy('parent', 'ASC')->get();
+        foreach($menus as $item){
+            if($item->id % 2 == 1){
+                $dataID = $item;
+            } else if($item->id % 2 == 0){
+                $data[] = (object)[
+                    'id' => $item->id,
+                    'translation' => [
+                        (object)[
+                            'language' => 'id',
+                            'name' => $dataID->name
+                        ],
+                        (object)[
+                            'language' => 'en',
+                            'name' => $item->name
+                        ]
+                        
+                    ],
+                    'parent' => $item->parent,
+                    'link' => $item->link,
+                    'order' => $item->order
+                ];
+            }
+        }
 
         foreach($menus as $menu){
             $parent[$menu->id] = $menu->name;
         }
 
         return view('admin.menu.index', [
-            'menus' => $menus,
+            'menus' => $data,
             'parent' => $parent
         ]);
     }

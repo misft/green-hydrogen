@@ -7,6 +7,7 @@
 @endsection
 
 @section('style')
+    <link rel="stylesheet" type="text/css" href="{{route('/')}}/assets/css/summernote.css">
 @endsection
 
 @section('breadcrumb-title')
@@ -21,7 +22,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row" x-data="{ name: '{{ $contentEN->types }}' }">
+        <div class="row" @if(isset($contentEN)) x-data="{ name: '{{ $contentEN->name }}' }" @else x-data="{ name: '' }" @endif>
             <x-form.wizard>
                 <x-slot name="header">
                     {{ request()->routeIs('content.create') ? 'Create Content' : 'Update Content' }}
@@ -44,37 +45,54 @@
                             </select>
                         </div>
                     @endif
-                    <div class="mb-2">
-                        <div class="col-form-label text-muted">Type<span class="text-danger">*</span></div>
-                        <select class="form-control" name="name" x-model="name">
-                            @foreach($dropdownTypeValues as $val)
-                                <option value="{{ $val['id'] }}">{{ $val['value'] }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-2">
-                        <div class="col-form-label">Position<span class="text-danger">*</span></div>
-                        <input type="text" name="positions" placeholder="Example: left, right, and middle" @if (isset($contentEN)) value="{{ $contentEN->positions }}" @endif class="form-control"/>
+                    @if(!isset($contentEN))
+                        <div class="mb-2">
+                            <div class="col-form-label text-muted">Type<span class="text-danger">*</span></div>
+                            <select class="form-control" name="name" x-model="name">
+                            <option value="" >Choose the type</option>
+                                @foreach($dropdownTypeValues as $val)
+                                    <option value="{{ $val['id'] }}">{{ $val['value'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <div class="col-form-label">Position<span class="text-danger">*</span></div>
+                            <input type="text" name="positions" placeholder="Example: left, right, and middle" @if (isset($contentEN)) value="{{ $contentEN->positions }}" @endif class="form-control"/>
+                        </div>
+                    @endif
+                    <div x-show="name == 'title' || name == 'button'">
+                        <div class="col-form-label"><span class="text-info">[id]</span>Content<span class="text-danger">*</span></div>
+                        <input type="text" name="content_id" placeholder="Input text in Bahasa" @if (isset($contentID)) value="{{ $contentID->content }}" @endif class="form-control"/>
                     </div>
                     <div x-show="name == 'title' || name == 'button'">
-                        <x-form.text :value="$contentEN->content" label="Text" name="content" />
+                        <div class="col-form-label"><span class="text-info">[en]</span>Content<span class="text-danger">*</span></div>
+                        <input type="text" name="content_en" placeholder="Input text in English" @if (isset($contentEN)) value="{{ $contentEN->content }}" @endif class="form-control"/>
                     </div>
                     <div x-show="name == 'description'">
-                        <x-form.wysiwyg :value="$contentEN->content" label="Description" name="content" />
+                        <div class="col-form-label"><span class="text-info">[id]</span>Description</div>
+                        <textarea name="content_en" id="summernote" class="summernote" cols="30" rows="10">{{ @$contentID->content }}</textarea>
+                    </div>
+                    <div x-show="name == 'description'">
+                        <div class="col-form-label"><span class="text-info">[en]</span>Description</div>
+                        <textarea name="descriptionEN" id="summernote" class="summernote" cols="30" rows="10">{{ @$contentEN->content }}</textarea>
                     </div>
                     <div x-show="name == 'picture' || name == 'video'">
                         <x-form.file label="File" name="content" />
                     </div>
                     <div x-show="name == 'link' ||  name == 'video_link'">
-                        <x-form.text :value="$contentEN->content" label="Link" name="content" />
+                        <x-form.text :value="@$contentEN->content" label="Link" name="content" />
                     </div>
                     @if(isset($contentEN))
+                        <div class="mb-2">
+                            <div class="col-form-label">Position<span class="text-danger">*</span></div>
+                            <input type="text" name="display_position" placeholder="Example: left, right, and middle" @if (isset($contentEN)) value="{{ $contentEN->positions.'_'.$contentEN->name.'_'.++$contentEN->order }}" @endif class="form-control" readonly/>
+                        </div>
                         <div class="mb-2">
                             <div class="col-form-label text-muted">Replace Position Content With</div>
                             <select class="form-control" data-placeholder="Choose the content" name="replaceContent">
                                 <option value="" >Choose content</option>
-                                @foreach ($anotherContents as $id => $item)
-                                    <option value="{{ $item->id }}">{{ $item->positions.'_'.$item->name.'-'.++$item->order }}</option>
+                                @foreach ($anotherContents as $item)
+                                    <option value="{{ $item->id }}">{{ $item->positions.'_'.$item->name.'_'.++$item->order }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -92,4 +110,6 @@
 @section('script')
     <script src="{{ route('/') }}/assets/js/select2/select2.full.min.js"></script>
     <script src="{{ route('/') }}/assets/js/select2/select2-custom.js"></script>
+    <script src="{{route('/')}}/assets/js/editor/summernote/summernote.js"></script>
+    <script src="{{route('/')}}/assets/js/editor/summernote/summernote.custom.js"></script>
 @endsection
