@@ -18,6 +18,6 @@ class Sponsor extends Model
     ];
 
     public function group() {
-        return $this->belongsTo(SponsorGroup::class);
+        return $this->belongsTo(SponsorGroup::class, 'sponsor_group_id');
     }
 }

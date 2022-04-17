@@ -28,6 +28,8 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
+use App\Http\Controllers\Admin\SponsorController;
+use App\Http\Controllers\Admin\SponsorGroupController;
 use App\Http\Controllers\Admin\SpotController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\VideoPublicationController;
@@ -104,6 +106,8 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/setting', SettingController::class)->only('store');
     Route::resource('/video_publication', VideoPublicationController::class);
 
+    Route::resource('/sponsor/group', SponsorGroupController::class)->parameter('group', 'sponsorGroup');
+    Route::resource('/sponsor', SponsorController::class);
     Route::resource('/sections', SectionController::class);
 });
 
