@@ -22,7 +22,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row" @if(isset($contentEN)) x-data="{ name: '{{ $contentEN->name }}' }" @else x-data="{ name: '' }" @endif>
+        <div class="row" x-data="{ name: '{{ $contentEN->name ?? '' }}' }" >
             <x-form.wizard>
                 <x-slot name="header">
                     {{ request()->routeIs('content.create') ? 'Create Content' : 'Update Content' }}
@@ -62,19 +62,19 @@
                     @endif
                     <div x-show="name == 'title' || name == 'button'">
                         <div class="col-form-label"><span class="text-info">[id]</span>Content<span class="text-danger">*</span></div>
-                        <input type="text" name="content_id" placeholder="Input text in Bahasa" @if (isset($contentID)) value="{{ $contentID->content }}" @endif class="form-control"/>
+                        <input type="text" name="content_tb_id" placeholder="Input text in Bahasa" @if (isset($contentID)) value="{{ $contentID->content }}" @endif class="form-control"/>
                     </div>
                     <div x-show="name == 'title' || name == 'button'">
                         <div class="col-form-label"><span class="text-info">[en]</span>Content<span class="text-danger">*</span></div>
-                        <input type="text" name="content_en" placeholder="Input text in English" @if (isset($contentEN)) value="{{ $contentEN->content }}" @endif class="form-control"/>
+                        <input type="text" name="content_tb_en" placeholder="Input text in English" @if (isset($contentEN)) value="{{ $contentEN->content }}" @endif class="form-control"/>
                     </div>
                     <div x-show="name == 'description'">
                         <div class="col-form-label"><span class="text-info">[id]</span>Description</div>
-                        <textarea name="content_en" id="summernote" class="summernote" cols="30" rows="10">{{ @$contentID->content }}</textarea>
+                        <textarea name="content_d_id" id="summernote" class="summernote" cols="30" rows="10">{{ @$contentID->content }}</textarea>
                     </div>
                     <div x-show="name == 'description'">
                         <div class="col-form-label"><span class="text-info">[en]</span>Description</div>
-                        <textarea name="descriptionEN" id="summernote" class="summernote" cols="30" rows="10">{{ @$contentEN->content }}</textarea>
+                        <textarea name="content_d_en" id="summernote" class="summernote" cols="30" rows="10">{{ @$contentEN->content }}</textarea>
                     </div>
                     <div x-show="name == 'picture' || name == 'video'">
                         <x-form.file label="File" name="content" />
@@ -83,6 +83,7 @@
                         <x-form.text :value="@$contentEN->content" label="Link" name="content" />
                     </div>
                     @if(isset($contentEN))
+                    <input type="hidden" name="name" @if (isset($contentID)) value="{{ $contentID->name }}" @endif class="form-control"/>
                         <div class="mb-2">
                             <div class="col-form-label">Position<span class="text-danger">*</span></div>
                             <input type="text" name="display_position" placeholder="Example: left, right, and middle" @if (isset($contentEN)) value="{{ $contentEN->positions.'_'.$contentEN->name.'_'.++$contentEN->order }}" @endif class="form-control" readonly/>

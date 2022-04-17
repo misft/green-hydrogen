@@ -129,9 +129,12 @@ class ContentController extends Controller
             ]
         ];
 
-        if($request->name == "title" || $request->name == "description" || $request->name == "button"){
-            $data[0]["content"] = $request->content_id;
-            $data[1]["content"] = $request->content_en;
+        if($request->name == "title" || $request->name == "button"){
+            $data[0]["content"] = $request->content_tb_id;
+            $data[1]["content"] = $request->content_tb_en;
+        } else if($request->name == "description"){
+            $data[0]["content"] = $request->content_d_id;
+            $data[1]["content"] = $request->content_d_en;
         } else if($request->name == "link" || $request->name == "video_link") {
             $data[0]["content"] = $request->content;
             $data[1]["content"] = $request->content;
@@ -179,7 +182,7 @@ class ContentController extends Controller
                 'updated_at' => now(),
         ];
 
-        if($request->replaceContent != null){
+        if(!is_null($request->replaceContent)){
             $contentID1 = Content::where('id',$id-1)->first();
             $contentEN1 = Content::where('id',$id)->first();
 
@@ -203,10 +206,13 @@ class ContentController extends Controller
             Content::where('id', $request->replaceContent)->update($targetContentEN);
         }
 
-        if($request->name == "title" || $request->name == "description" || $request->name == "button"){
-            $dataID["content"] = $request->content_id;
-            $dataEN["content"] = $request->content_en;
-        } else if($request->name == "link" || $request->name == "video_link") {
+        if($request->name == "title" || $request->name == "button"){
+            $dataID["content"] = $request->content_tb_id;
+            $dataEN["content"] = $request->content_tb_en;
+        } else if($request->name == "description"){
+            $dataID["content"] = $request->content_d_id;
+            $dataEN["content"] = $request->content_d_en;
+        }else if($request->name == "link" || $request->name == "video_link") {
             $dataID["content"] = $request->content;
             $dataEN["content"] = $request->content;
         } else if($request->name == "picture" || $request->name == "video"){
