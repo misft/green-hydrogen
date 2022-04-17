@@ -46,7 +46,7 @@
                                     @foreach ($slots as $slot)
                                         <tr>
                                             <td>
-                                                <h6>{{ $slot->name }}</h6>
+                                                <span class="text-info">[{{ $slot->translation->code }}]</span><h6>{{ $slot->name }}</h6>
                                             </td>
                                             <td>
                                                 <x-action.delete-row :idform="$slot->id" :action="route('slot.destroy', $slot->id)" />
