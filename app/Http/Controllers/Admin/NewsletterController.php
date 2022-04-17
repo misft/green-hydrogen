@@ -61,7 +61,7 @@ class NewsletterController extends Controller
         ]));
 
         $data = $request->all();
-        $data['title'] = 'Green Hydrogen';
+        $data['title'] = env('MAIL_FROM_NAME', 'Green Hydrogen');
 
         Mail::to($email)->send(new SendEmail($data, $request->attachments));
 
