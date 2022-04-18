@@ -59,9 +59,9 @@ class ProjectController extends Controller
             'total_budget'=>'required',
             'lat'=>'required',
             'lng'=>'required',
-            'image'=>'required|max:1024',
-            'logo'=>'required|max:1024',
-            'member_of_image'=>'required|max:1024',
+            'image'=>'required|max:1024|mimes:jpg,jpeg,png',
+            'logo'=>'required|max:1024|mimes:jpg,jpeg,png',
+            'member_of_image'=>'required|max:1024|mimes:jpg,jpeg,png',
         ];
 
         $message = [
@@ -80,11 +80,14 @@ class ProjectController extends Controller
             'lat.required'=>'Kolom Latitude dibutuhkan',
             'lng.required'=>'Kolom Longitude dibutuhkan',
             'image.required'=>'Image dibutuhkan',
-            'image.max'=>'batas ukuran Image maximal 1MB',
+            'image.max'=>'Batas ukuran Image maximal 1MB',
+            'image.mimes'=>'Tipe Image yang diperbolehkan JPG, JPEG, PNG',
             'logo.required'=>'Logo dibutuhkan',
-            'logo.max'=>'batas ukuran logo maximal 1MB',
+            'logo.max'=>'Batas ukuran logo maximal 1MB',
+            'logo.mimes'=>'Tipe logo yang diperbolehkan JPG, JPEG, PNG',
             'member_of_image.required'=>'Member of dibutuhkan',
-            'member_of_image.max'=>'batas ukuran Member of maximal 1MB',
+            'member_of_image.max'=>'Batas ukuran Member of maximal 1MB',
+            'member_of_image.mimes'=>'Tipe Member of yang diperbolehkan JPG, JPEG, PNG',
         ];
 
         $data = $request->all();
