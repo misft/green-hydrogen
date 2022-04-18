@@ -43,6 +43,10 @@ class ContentController extends Controller
                 'id' => 'picture',
                 'value' => 'Picture'
             ],
+            [
+                'id' => 'html',
+                'value' => 'HTML'
+            ],
         ];
     }
 
@@ -135,6 +139,9 @@ class ContentController extends Controller
         } else if($request->name == "description"){
             $data[0]["content"] = $request->content_d_id;
             $data[1]["content"] = $request->content_d_en;
+        } else if($request->name == "html"){
+            $data[0]["content"] = $request->content_html;
+            $data[1]["content"] = $request->content_html;
         } else if($request->name == "link" || $request->name == "video_link") {
             $data[0]["content"] = $request->content;
             $data[1]["content"] = $request->content;
@@ -175,6 +182,7 @@ class ContentController extends Controller
     }
 
     public function update(Request $request, $id) {
+        // return $request;
         $dataID = [
                 'updated_at' => now(),
         ];
@@ -209,6 +217,9 @@ class ContentController extends Controller
         if($request->name == "title" || $request->name == "button"){
             $dataID["content"] = $request->content_tb_id;
             $dataEN["content"] = $request->content_tb_en;
+        } else if($request->name == "html"){
+            $dataID["content"] = $request->content_html;
+            $dataEN["content"] = $request->content_html;
         } else if($request->name == "description"){
             $dataID["content"] = $request->content_d_id;
             $dataEN["content"] = $request->content_d_en;

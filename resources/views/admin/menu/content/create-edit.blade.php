@@ -72,6 +72,10 @@
                         <div class="col-form-label"><span class="text-info">[id]</span>Description</div>
                         <textarea name="content_d_id" id="summernote" class="summernote" cols="30" rows="10">{{ @$contentID->content }}</textarea>
                     </div>
+                    <div x-show="name == 'html'">
+                        <div class="col-form-label">HTML<span class="text-danger">*</span></div>
+                        <textarea name="content_html" class="form-control" cols="30" rows="10">{{ @$contentID->content }}</textarea>
+                    </div>
                     <div x-show="name == 'description'">
                         <div class="col-form-label"><span class="text-info">[en]</span>Description</div>
                         <textarea name="content_d_en" id="summernote" class="summernote" cols="30" rows="10">{{ @$contentEN->content }}</textarea>
