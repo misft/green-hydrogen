@@ -16,13 +16,21 @@ class ContentController extends Controller
                             ->where('section_id', $menu_id)
                             ->whereHas('translation', function ($query) use ($translation_code){
                                 return $query->where('code', '=', $translation_code);
-                            })->get();
+                            })->orderBy('order','ASC')->get();
         
         foreach($spots as $spot){
             $data = $spot->content;
             $temp = array();
+            $currentPosition = "";
+            $lastPosition = "";
+            $index = 0;
             foreach($data as $item){
-                $temp[$item->positions.'_'.$item->name.'_'.++$item->order] = $item->content;
+                $currentPosition = $item->positions;
+                if($currentPosition != $lastPosition){
+                    $index = 0;
+                }
+                $temp[$item->positions.'_'.$item->name.'_'.++$index] = $item->content;
+                $lastPosition = $currentPosition;
             }
             unset($spot->content);
             $spot->content = $temp;
