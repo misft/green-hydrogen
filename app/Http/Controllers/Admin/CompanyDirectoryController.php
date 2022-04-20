@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyDirectory;
+use App\Models\CompanyDirectoryVerify;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -62,5 +63,26 @@ class CompanyDirectoryController extends Controller
     public function profile()
     {
         return view('admin.company_directory.index');
+    }
+
+    public function verify($token)
+    {
+        $verifyCompany = CompanyDirectoryVerify::where('token', $token)->first();
+
+        $message = 'Sorry your email cannot be identified.';
+
+        if(!is_null($verifyCompany) ){
+            $user = $verifyCompany->company_directory;
+
+            if(!$user->is_email_verified) {
+                $verifyCompany->company_directory->is_email_verified = 1;
+                $verifyCompany->company_directory->save();
+                $message = "Your e-mail is verified. You can now login.";
+            } else {
+                $message = "Your e-mail is already verified. You can now login.";
+            }
+        }
+
+        return redirect(route('login.company'))->with('status', $message);
     }
 }

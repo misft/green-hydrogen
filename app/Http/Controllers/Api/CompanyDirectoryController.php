@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginCompanyDirectoryRequest;
 use App\Http\Requests\Api\RegisterCompanyDirectoryRequest;
 use App\Models\CompanyDirectory;
+use App\Models\CompanyDirectoryVerify;
 use App\Models\CompanyDocument;
 use App\Traits\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Whoops\Run;
@@ -19,6 +21,13 @@ use Whoops\Run;
 class CompanyDirectoryController extends Controller
 {
     use Response;
+
+    public function __construct()
+    {
+        $this->middleware('is_verify_email')->except([
+            'index', 'register', 'login'
+        ]);
+    }
 
     public function index(Request $request) {
         $companyDirectories = CompanyDirectory::with(['region:id,name'])
@@ -40,8 +49,16 @@ class CompanyDirectoryController extends Controller
             return $this->badRequest(message: __('auth.register_failed'));
         }
 
+        $createVerif = CompanyDirectoryVerify::create(['company_directory_id' => $companyDirectory->id, 'token' => sha1(time())]);
+
+        Mail::send('authMailVerif', ['token' => $createVerif->token], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Email Verification - Green Hydrogen');
+        });
+
         return $this->success(body: [
-            'company_directory' => $companyDirectory
+            'company_directory' => $companyDirectory,
+            'register_message' => 'Please verify your email!'
         ]);
     }
 
@@ -102,7 +119,7 @@ class CompanyDirectoryController extends Controller
         foreach(json_decode($document->documents) as $file) {
             Storage::disk('public')->delete($file);
         }
-        
+
         $document->delete();
 
         return $this->success();

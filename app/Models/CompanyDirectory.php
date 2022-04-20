@@ -37,4 +37,9 @@ class CompanyDirectory extends Authenticatable
     public function topics() {
         return $this->belongsToMany(CompanyHasTopic::class);
     }
+
+    public function company_directory_verify()
+    {
+        return $this->hasOne(CompanyDirectoryVerify::class);
+    }
 }

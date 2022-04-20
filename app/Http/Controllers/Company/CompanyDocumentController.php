@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Validator;
 
 class CompanyDocumentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('is_verify_email');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -99,7 +103,7 @@ class CompanyDocumentController extends Controller
             if($request->file('documents')){
                 $files = $request->file('documents') ?? [];
                 $documents = array();
-    
+
                 foreach($files as $file) {
                     $documents[] = $file->storePublicly('company_document');
                 }
@@ -117,7 +121,7 @@ class CompanyDocumentController extends Controller
             if($request->file('documents')){
                 $files = $request->file('documents') ?? [];
                 $documents = array();
-    
+
                 foreach($files as $file) {
                     $documents[] = $file->storePublicly('company_document');
                 }

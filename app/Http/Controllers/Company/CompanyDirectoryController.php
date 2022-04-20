@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 
 class CompanyDirectoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('is_verify_email');
+    }
     /**
      * Display a listing of the resource.
      *

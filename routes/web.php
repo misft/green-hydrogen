@@ -114,10 +114,12 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/sections', SectionController::class);
 });
 
-Route::middleware(['company'])->group(function() {
+Route::middleware(['company', 'is_verify_email'])->group(function() {
     Route::resource('/company/company_directory', CompanyCompanyDirectoryController::class, ['as' => 'company']);
     Route::resource('/company/company_document', CompanyCompanyDocumentController::class, ['as' => 'company']);
 });
+
+Route::get('/company/{token}/verify', [CompanyDirectoryController::class, 'verify'])->name('verify.email' );
 
 Route::get('/_dev_/console/link', function() {
     Artisan::call('storage:link');
