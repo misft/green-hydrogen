@@ -28,8 +28,12 @@ class ContentController extends Controller
                 'value' => 'Link'
             ],
             [
+                'id' => 'button_link',
+                'value' => 'Button Link'
+            ],
+            [
                 'id' => 'button',
-                'value' => 'Button'
+                'value' => 'Button Title'
             ],
             [
                 'id' => 'video',
@@ -142,7 +146,7 @@ class ContentController extends Controller
         } else if($request->name == "html"){
             $data[0]["content"] = $request->content_html;
             $data[1]["content"] = $request->content_html;
-        } else if($request->name == "link" || $request->name == "video_link") {
+        } else if($request->name == "link" || $request->name == "video_link" || $request->name == "button_link") {
             $data[0]["content"] = $request->content;
             $data[1]["content"] = $request->content;
         } else if($request->name == "picture" || $request->name == "video"){
@@ -223,7 +227,7 @@ class ContentController extends Controller
         } else if($request->name == "description"){
             $dataID["content"] = $request->content_d_id;
             $dataEN["content"] = $request->content_d_en;
-        }else if($request->name == "link" || $request->name == "video_link") {
+        }else if($request->name == "link" || $request->name == "video_link"  || $request->name == "button_link") {
             $dataID["content"] = $request->content;
             $dataEN["content"] = $request->content;
         } else if($request->name == "picture" || $request->name == "video"){

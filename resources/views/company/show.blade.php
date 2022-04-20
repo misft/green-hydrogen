@@ -33,17 +33,22 @@
                         <div class="row">
                             <form id="form-profile" action="{{ route('company.company_directory.update', $company->id) }}" method="post" enctype="multipart/form-data">
                             <div class="col-12">
-                                <label for="">Image</label>
+                                <label for="">Logo Company</label>
                             </div>
                             <div class="col-auto mb-2">
                                 <img class="img-thumbnail" src="{{ asset('storage/'.$company->image) }}" width="200" height="200" alt="">
                             </div>
+                            @if(!isset($company->image))
+                                <div class="col-auto">
+                                    <label for="" class="f-8 text-danger">Please insert your logo here</label>
+                                </div>
+                            @endif
                             <div class="col-auto">
                                 <input type="file" name="image" class="form-control">
                             </div>
 
-                            <div class="col-12">
-                                <label for="">Photo</label>
+                            <div class="col-12 mt-2">
+                                <label for="">Photo Company</label>
                             </div>
                             <div class="col-auto mb-2">
                                 <img class="img-thumbnail" src="{{ asset('storage/'.$company->photo) }}" width="200" height="200" alt="">

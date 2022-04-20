@@ -69,7 +69,7 @@
                                             <td>
                                                 <h6>
                                                     @foreach($content->translation as $item)
-                                                        @if($content->name === "link")
+                                                        @if($content->name === "link" || $content->name === "button_link")
                                                             {{ $item->content }}
                                                             @break
                                                         @elseif($content->name === "picture" || $content->name === "video" || $content->name === "video_link")

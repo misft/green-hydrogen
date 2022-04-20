@@ -21,16 +21,8 @@ class ContentController extends Controller
         foreach($spots as $spot){
             $data = $spot->content;
             $temp = array();
-            $currentPosition = "";
-            $lastPosition = "";
-            $index = 0;
             foreach($data as $item){
-                $currentPosition = $item->positions;
-                if($currentPosition != $lastPosition){
-                    $index = 0;
-                }
-                $temp[$item->positions.'_'.$item->name.'_'.++$index] = $item->content;
-                $lastPosition = $currentPosition;
+                $temp[$item->positions.'_'.$item->name.'_'.++$item->order] = $item->content;
             }
             unset($spot->content);
             $spot->content = $temp;

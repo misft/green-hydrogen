@@ -42,6 +42,7 @@
                                         <th>Category</th>
                                         <th>Title</th>
                                         <th>Description</th>
+                                        <th>Cover Image</th>
                                         <th>Document</th>
                                         <th>Action</th>
                                     </tr>

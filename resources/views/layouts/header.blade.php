@@ -1,7 +1,7 @@
 <div class="page-main-header">
     <div class="main-header-right">
         <div class="main-header-left text-center">
-            <img src="https://greenhydrogen.my.id/static/media/logo.3abbe43d90225df4da30.png" height="35px" alt="">
+            <img src="https://greenhydrogen.my.id/static/media/logo.3abbe43d90225df4da30.png" height="50px" alt="">
         </div>
         <div class="mobile-sidebar">
             <div class="media-body text-right switch-sm">
@@ -123,7 +123,7 @@
                             src="{{ route('/') }}/assets/images/dashboard/user.png" width="500" height="500" alt=""></span>
                     <ul class="onhover-show-div profile-dropdown">
                         <li class="gradient-primary">
-                            <h5 class="f-w-600 mb-0 text-wrap">{{ Auth::guard('web')->user()->name ?? Auth::guard('company')->user()->name }}</h5><span>{{ Auth::guard('web')->check() ? 'Admin' : 'Company User'}}</span>
+                            <h6 class="f-w-600 mb-0 text-wrap">{{ Auth::guard('web')->user()->name ?? Auth::guard('company')->user()->name }}</h6><span>{{ Auth::guard('web')->check() ? 'Admin' : 'Company User'}}</span>
                         </li>
                         <li><i data-feather="settings"> </i><a  href="{{ url('logout') }}">Logout</span> </li>
                     </ul>

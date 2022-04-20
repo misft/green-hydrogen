@@ -7,6 +7,7 @@
 @endsection
 
 @section('style')
+<link rel="stylesheet" type="text/css" href="{{route('/')}}/assets/css/summernote.css">
 @endsection
 
 @section('breadcrumb-title')
@@ -69,7 +70,7 @@
                     </div>
                     <div x-show="name == 'description'">
                         <div class="col-form-label"><span class="text-info">[id]</span>Description</div>
-                        <textarea name="content_d_id" class="form-control" cols="30" rows="10">{{ @$contentID->content }}</textarea>
+                        <textarea name="content_d_id" id="summernote" class="summernote"  cols="30" rows="10">{{ @$contentID->content }}</textarea>
                     </div>
                     <div x-show="name == 'html'">
                         <div class="col-form-label">HTML<span class="text-danger">*</span></div>
@@ -77,12 +78,12 @@
                     </div>
                     <div x-show="name == 'description'">
                         <div class="col-form-label"><span class="text-info">[en]</span>Description</div>
-                        <textarea name="content_d_en" class="form-control" cols="30" rows="10">{{ @$contentEN->content }}</textarea>
+                        <textarea name="content_d_en" id="summernote" class="summernote"  cols="30" rows="10">{{ @$contentEN->content }}</textarea>
                     </div>
                     <div x-show="name == 'picture' || name == 'video'">
                         <x-form.file label="File" name="content" />
                     </div>
-                    <div x-show="name == 'link' ||  name == 'video_link'">
+                    <div x-show="name == 'link' ||  name == 'video_link' ||  name == 'button_link'">
                         <x-form.text :value="@$contentEN->content" label="Link" name="content" />
                     </div>
                     @if(isset($contentEN))
@@ -114,4 +115,6 @@
 @section('script')
     <script src="{{ route('/') }}/assets/js/select2/select2.full.min.js"></script>
     <script src="{{ route('/') }}/assets/js/select2/select2-custom.js"></script>
+    <script src="{{route('/')}}/assets/js/editor/summernote/summernote.js"></script>
+    <script src="{{route('/')}}/assets/js/editor/summernote/summernote.custom.js"></script>
 @endsection
