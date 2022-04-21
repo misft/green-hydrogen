@@ -13,7 +13,7 @@ class Event extends Model
     protected $translation = EventTranslation::class;
 
     protected $fillable = [
-        'event_category_id', 'speaker_name', 'speaker_title', 'lat', 'lng', 'location', 'date', 'start_at', 'end_at', 'embed_type', 'embed'
+        'event_category_id', 'speaker_name', 'speaker_title', 'lat', 'lng', 'location', 'date', 'start_at', 'end_at', 'embed_type', 'embed', 'link'
     ];
 
     protected $appends = [

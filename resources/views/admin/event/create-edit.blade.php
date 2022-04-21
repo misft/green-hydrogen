@@ -38,7 +38,8 @@
                     <x-form.text :value="@$event->speaker_title" label="Speaker Title" name="speaker_title" />
                     <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
-                    <x-form.embed label="File" name="embed" value="{{ @$event->embed }}" isFile="{{ @$event->embed_type == 'FILE' }}" name="embed" placeholder="Link" />
+                    <x-form.file id="embed-file" name="embed" label="File"/>
+                    <x-form.text id="embed-text" label="Or Link" placeholder="External Link" name="link" value="{{ @$event->link }}"/>
                     <x-form.text :value="@$event->location" placeholder="Address" label="Address" name="location"/>
                     <x-form.maps identifier="event_{{ $key }}" lat-name="lat" lng-name="lng" :lat="@$event->lat" :lng="@$event->lng"></x-form.maps>
                     <x-form.date label="Date" value="{{ @$event->date }}" name="date"/>

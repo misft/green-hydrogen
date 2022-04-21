@@ -81,7 +81,7 @@
                                                             @break
                                                         @else
                                                             <span class="text-info">[{{ $item->language }}]</span>
-                                                            {{ $item->content }} <br>
+                                                            {!! substr(strip_tags($item->content),0,100) !!}@if(strlen($item->content) > 100){{__('...')}} @endif<br>
                                                         @endif
                                                     @endforeach
                                                 </h6>

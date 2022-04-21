@@ -32,8 +32,6 @@ class EventController extends Controller
 
         if($embed) {
             $embed = $request->file('embed')->storePublicly('event');
-        } else if ($request->get('embed')) {
-            $embed = $request->get('embed');
         } else {
             $embed = null;
         }
@@ -64,9 +62,7 @@ class EventController extends Controller
         
         if($embed) {
             $embed = $request->file('embed')->storePublicly('event');
-        } else if ($request->get('embed')) {
-            $embed = $request->get('embed');
-        } else {
+        }else {
             $embed = $event->embed;
         }
 

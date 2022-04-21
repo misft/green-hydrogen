@@ -55,6 +55,11 @@ Route::get('/menuseeder', function () {
     return "Menu has been seeding";
 });
 
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+    return "Migrating successfully";
+});
+
 Route::get('/clear-cache', function() {
     Artisan::call('config:cache');
     Artisan::call('cache:clear');
