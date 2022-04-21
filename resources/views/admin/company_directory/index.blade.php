@@ -38,6 +38,7 @@
                             <thead>
                                 <tr>
                                     <th>Company Name</th>
+                                    <th>Email</th>
                                     <th>Region</th>
                                     <th>Contact</th>
                                     <th>E-mail</th>
@@ -51,6 +52,9 @@
                                 <tr>
                                     <td>
                                         <h6>{{ $company->name }}</h6>
+                                    </td>
+                                    <td>
+                                        <h6>{{ $company->is_email_verified ? 'Verified' : 'Unverified' }}</h6>
                                     </td>
                                     <td>
                                         <h6>{{ $company->region?->name }}</h6>
@@ -69,6 +73,9 @@
                                         <h6>{{ $company->website }}</h6>
                                     </td>
                                     <td>
+                                        @if (!$company->is_email_verified)
+                                        <x-action.comdir-act-deact :idform="'act-deact' . $company->id" :value="$company->is_email_verified" :action="route('company_directory.activate', $company->id)" :email="$company->email" />
+                                        @endif
                                         <x-action.delete-row :idform="$company->id"
                                             :action="route('company_directory.destroy', $company->id)" />
                                         <x-action.edit-row :route="route('company_directory.edit', $company->id)" />

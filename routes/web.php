@@ -77,6 +77,8 @@ Route::middleware(['admin'])->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/news_category/sidebar', [NewsCategoryController::class, 'sidebar'])->name('news_category.sidebar');
+    Route::put('/company_directory/{company_directory}/activate', [CompanyDirectoryController::class, 'activate'])->name('company_directory.activate');
+
 
     Route::resource('/menu_group', MenuGroupController::class);
     // Route::resource('/slot', SlotController::class);

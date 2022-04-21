@@ -65,6 +65,13 @@ class CompanyDirectoryController extends Controller
         return view('admin.company_directory.index');
     }
 
+    public function activate(CompanyDirectory $companyDirectory)
+    {
+        $companyDirectory->update(['is_email_verified' => 1]);
+
+        return redirect(route('company_directory.index'))->with('success', "Company Directory email verified!");
+    }
+
     public function verify($token)
     {
         $verifyCompany = CompanyDirectoryVerify::where('token', $token)->first();
