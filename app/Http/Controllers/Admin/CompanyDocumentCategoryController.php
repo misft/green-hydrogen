@@ -26,6 +26,8 @@ class CompanyDocumentCategoryController extends Controller
 
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         CompanyDocumentCategory::create($request->all());
@@ -43,6 +45,8 @@ class CompanyDocumentCategoryController extends Controller
 
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $companyDocumentCategory->update($request->all());

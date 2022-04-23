@@ -22,6 +22,8 @@ class ProjectCategoryController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         ProjectCategory::create($request->all());
@@ -38,6 +40,8 @@ class ProjectCategoryController extends Controller
     public function update(Request $request, ProjectCategory $projectCategory) {
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $projectCategory->update($request->all());

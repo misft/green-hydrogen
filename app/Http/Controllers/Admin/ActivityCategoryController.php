@@ -29,6 +29,8 @@ class ActivityCategoryController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $activityCategory = ActivityCategory::create($request->all());
@@ -49,6 +51,8 @@ class ActivityCategoryController extends Controller
     public function update(Request $request, ActivityCategory $activityCategory) {
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $activityCategory->update($request->all());

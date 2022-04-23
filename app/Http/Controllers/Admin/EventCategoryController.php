@@ -28,6 +28,8 @@ class EventCategoryController extends Controller
 
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $category = EventCategory::create();
@@ -51,6 +53,8 @@ class EventCategoryController extends Controller
     public function update(Request $request, $id) {
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $category = EventCategory::find($id);

@@ -26,6 +26,8 @@ class CompanyDirectoryTopicController extends Controller
 
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         CompanyDirectoryTopic::create($request->all());
@@ -41,6 +43,8 @@ class CompanyDirectoryTopicController extends Controller
 
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $companyDirectoryTopic->update($request->all());

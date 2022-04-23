@@ -25,6 +25,8 @@ class RegionController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $region = Region::create($request->all());
@@ -39,6 +41,8 @@ class RegionController extends Controller
     public function update(Request $request, Region $region) {
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $region->update($request->all());

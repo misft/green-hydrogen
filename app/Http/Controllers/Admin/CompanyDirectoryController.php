@@ -41,6 +41,15 @@ class CompanyDirectoryController extends Controller
             'contact' => 'required',
             'description' => 'required',
             'photo' => 'required',
+        ], [
+            'name.required' => 'Nama Dibutuhkan',
+            'email.required' => 'Email Dibutuhkan',
+            'password.required' => 'Password Dibutuhkan',
+            'region_id.required' => 'Region Dibutuhkan',
+            'website.required' => 'Website Dibutuhkan',
+            'contact.required' => 'Contact Dibutuhkan',
+            'description.required' => 'Description Dibutuhkan',
+            'photo.required' => 'Photo Dibutuhkan',
         ]);
 
 
@@ -69,6 +78,15 @@ class CompanyDirectoryController extends Controller
             'contact' => 'required',
             'description' => 'required',
             'photo' => 'required',
+        ], [
+            'name.required' => 'Nama Dibutuhkan',
+            'email.required' => 'Email Dibutuhkan',
+            'password.required' => 'Password Dibutuhkan',
+            'region_id.required' => 'Region Dibutuhkan',
+            'website.required' => 'Website Dibutuhkan',
+            'contact.required' => 'Contact Dibutuhkan',
+            'description.required' => 'Description Dibutuhkan',
+            'photo.required' => 'Photo Dibutuhkan',
         ]);
 
         $companyDirectory->update(array_merge($request->toArray(), [

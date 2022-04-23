@@ -32,6 +32,8 @@ class NewsCategoryController extends Controller
 
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $newsCategory = NewsCategory::create($request->all());
@@ -53,6 +55,8 @@ class NewsCategoryController extends Controller
 
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $newsCategory->update($request->all());

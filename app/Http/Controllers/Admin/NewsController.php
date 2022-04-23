@@ -31,6 +31,10 @@ class NewsController extends Controller
             'title' => 'required',
             'description' => 'required',
             'embed' => 'required'
+        ], [
+            'title.required' => 'Title Dibutuhkan',
+            'description.required' => 'Description Dibutuhkan',
+            'embed.required' => 'Embed Dibutuhkan'
         ]);
 
         $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('news')) : "";
@@ -60,6 +64,10 @@ class NewsController extends Controller
             'title' => 'required',
             'description' => 'required',
             'embed' => 'required'
+        ], [
+            'title.required' => 'Title Dibutuhkan',
+            'description.required' => 'Description Dibutuhkan',
+            'embed.required' => 'Embed Dibutuhkan'
         ]);
 
 

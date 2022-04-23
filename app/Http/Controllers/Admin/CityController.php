@@ -39,6 +39,8 @@ class CityController extends Controller
     {
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         city::create($request->all());
@@ -81,6 +83,8 @@ class CityController extends Controller
     {
         $request->validate([
             'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
         ]);
 
         $city->update($request->all());
