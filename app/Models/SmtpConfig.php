@@ -10,6 +10,7 @@ class SmtpConfig extends Model
     use HasFactory;
 
     protected $fillable = [
+        'smtp_name',
         'smtp_server',
         'smtp_port',
         'smtp_username',

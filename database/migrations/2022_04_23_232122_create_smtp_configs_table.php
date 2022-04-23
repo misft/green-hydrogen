@@ -15,6 +15,7 @@ class CreateSmtpConfigsTable extends Migration
     {
         Schema::create('smtp_configs', function (Blueprint $table) {
             $table->id();
+            $table->string('smtp_name');
             $table->string('smtp_server');
             $table->string('smtp_port');
             $table->string('smtp_username');

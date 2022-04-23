@@ -49,6 +49,7 @@ class SmtpConfigController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'smtp_name' => 'required',
             'smtp_server' => 'required',
             'smtp_port' => 'required',
             'smtp_username' => 'required',
@@ -94,6 +95,7 @@ class SmtpConfigController extends Controller
     public function update(Request $request, SmtpConfig $smtpConfig)
     {
         $request->validate([
+            'smtp_name' => 'required',
             'smtp_server' => 'required',
             'smtp_port' => 'required',
             'smtp_username' => 'required',

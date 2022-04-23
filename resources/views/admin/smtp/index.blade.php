@@ -32,14 +32,15 @@
                     @if(!empty($smtpConfig))
                     @method('PUT')
                     @endif
-                    <x-form.text :value="@$smtpConfig->smtp_server" label="SMTP Server" name="smtp_server" />
+                    <x-form.text :value="@$smtpConfig->smtp_name" label="SMTP Name" name="smtp_name" placeholder="Green Hydrogen"/>
+                    <x-form.text :value="@$smtpConfig->smtp_server" label="SMTP Server" name="smtp_server" placeholder="mail.example.com"/>
                     <x-form.select :items="$port" placeholder="Pilih Port" name="smtp_port" label="SMTP Port"
                         :value="@$smtpConfig->smtp_port"></x-form.select>
-                    <x-form.text :value="@$smtpConfig->smtp_username" label="SMTP Username" name="smtp_username" />
+                    <x-form.text :value="@$smtpConfig->smtp_username" label="SMTP Username" name="smtp_username" placeholder="admin@example.com" />
                     <x-form.text :value="@$smtpConfig->smtp_password" label="SMTP Password" password="1" name="smtp_password" />
                     <x-form.select :items="$auth" placeholder="Pilih Port" name="smtp_auth" label="SMTP Auth"
                         :value="@$smtpConfig->smtp_auth == null ? 'NONE' : @$smtpConfig->smtp_auth"></x-form.select>
-                    <x-form.text :value="@$smtpConfig->smtp_from" label="SMTP From" name="smtp_from" />
+                    <x-form.text :value="@$smtpConfig->smtp_from" label="SMTP From" name="smtp_from" placeholder="admin@hydrogen.com"/>
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>
