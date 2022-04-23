@@ -81,7 +81,7 @@ class NewsletterSubscriberController extends Controller
 
         $subscriber = $newsletterSubscriber->update($request->all());
 
-        return redirect(route('subscriber.index'))->with('success', 'Berhasil mengupdate subscriber');
+        return redirect(route('subscriber.index'))->with('success', 'Berhasil update subscriber');
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Company Directory Management')
+@section('title', 'SMTP Management')
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ route('/') }}/assets/css/select2.css">
@@ -9,12 +9,12 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h2>Company Directory<span>Forms</span></h2>
+    <h2>SMTP<span>Forms</span></h2>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">Forms</li>
-    <li class="breadcrumb-item active">Company Directory</li>
+    <li class="breadcrumb-item active">SMTP</li>
     {{-- <li class="breadcrumb-item active">Index</li> --}}
 @endsection
 
@@ -23,15 +23,15 @@
         <div class="row">
             <x-form.wizard>
                 <x-slot name="header">
-                    {{ request()->routeIs('company_directory_topic.create') ? 'Create Company Topic' : 'Update Company Topic' }}
+                    {{ request()->routeIs('city.create') ? 'Create SMTP' : 'Update SMTP' }}
                 </x-slot>
                 <form id="form"
-                    action="{{ request()->routeIs('company_directory_topic.create') ? route('company_directory_topic.store') : route('company_directory_topic.update', $companyDirectoryTopic->id) }}"
+                    action="{{ request()->routeIs('city.create') ? route('city.store'): route('city.update', @$city->id) }}"
                     class="theme-form mega-form" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.text :value="@$companyDirectoryTopic->name" label="Name" name="name" />
+                    <x-form.text :value="@$city->name" label="SMTP" name="name" />
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>

@@ -38,7 +38,7 @@
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>
-                    <button form="form" class="btn btn-secondary btn-pill">Cancel</button>
+                    <x-action.cancel />
                 </x-slot>
             </x-form.wizard>
         </div>

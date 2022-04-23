@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SlotController;
 use App\Http\Controllers\Admin\SlotHasContentController;
+use App\Http\Controllers\Admin\SmtpConfigController;
 use App\Http\Controllers\Admin\SocialMediaLinkController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\SponsorGroupController;
@@ -119,6 +120,7 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/sponsor/group', SponsorGroupController::class)->parameter('group', 'sponsorGroup');
     Route::resource('/sponsor', SponsorController::class);
     Route::resource('/sections', SectionController::class);
+    Route::resource('/smtp', SmtpConfigController::class)->parameter('smtp', 'smtpConfig');
 });
 
 Route::middleware(['company', 'is_verify_email'])->group(function() {
