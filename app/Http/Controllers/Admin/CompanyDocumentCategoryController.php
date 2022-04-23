@@ -29,7 +29,7 @@ class CompanyDocumentCategoryController extends Controller
     } 
     
     public function edit(Request $request, CompanyDocumentCategory $companyDocumentCategory) {
-        return view('admin.company_directory.document_category.create-edit', [
+        return view('admin.company_directory.document.category.create-edit', [
             'companyDocumentCategory' => $companyDocumentCategory
         ]);
     } 
