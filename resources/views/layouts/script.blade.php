@@ -6,6 +6,9 @@
 <!-- feather icon js-->
 <script src="{{route('/')}}/assets/js/icons/feather-icon/feather.min.js"></script>
 <script src="{{route('/')}}/assets/js/icons/feather-icon/feather-icon.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.esm.min.js"></script>
 <!-- Sidebar jquery-->
 <script src="{{route('/')}}/assets/js/sidebar-menu.js"></script>
 <script src="{{route('/')}}/assets/js/config.js"></script>

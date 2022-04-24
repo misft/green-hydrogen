@@ -5,12 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content=""
-        content="">
+    <meta name="description" content="" content="">
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{ route('/') }}/assets/images/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="{{ route('/') }}/assets/images/favicon.png" type="image/x-icon">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
     <title>@yield('title') | Green Hydrogen</title>
     @include('layouts.css')
     @yield('style')
@@ -49,8 +51,7 @@
                             </div>
                             <div class="col-lg-6 breadcrumb-right">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('/') }}"><i
-                                                class="pe-7s-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('/') }}"><i class="pe-7s-home"></i></a></li>
                                     @yield('breadcrumb-items')
                                 </ol>
                             </div>
@@ -59,14 +60,14 @@
                 </div>
                 <div class="container-fluid">
                     @if(session('success') || session('error'))
-                    <x-card.page-notification/>
+                    <x-card.page-notification />
                     @endif
 
                     @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible show fade">
                         <ul>
                             @foreach ($errors->all() as $now => $error)
-                                <li>{{ $error }}</li>
+                            <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -76,8 +77,7 @@
                 <div class="welcome-popup modal fade" id="loadModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">×</span></button>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <div class="modal-body">
                                 <div class="modal-header"></div>
                                 <div class="contain p-30">
