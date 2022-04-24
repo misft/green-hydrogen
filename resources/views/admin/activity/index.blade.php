@@ -49,7 +49,12 @@
                                     @foreach ($activity as $item)
                                         <tr>
                                             <td>
-                                                <x-table.cell.language :items="$item" key="category.name" />
+                                            @foreach ($category[$item->activity_category_id] as $cat)
+                                                <h6>
+                                                    <span class="text-info">[{{ $cat->translation->code }}]</span>
+                                                    {{ $cat->name }}
+                                                </h6>
+                                            @endforeach
                                             </td>
                                             <td>
                                                 <x-table.cell.language :items="$item" key="title" />
