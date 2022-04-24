@@ -29,6 +29,13 @@ class NewsCategoryController extends Controller
     }
 
     public function store(Request $request) {
+
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
         $newsCategory = NewsCategory::create($request->all());
         $newsCategory->translation()->create($request->all());
 
@@ -45,6 +52,13 @@ class NewsCategoryController extends Controller
     }
 
     public function update(Request $request, NewsCategory $newsCategory) {
+
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
         $newsCategory->update($request->all());
         $newsCategory->translation()->updateOrCreate([
             'translation_id' => $request->get('translation_id'),

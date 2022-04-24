@@ -4,16 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
+use App\Models\ActivityCategory;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
-    public function index(Request $request) {
-        $activity = Activity::with(['translation', 'category'])->get();
+    public function index() {
+        $activity = Activity::all();
+        $categories = ActivityCategory::with(['translations'])->get();
+        $category = array();
 
-        return view('admin.activity.index', [
-            'activity' => $activity
-        ]);
+        foreach($categories as $cat) {
+            $category[$cat->id] = $cat->translations; 
+        }
+
+        return view('admin.activity.index', compact('activity', 'category'));
     }
 
     public function show(Request $request, Activity $activity) {
@@ -27,14 +32,15 @@ class ActivityController extends Controller
     }
 
     public function store(Request $request) {
+        // return $request;
         $request->validate([
             'title' => 'required',
             'activity_category_id' => 'required',
             'translation_id' => 'required',
             'embed' => 'required',
         ]);
-        $type = $request->file('embed') ? 'FILE' : 'LINK';
-        $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('activity')) : $request->embed;
+        $type = $request->hasFile('embed') ? 'FILE' : 'LINK';
+        $file = $request->hasFile('embed') ? json_encode($request->file('embed')->storePublicly('activity')) : $request->embed;
 
         $activity = Activity::create(array_merge($request->toArray(), [
             'embed' => $file,

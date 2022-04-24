@@ -106,9 +106,9 @@ class SocialMediaLinkController extends Controller
         }
         try{
             $socialMediaLink->update($data);
-            return redirect(route('social_media.index'))->with('success', 'Berhasil mengupdate link Social Media');
+            return redirect(route('social_media.index'))->with('success', 'Berhasil update link Social Media');
         }catch(QueryException){
-            return redirect(route('social_media.update', $socialMediaLink->id))->with('error', 'Gagal mengupdate link Social Media');
+            return redirect(route('social_media.update', $socialMediaLink->id))->with('error', 'Gagal update link Social Media');
         }
     }
 

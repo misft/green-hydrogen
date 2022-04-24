@@ -31,6 +31,28 @@ class CompanyDirectoryController extends Controller
     }
 
     public function store(Request $request) {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'region_id' => 'required',
+            'website' => 'required',
+            'contact' => 'required',
+            'description' => 'required',
+            'photo' => 'required',
+        ], [
+            'name.required' => 'Nama Dibutuhkan',
+            'email.required' => 'Email Dibutuhkan',
+            'password.required' => 'Password Dibutuhkan',
+            'region_id.required' => 'Region Dibutuhkan',
+            'website.required' => 'Website Dibutuhkan',
+            'contact.required' => 'Contact Dibutuhkan',
+            'description.required' => 'Description Dibutuhkan',
+            'photo.required' => 'Photo Dibutuhkan',
+        ]);
+
+
         CompanyDirectory::create(array_merge($request->toArray(), [
             'password' => Hash::make($request->get('password')),
             'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company_directory') : null
@@ -46,6 +68,27 @@ class CompanyDirectoryController extends Controller
     }
 
     public function update(Request $request, CompanyDirectory $companyDirectory) {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'region_id' => 'required',
+            'website' => 'required',
+            'contact' => 'required',
+            'description' => 'required',
+            'photo' => 'required',
+        ], [
+            'name.required' => 'Nama Dibutuhkan',
+            'email.required' => 'Email Dibutuhkan',
+            'password.required' => 'Password Dibutuhkan',
+            'region_id.required' => 'Region Dibutuhkan',
+            'website.required' => 'Website Dibutuhkan',
+            'contact.required' => 'Contact Dibutuhkan',
+            'description.required' => 'Description Dibutuhkan',
+            'photo.required' => 'Photo Dibutuhkan',
+        ]);
+
         $companyDirectory->update(array_merge($request->toArray(), [
             'password' => !empty($request->get('password')) ? Hash::make($request->get('password')) : $companyDirectory->password,
             'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company_directory') : $companyDirectory->photo

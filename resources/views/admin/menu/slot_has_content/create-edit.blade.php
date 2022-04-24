@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <button form="form" class="btn btn-primary btn-pill">Submit</button>
-                                    <button form="form" class="btn btn-secondary btn-pill">Cancel</button>
+                                    <x-action.cancel />
                                 </div>
                             </div>
                         </div>

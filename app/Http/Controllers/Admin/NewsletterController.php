@@ -115,7 +115,7 @@ class NewsletterController extends Controller
         //     'attachments' => $file
         // ]));
 
-        // return redirect(route('newsletter.index'))->with('success', 'Berhasil mengupdate jadwal Newsletter');
+        // return redirect(route('newsletter.index'))->with('success', 'Berhasil update jadwal Newsletter');
     }
 
     /**

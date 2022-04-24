@@ -13,7 +13,7 @@ class Activity extends Model
     protected $translation = ActivityTranslation::class;
 
     protected $fillable = [
-        'type', 'embed'
+        'type', 'embed', 'activity_category_id'
     ];
 
     protected $hidden = [

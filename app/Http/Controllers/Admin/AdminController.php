@@ -67,9 +67,9 @@ class AdminController extends Controller
         // $updated = Admin::whereId($id)->update($data);
         $updated = $admin->update($data);
         if($updated){
-            return redirect(route('manage_admin.index'))->with('success', 'Berhasil mengupdate Admin');
+            return redirect(route('manage_admin.index'))->with('success', 'Berhasil update Admin');
         }else{
-            return redirect(route('manage_admin.index'))->with('error', 'Gagal mengupdate admin');
+            return redirect(route('manage_admin.index'))->with('error', 'Gagal update admin');
         }
     }
 

@@ -37,6 +37,12 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
         Country::create($request->all());
 
         return redirect(route('country.index'))->with('success', 'Successfully adding country');
@@ -75,6 +81,12 @@ class CountryController extends Controller
      */
     public function update(Request $request, Country $country)
     {
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
         $country->update($request->all());
 
         return redirect(route('country.index'))->with('success', 'Successfully updating country');

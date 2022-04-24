@@ -27,6 +27,16 @@ class NewsController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'embed' => 'required'
+        ], [
+            'title.required' => 'Title Dibutuhkan',
+            'description.required' => 'Description Dibutuhkan',
+            'embed.required' => 'Embed Dibutuhkan'
+        ]);
+
         $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('news')) : "";
 
         $news = News::create(array_merge($request->toArray(), [
@@ -49,6 +59,18 @@ class NewsController extends Controller
     }
 
     public function update(Request $request, News $news) {
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'embed' => 'required'
+        ], [
+            'title.required' => 'Title Dibutuhkan',
+            'description.required' => 'Description Dibutuhkan',
+            'embed.required' => 'Embed Dibutuhkan'
+        ]);
+
+
         $file = $request->file('embed') ? json_encode($request->file('embed')->storePublicly('news')) : $news->embed;
 
         $news->update(array_merge($request->toArray(), [

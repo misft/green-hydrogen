@@ -27,7 +27,13 @@ class ActivityCategoryController extends Controller
     }
 
     public function store(Request $request) {
-        $activityCategory= ActivityCategory::create($request->all());
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
+        $activityCategory = ActivityCategory::create($request->all());
         $activityCategory->translation()->create($request->all());
 
         return redirect(route('activity_category.edit', $activityCategory->id))->with('success', 'Success inserting activity category');
@@ -43,6 +49,12 @@ class ActivityCategoryController extends Controller
     }
 
     public function update(Request $request, ActivityCategory $activityCategory) {
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
         $activityCategory->update($request->all());
         $activityCategory->translation()->updateOrCreate([
             'translation_id' => $request->get('translation_id'),

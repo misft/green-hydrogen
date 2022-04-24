@@ -26,16 +26,16 @@
                     {{ request()->routeIs('company_document_category.create') ? 'Create Category' : 'Update Category' }}
                 </x-slot>
                 <form id="form"
-                    action="{{ request()->routeIs('company_document_category.create') ? route('company_document_category.store'): route('company_document_category.update', @$companyDirectoryCategory->id) }}"
+                    action="{{ request()->routeIs('company_document_category.create') ? route('company_document_category.store'): route('company_document_category.update', $companyDocumentCategory->id) }}"
                     class="theme-form mega-form" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.text :value="@$companyDirectoryCategory->name" label="Category" name="name" />
+                    <x-form.text :value="@$companyDocumentCategory->name" label="Category" name="name" />
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>
-                    <button form="form" class="btn btn-secondary btn-pill">Cancel</button>
+                    <x-action.cancel />
                 </x-slot>
             </x-form.wizard>
         </div>

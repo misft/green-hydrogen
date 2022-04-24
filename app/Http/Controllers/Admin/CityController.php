@@ -37,6 +37,12 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
         city::create($request->all());
 
         return redirect(route('city.index'))->with('success', 'Successfully adding city');
@@ -75,6 +81,12 @@ class CityController extends Controller
      */
     public function update(Request $request, City $city)
     {
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
         $city->update($request->all());
 
         return redirect(route('city.index'))->with('success', 'Successfully updating city');

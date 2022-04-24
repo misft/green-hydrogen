@@ -14,18 +14,25 @@ class EventCategoryController extends Controller
         return view('admin.event-category.index', [
             'categories' => $categories
         ]);
-    } 
-    
+    }
+
     public function show(Request $request, $id) {
-    
-    } 
-    
+
+    }
+
     public function create(Request $request) {
         return view('admin.event-category.create-edit');
-    } 
-    
+    }
+
     public function store(Request $request) {
-        $category = EventCategory::create();       
+
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
+        $category = EventCategory::create();
         $category->translations()->updateOrCreate([
             'event_category_id' => $category->id,
             'translation_id' => $request->get('translation_id')
@@ -33,18 +40,24 @@ class EventCategoryController extends Controller
 
         // return back()->with('success', 'Successfully adding event category');
         return redirect(route('event_category.edit', $category->id))->with('success', 'Successfully adding event category');
-    } 
-    
+    }
+
     public function edit(Request $request, $id) {
         $category = EventCategory::with('translations')->find($id);
 
         return view('admin.event-category.create-edit', [
             'category' => $category
         ]);
-    } 
-    
+    }
+
     public function update(Request $request, $id) {
-        $category = EventCategory::find($id);       
+        $request->validate([
+            'name' => 'required'
+        ], [
+            'name.required' => 'Name Dibutuhkan'
+        ]);
+
+        $category = EventCategory::find($id);
         $category->translations()->updateOrCreate([
             'event_category_id' => $category->id,
             'translation_id' => $request->get('translation_id')
@@ -52,12 +65,12 @@ class EventCategoryController extends Controller
 
         // return back()->with('success', 'Successfully updating event category');
         return redirect(route('event_category.index'))->with('success', 'Successfully updating event category');
-    } 
-    
+    }
+
     public function destroy(Request $request, $id) {
         EventCategory::with('translations')->find($id)->delete();
 
         return back()->with('success', 'Successfully deleting event');
-    } 
-    
+    }
+
 }

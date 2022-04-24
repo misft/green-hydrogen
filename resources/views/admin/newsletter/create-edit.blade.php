@@ -57,7 +57,7 @@
                 <x-slot name="footer">
                     @if (request()->routeIs('newsletter.create'))
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>
-                    <button form="form" class="btn btn-secondary btn-pill">Cancel</button>
+                    <x-action.cancel />
                     @else
                     <a href="{{URL::previous()}}" class="btn btn-secondary">Back</a>
                     @endif
