@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasTranslation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
 class CompanyDirectory extends Authenticatable
 {
-    use HasFactory, HasApiTokens;
+    use HasFactory, HasApiTokens, HasTranslation;
+
+    protected $translation = CompanyDirectoryTranslation::class;
 
     public $guarded = [];
 
@@ -41,5 +44,10 @@ class CompanyDirectory extends Authenticatable
     public function company_directory_verify()
     {
         return $this->hasOne(CompanyDirectoryVerify::class);
+    }
+
+    public function company_directory_translation()
+    {
+        return $this->hasMany(CompanyDirectoryTranslation::class);
     }
 }

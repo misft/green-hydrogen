@@ -6,18 +6,18 @@ use App\Models\Traits\IsTranslation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyDirectoryTopicTranslation extends Model
+class CompanyDirectoryTranslation extends Model
 {
     use HasFactory, IsTranslation;
 
     protected $fillable = [
-        'company_directory_topic_id',
+        'company_directory_id',
         'translation_id',
-        'name'
+        'description'
     ];
 
-    public function company_directory_topic(){
-        return $this->belongsTo(CompanyDirectoryTopic::class, 'company_directory_topic_id');
+    public function news(){
+        return $this->belongsTo(CompanyDirectory::class, 'company_directory_id');
     }
 
     public function translation()

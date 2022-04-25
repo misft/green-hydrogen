@@ -30,7 +30,8 @@ class CompanyDirectoryTopicController extends Controller
             'name.required' => 'Name Dibutuhkan'
         ]);
 
-        CompanyDirectoryTopic::create($request->all());
+        $companyDirectoryTopic = CompanyDirectoryTopic::create($request->all());
+        $companyDirectoryTopic->translation()->create($request->all());
 
         return redirect(route('company_directory_topic.index'))->with('success', 'Successfully updating data');
     }
@@ -48,6 +49,11 @@ class CompanyDirectoryTopicController extends Controller
         ]);
 
         $companyDirectoryTopic->update($request->all());
+
+        $companyDirectoryTopic->translation()->updateOrCreate([
+            'company_directory_topic_id' => $companyDirectoryTopic->id,
+            'translation_id' => $request->get('translation_id')
+        ], $request->all());
 
         return redirect(route('company_directory_topic.index'))->with('success', 'Successfully updating data');
     }

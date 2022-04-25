@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Hash;
 class CompanyDirectoryController extends Controller
 {
     public function index(Request $request) {
-        $companyDirectories = CompanyDirectory::all();
-
+        $companyDirectories = CompanyDirectory::with(['translation'])->get();
+        // dd($companyDirectories);
         return view('admin.company_directory.index', [
             'companyDirectories' => $companyDirectories
         ]);
@@ -53,10 +53,12 @@ class CompanyDirectoryController extends Controller
         ]);
 
 
-        CompanyDirectory::create(array_merge($request->toArray(), [
+        $companyDirectory = CompanyDirectory::create(array_merge($request->toArray(), [
             'password' => Hash::make($request->get('password')),
             'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company_directory') : null
         ]));
+
+        $companyDirectory->translation()->create($request->all());
 
         return redirect(route('company_directory.index'))->with('success', "Company Directory created!");
     }
@@ -72,27 +74,32 @@ class CompanyDirectoryController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'sometimes',
             'region_id' => 'required',
             'website' => 'required',
             'contact' => 'required',
             'description' => 'required',
-            'photo' => 'required',
+            'photo' => 'sometimes',
         ], [
             'name.required' => 'Nama Dibutuhkan',
             'email.required' => 'Email Dibutuhkan',
-            'password.required' => 'Password Dibutuhkan',
+            // 'password.required' => 'Password Dibutuhkan',
             'region_id.required' => 'Region Dibutuhkan',
             'website.required' => 'Website Dibutuhkan',
             'contact.required' => 'Contact Dibutuhkan',
             'description.required' => 'Description Dibutuhkan',
-            'photo.required' => 'Photo Dibutuhkan',
+            // 'photo.required' => 'Photo Dibutuhkan',
         ]);
 
         $companyDirectory->update(array_merge($request->toArray(), [
             'password' => !empty($request->get('password')) ? Hash::make($request->get('password')) : $companyDirectory->password,
             'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company_directory') : $companyDirectory->photo
         ]));
+
+        $companyDirectory->translation()->updateOrCreate([
+            'company_directory_id' => $companyDirectory->id,
+            'translation_id' => $request->get('translation_id')
+        ], $request->all());
 
         return redirect(route('company_directory.edit', ['company_directory' => $companyDirectory->id]))->with('success', "Company Directory created!");
     }

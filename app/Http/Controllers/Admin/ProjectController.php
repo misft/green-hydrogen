@@ -129,6 +129,51 @@ class ProjectController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $rules = [
+            'project_category_id'=>'required',
+            'country_id'=>'required',
+            'region_id'=>'required',
+            'city_id'=>'required',
+            'name'=>'required',
+            'company_name'=>'required',
+            'description'=>'required',
+            'status'=>'required',
+            'email'=>'required',
+            'contact'=>'required',
+            'website'=>'required',
+            'total_budget'=>'required',
+            'address'=>'required',
+            'lat'=>'required',
+            'lng'=>'required',
+            'image'=>'sometimes|max:1024|mimes:jpg,jpeg,png',
+            'logo'=>'sometimes|max:1024|mimes:jpg,jpeg,png',
+            'member_of_image'=>'sometimes|max:1024|mimes:jpg,jpeg,png',
+        ];
+
+        $message = [
+            'project_category_id.required'=>'Kolom Project Category dibutuhkan',
+            'country_id.required'=>'Kolom Country dibutuhkan',
+            'region_id.required'=>'Kolom Region dibutuhkan',
+            'city_id.required'=>'Kolom City dibutuhkan',
+            'name.required'=>'Kolom Name dibutuhkan',
+            'company_name.required'=>'Kolom Company Name dibutuhkan',
+            'description.required'=>'Kolom Description dibutuhkan',
+            'status.required'=>'Kolom Status dibutuhkan',
+            'email.required'=>'Kolom Email dibutuhkan',
+            'contact.required'=>'Kolom Contact dibutuhkan',
+            'website.required'=>'Kolom Website dibutuhkan',
+            'total_budget.required'=>'Kolom Todal Budget dibutuhkan',
+            'lat.required'=>'Kolom Latitude dibutuhkan',
+            'lng.required'=>'Kolom Longitude dibutuhkan',
+            'image.max'=>'Batas ukuran Image maximal 1MB',
+            'image.mimes'=>'Tipe Image yang diperbolehkan JPG, JPEG, PNG',
+            'address.required'=>'Address dibutuhkan',
+            'logo.max'=>'Batas ukuran logo maximal 1MB',
+            'logo.mimes'=>'Tipe logo yang diperbolehkan JPG, JPEG, PNG',
+            'member_of_image.max'=>'Batas ukuran Member of maximal 1MB',
+            'member_of_image.mimes'=>'Tipe Member of yang diperbolehkan JPG, JPEG, PNG',
+        ];
+
         $project = Project::find($id);
 
         $project->update(array_merge($request->all(), [

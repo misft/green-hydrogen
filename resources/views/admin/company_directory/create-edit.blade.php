@@ -21,6 +21,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
+        @foreach ($companyDirectory->translations ?? [0] as $key => $translation)
         <x-form.wizard>
             <x-slot name="header">
                 {{ request()->routeIs('company_directory.create') ? 'Create Company Directory' : 'Update Company
@@ -31,6 +32,7 @@
                 class="theme-form mega-form" method="post" enctype="multipart/form-data">
                 @csrf
                 <x-form.put-method />
+                <x-form.localization :value="@$translation->translation_id" />
                 <x-form.text :value="@$companyDirectory->name" label="Name" name="name" />
                 <x-form.text :value="@$companyDirectory->email" label="Email" name="email" />
                 <x-form.text label="Password" name="password" password="1" value="" placeholder="ContohPass123" />
@@ -40,7 +42,7 @@
                     placeholder="https://foo.com" />
                 <x-form.text label="Contact (Phone)" name="contact" :value="@$companyDirectory->contact"
                     placeholder="+62xxxxxx" />
-                <x-form.wysiwyg :value="@$companyDirectory->description" label="Description" name="description" />
+                <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
                 <x-form.maps label="Location" :lat="@$companyDirectory->lat" :lng="@$companyDirectory->lng"
                     lat-name="lat" lng-name="lng" />
                 <x-form.file name="photo" label="Image" />
@@ -51,6 +53,7 @@
                 <x-action.cancel />
             </x-slot>
         </x-form.wizard>
+        @endforeach
     </div>
 </div>
 @endsection

@@ -47,7 +47,7 @@
                                 @foreach ($companyDirectoryTopics as $item)
                                 <tr>
                                     <td>
-                                        <h6>{{ $item->name }}</h6>
+                                        <x-table.cell.language :items="$item" key="name" />
                                     </td>
                                     <td>
                                         <x-action.delete-row :idform="$item->id" :action="route('company_directory_topic.destroy', $item->id)" />
