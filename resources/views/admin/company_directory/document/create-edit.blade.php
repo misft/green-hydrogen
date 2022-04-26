@@ -36,7 +36,7 @@
                         <div class="col-form-label text-muted">{{ __('Document Category') }}</div>
                         <select class="form-control" name="company_document_category_id">
                             @foreach ($companyDocumentCategories as $id => $name)
-                                <option value="{{ $id }}" @if (@$companyDocument->company_document_category_id == $id) selected @endif>{{ is_array($name) ? json_decode($name)[0]->name.' / '.json_decode($name)[1]->name : $name }}</option>
+                                <option value="{{ $id }}" @if (@$companyDocument->company_document_category_id == $id) selected @endif>{{ is_array(json_decode($name)) ? json_decode($name)[0]->name.' / '.json_decode($name)[1]->name : $name }}</option>
                             @endforeach
                         </select>
                     </div>
