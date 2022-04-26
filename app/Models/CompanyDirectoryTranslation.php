@@ -16,7 +16,7 @@ class CompanyDirectoryTranslation extends Model
         'description'
     ];
 
-    public function news(){
+    public function company_directory(){
         return $this->belongsTo(CompanyDirectory::class, 'company_directory_id');
     }
 
