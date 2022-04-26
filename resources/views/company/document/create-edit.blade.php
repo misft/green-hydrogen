@@ -31,10 +31,30 @@
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="company_directory_id" value="{{ Auth::guard('company')->user()->id }}">
-                    <x-form.put-method  />
-                    <x-form.select :items="$companyDocumentCategories" placeholder="Pilih Document Category" name="company_document_category_id" label="Document Category" :value="@$companyDocument->company_document_category_id"></x-form.select>
-                    <x-form.text :value="@$companyDocument->title" label="Title" name="title" />
-                    <x-form.textarea :value="@$companyDocument->description" label="Description" name="description" />
+                    <x-form.put-method  /><div class="mb-2">
+                        <div class="col-form-label text-muted">{{ __('Document Category') }}</div>
+                        <select class="form-control" name="company_document_category_id">
+                            @foreach ($companyDocumentCategories as $id => $name)
+                                <option value="{{ $id }}" @if (@$companyDocument->company_document_category_id == $id) selected @endif>{{ is_array($name) ? json_decode($name)[0]->name.' / '.json_decode($name)[1]->name : $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <div class="col-form-label"><span class="text-info">[id]</span>Title<span class="text-danger">*</span></div>
+                        <input type="text" name="title_id" placeholder="Input title in Bahasa" value="{{ @json_decode($companyDocument->title)[0]->title ?? @$companyDocument->title }}" class="form-control"/>
+                    </div>
+                    <div class="mb-2">
+                        <div class="col-form-label"><span class="text-info">[en]</span>Title<span class="text-danger">*</span></div>
+                        <input type="text" name="title_en" placeholder="Input title in English" value="{{ @json_decode($companyDocument->title)[1]->title ?? @$companyDocument->title }}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea4"><span class="text-info">[id]</span>Description</label>
+                        <textarea class="form-control" name="description_id" rows="3">{{ @json_decode($companyDocument->description)[0]->description ?? @$companyDocument->description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea4"><span class="text-info">[en]</span>Description</label>
+                        <textarea class="form-control" name="description_en" rows="3">{{ @json_decode($companyDocument->description)[1]->description ?? @$companyDocument->description }}</textarea>
+                    </div>
                     <x-form.file name="coverImage[]" multiples label="Cover Image" />
                     <x-form.file name="documents[]" multiples label="File" />
                 </form>

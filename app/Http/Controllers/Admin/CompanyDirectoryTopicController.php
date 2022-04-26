@@ -25,15 +25,15 @@ class CompanyDirectoryTopicController extends Controller
     public function store(Request $request) {
 
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
         ], [
-            'name.required' => 'Name Dibutuhkan'
+            'name.required' => 'Name Dibutuhkan',
         ]);
 
         $companyDirectoryTopic = CompanyDirectoryTopic::create($request->all());
         $companyDirectoryTopic->translation()->create($request->all());
 
-        return redirect(route('company_directory_topic.index'))->with('success', 'Successfully updating data');
+        return redirect(route('company_directory_topic.edit', $companyDirectoryTopic->id))->with('success', 'Successfully adding data');
     }
 
     public function edit(Request $request, CompanyDirectoryTopic $companyDirectoryTopic) {
@@ -43,12 +43,10 @@ class CompanyDirectoryTopicController extends Controller
     public function update(Request $request, CompanyDirectoryTopic $companyDirectoryTopic) {
 
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
         ], [
-            'name.required' => 'Name Dibutuhkan'
+            'name.required' => 'Name Dibutuhkan',
         ]);
-
-        $companyDirectoryTopic->update($request->all());
 
         $companyDirectoryTopic->translation()->updateOrCreate([
             'company_directory_topic_id' => $companyDirectoryTopic->id,

@@ -41,15 +41,19 @@ class CompanyDocumentController extends Controller
         $data = $request->all();
         $rules = [
             'company_document_category_id'=>'required',
-            'title'=>'required',
-            'description'=>'required',
+            'title_id'=>'required',
+            'title_en'=>'required',
+            'description_id'=>'required',
+            'description_en'=>'required',
             'coverImage'=>'required|max:1024',
             'documents'=>'required|max:1024',
         ];
         $message = [
             'company_document_category_id.required' => 'Document Category dibutuhkan',
-            'title.required' => 'Title dibutuhkan',
-            'description.required' => 'Description dibutuhkan',
+            'title_id.required' => 'Title dalam bahasa dibutuhkan',
+            'title_en.required' => 'Title dalam english dibutuhkan',
+            'description_id.required' => 'Description dalam bahasa dibutuhkan',
+            'description_en.required' => 'Description dalam english dibutuhkan',
             'coverImage.required' => 'Image dibutuhkan',
             'coverImage.max' => 'batas ukuran Document File maksimal adalah 1MB',
             'documents.required' => 'Document dibutuhkan',
@@ -76,6 +80,26 @@ class CompanyDocumentController extends Controller
         }
 
         CompanyDocument::create(array_merge($request->all(), [
+            'title' => json_encode([
+                [
+                    'language' => 'id',
+                    'title' => $request->title_id
+                ],
+                [
+                    'language' => 'en',
+                    'title' => $request->title_en
+                ]
+            ]),
+            'description' => json_encode([
+                [
+                    'language' => 'id',
+                    'description' => $request->description_id
+                ],
+                [
+                    'language' => 'en',
+                    'description' => $request->description_en
+                ]
+            ]),
             'documents' => json_encode($documents),
             'cover' => json_encode($covers)
         ]));
@@ -109,11 +133,51 @@ class CompanyDocumentController extends Controller
                 }
 
                 $companyDocument->update(array_merge($request->all(), [
+                    'title' => json_encode([
+                        [
+                            'language' => 'id',
+                            'title' => $request->title_id
+                        ],
+                        [
+                            'language' => 'en',
+                            'title' => $request->title_en
+                        ]
+                    ]),
+                    'description' => json_encode([
+                        [
+                            'language' => 'id',
+                            'description' => $request->description_id
+                        ],
+                        [
+                            'language' => 'en',
+                            'description' => $request->description_en
+                        ]
+                    ]),
                     'documents' => json_encode($documents),
                     'cover' => json_encode($covers)
                 ]));
             } else {
                 $companyDocument->update(array_merge($request->all(), [
+                    'title' => json_encode([
+                        [
+                            'language' => 'id',
+                            'title' => $request->title_id
+                        ],
+                        [
+                            'language' => 'en',
+                            'title' => $request->title_en
+                        ]
+                    ]),
+                    'description' => json_encode([
+                        [
+                            'language' => 'id',
+                            'description' => $request->description_id
+                        ],
+                        [
+                            'language' => 'en',
+                            'description' => $request->description_en
+                        ]
+                    ]),
                     'cover' => json_encode($covers)
                 ]));
             }
@@ -127,7 +191,50 @@ class CompanyDocumentController extends Controller
                 }
 
                 $companyDocument->update(array_merge($request->all(), [
+                    'title' => json_encode([
+                        [
+                            'language' => 'id',
+                            'title' => $request->title_id
+                        ],
+                        [
+                            'language' => 'en',
+                            'title' => $request->title_en
+                        ]
+                    ]),
+                    'description' => json_encode([
+                        [
+                            'language' => 'id',
+                            'description' => $request->description_id
+                        ],
+                        [
+                            'language' => 'en',
+                            'description' => $request->description_en
+                        ]
+                    ]),
                     'documents' => json_encode($documents)
+                ]));
+            }else {
+                $companyDocument->update(array_merge($request->all(), [
+                    'title' => json_encode([
+                        [
+                            'language' => 'id',
+                            'title' => $request->title_id
+                        ],
+                        [
+                            'language' => 'en',
+                            'title' => $request->title_en
+                        ]
+                    ]),
+                    'description' => json_encode([
+                        [
+                            'language' => 'id',
+                            'description' => $request->description_id
+                        ],
+                        [
+                            'language' => 'en',
+                            'description' => $request->description_en
+                        ]
+                    ])
                 ]));
             }
         }
