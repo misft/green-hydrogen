@@ -103,7 +103,7 @@ class ProjectController extends Controller
         $project = Project::create(array_merge($request->all(), [
             'image' => $request->has('image') ? $request->file('image')->storePublicly('project/image') : null,
             'logo' => $request->has('logo') ? $request->file('logo')->storePublicly('project/logo') : null,
-            'member_of_image' => $request->has('member_of_image') ? $request->file('logo')->storePublicly('project/member_of_image') : null,
+            'member_of_image' => $request->has('member_of_image') ? $request->file('member_of_image')->storePublicly('project/member_of_image') : null,
         ]));
 
         $project->translations()->create($request->all());
@@ -179,7 +179,7 @@ class ProjectController extends Controller
         $project->update(array_merge($request->all(), [
             'image' => $request->has('image') ? $request->file('image')->storePublicly('project/image') : $project->image,
             'logo' => $request->has('logo') ? $request->file('logo')->storePublicly('project/logo') : $project->logo,
-            'member_of_image' => $request->has('member_of_image') ? $request->file('logo')->storePublicly('project/member_of_image') : $project->member_of_image,
+            'member_of_image' => $request->has('member_of_image') ? $request->file('member_of_image')->storePublicly('project/member_of_image') : $project->member_of_image,
         ]));
 
         $project->translations()->updateOrCreate([
