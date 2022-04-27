@@ -24,43 +24,50 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 xl-100 mb-5">
+        <div class="col-lg-12 xl-100">
             <div class="row">
-                <div class="col-xl-3 xl-50 col-md-6 box-col-6">
-                    <canvas id="line-chart-visitor"></canvas>
+                <div class="col-xl-6 xl-50 box-col-6">
+                    <canvas id="line-chart-visitor" class="card p-4 year-overview"></canvas>
                 </div>
-                <div class="col-xl-3 xl-50 col-md-6 box-col-6">
-                    <canvas id="line-chart-bounce-rate"></canvas>
+                <div class="col-xl-6 xl-50 box-col-6">
+                    <canvas id="line-chart-bounce-rate" class="card p-4 year-overview"></canvas>
                 </div>
             </div>
         </div>
-        <table class="col-lg-12 xl-100 mb-5 table table-hover table-striped">
-            <thead class="font-weight-bold text-center">
-                <tr>
-                    <td>No.</td>
-                    <td>Date</td>
-                    <td>Country</td>
-                    <td>Visitor</td>
-                    <td>Bounch Rate (%)</td>
-                    <td>Time Duration (Minutes)</td>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                    $i = 0;
-                @endphp
-                @foreach ($analyticsDataAll as $data)
-                    <tr>
-                        <td class="text-center">{{++$i}}.</td>
-                        <td class="text-center">{{$data['year']}}-{{$data['month']}}</td>
-                        <td>{{$data['country']}}</td>
-                        <td class="text-center">{{$data['visitor']}}</td>
-                        <td class="text-center">{{$data['bounchRate']}}</td>
-                        <td class="text-center">{{number_format($data['duration'], 2, '.', '')}}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="card col-lg-12 xl-100 mb-5 year-overview">
+            <div class="card-header no-border d-flex">
+                <h5>Detail</h5>
+            </div>
+            <div class="card-body row">
+                <table class="table table-hover table-striped">
+                    <thead class="font-weight-bold text-center">
+                        <tr>
+                            <td>No.</td>
+                            <td>Date</td>
+                            <td>Country</td>
+                            <td>Visitor</td>
+                            <td>Bounch Rate (%)</td>
+                            <td>Time Duration (Minutes)</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $i = 0;
+                        @endphp
+                        @foreach ($analyticsDataAll as $data)
+                        <tr>
+                            <td class="text-center">{{++$i}}.</td>
+                            <td class="text-center">{{$data['year']}}-{{$data['month']}}</td>
+                            <td>{{$data['country']}}</td>
+                            <td class="text-center">{{$data['visitor']}}</td>
+                            <td class="text-center">{{$data['bounchRate']}}</td>
+                            <td class="text-center">{{number_format($data['duration'], 2, '.', '')}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="col-xl-8 xl-100 box-col-12">
             <div class="card year-overview">
                 <div class="card-header no-border d-flex">
@@ -581,14 +588,14 @@
             },
             plugins: {
                 title: {
+                    color: '#111',
                     display: true,
                     position: "top",
                     text: "Bounce Rate (%)",
                     font: {
-                        size: 18,
+                        size: 20,
                         weight: 'bold'
                     },
-                    fontColor: "#111"
                 },
                 legend: {
                     display: false
@@ -645,14 +652,14 @@
             },
             plugins: {
                 title: {
+                    color: '#111',
                     display: true,
                     position: "top",
                     text: "Visitor",
                     font: {
-                        size: 18,
+                        size: 20,
                         weight: 'bold'
                     },
-                    fontColor: "#111"
                 },
                 legend: {
                     display: false
