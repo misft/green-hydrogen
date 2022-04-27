@@ -21,6 +21,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
+            @foreach ($event->translations ?? [0] as $key => $translation)
             <x-form.wizard>
                 <x-slot name="header">
                     {{ request()->routeIs('activity_category.create') ? 'Create Activity Category' : 'Update Activity Category' }}
@@ -31,7 +32,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.localization :value="@$activityCategory->translation->translation_id" />
+                    <x-form.localization :value="@$translation->translation_id" />
                     <x-form.text :value="@$activityCategory->translation->name" label="Name" name="name" />
                 </form>
                 <x-slot name="footer">
@@ -39,6 +40,7 @@
                     <button form="form-news-cat" class="btn btn-secondary btn-pill">Cancel</button>
                 </x-slot>
             </x-form.wizard>
+            @endforeach
         </div>
     </div>
 @endsection

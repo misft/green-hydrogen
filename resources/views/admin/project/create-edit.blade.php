@@ -21,6 +21,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
+            @foreach ($project->translations ?? [0] as $key => $translation )
             <x-form.wizard>
                 <x-slot name="header">
                     {{ request()->routeIs('project.create') ? 'Create Project' : 'Update Project' }}
@@ -31,7 +32,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.localization :value="@$project->translation->translation_id"/>
+                    <x-form.localization :value="@$translation->translation_id"/>
                     <x-form.select :items="$categories" :value="@$project->project_category_id" label="Category" name="project_category_id"/>
                     <x-form.select :items="$countries" :value="@$project->country_id" label="Country" name="country_id"/>
                     <x-form.select :items="$regions" :value="@$project->region_id" label="Region" name="region_id"/>
@@ -70,6 +71,7 @@
                     <x-action.cancel />
                 </x-slot>
             </x-form.wizard>
+            @endforeach
         </div>
     </div>
 @endsection

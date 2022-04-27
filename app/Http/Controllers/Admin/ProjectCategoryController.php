@@ -10,7 +10,7 @@ class ProjectCategoryController extends Controller
 {
     public function index()
     {
-        $categories = ProjectCategory::all();
+        $categories = ProjectCategory::with(['translation'])->get();
         return view('admin.project.category.index', compact('categories'));
     }
 
@@ -26,12 +26,14 @@ class ProjectCategoryController extends Controller
             'name.required' => 'Name Dibutuhkan'
         ]);
 
-        ProjectCategory::create($request->all());
+        $projectCategory = ProjectCategory::create($request->all());
+        $projectCategory->translation()->create($request->all());
 
         return redirect(route('project_category.index'))->with('success', 'Successfully adding category');
     }
 
     public function edit(Request $request, ProjectCategory $projectCategory) {
+        // dd($projectCategory);
         return view('admin.project.category.create-edit', [
             'projectCategory' => $projectCategory
         ]);
@@ -45,6 +47,10 @@ class ProjectCategoryController extends Controller
         ]);
 
         $projectCategory->update($request->all());
+        $projectCategory->translation()->updateOrCreate([
+            'translation_id' => $request->get('translation_id'),
+            'project_category_id' => $projectCategory->id
+        ], $request->all());
 
         return redirect(route('project_category.index'))->with('success', 'Successfully updating category');
     }

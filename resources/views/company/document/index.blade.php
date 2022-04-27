@@ -50,14 +50,47 @@
                                 <tbody>
                                     @foreach ($documents as $item)
                                         <tr>
-                                            <td>
-                                                <h6>{{ $item->category->name }}</h6>
+                                        <td>
+                                                @if(is_array(json_decode($item->category->name)))
+                                                    @foreach (json_decode($item->category->name) as $cat)
+                                                        <h6>
+                                                            <span class="text-info">[{{ $cat->language }}]</span>
+                                                            {{ $cat->name }}
+                                                        </h6>
+                                                    @endforeach
+                                                @else 
+                                                    <h6>
+                                                        <span class="text-danger">Masih menggunakan format data lama, silahkan diupdate</span>
+                                                    </h6>
+                                                @endif
                                             </td>
                                             <td>
-                                                <h6>{{ $item->title }}</h6>
+                                                @if(is_array(json_decode($item->title)))
+                                                    @foreach (json_decode($item->title) as $title)
+                                                        <h6>
+                                                            <span class="text-info">[{{ $title->language }}]</span>
+                                                            {{ $title->title }}
+                                                        </h6>
+                                                    @endforeach
+                                                @else 
+                                                    <h6>
+                                                        <span class="text-danger">Masih menggunakan format data lama, silahkan diupdate</span>
+                                                    </h6>
+                                                @endif
                                             </td>
                                             <td>
-                                                <h6>{{ $item->description }}</h6>
+                                                @if(is_array(json_decode($item->description)))
+                                                    @foreach (json_decode($item->description) as $description)
+                                                        <h6>
+                                                            <span class="text-info">[{{ $description->language }}]</span>
+                                                            {{ $description->description }}
+                                                        </h6>
+                                                    @endforeach
+                                                @else 
+                                                    <h6>
+                                                        <span class="text-danger">Masih menggunakan format data lama, silahkan diupdate</span>
+                                                    </h6>
+                                                @endif
                                             </td>
                                             <td>
                                                 <h6>

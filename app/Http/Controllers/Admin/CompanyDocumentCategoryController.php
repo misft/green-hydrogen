@@ -25,14 +25,27 @@ class CompanyDocumentCategoryController extends Controller
     public function store(Request $request) {
 
         $request->validate([
-            'name' => 'required'
+            'name_id' => 'required',
+            'name_en' => 'required'
         ], [
-            'name.required' => 'Name Dibutuhkan'
+            'name_id.required' => 'Name dalam Bahasa Dibutuhkan',
+            'name_en.required' => 'Name dalam English Dibutuhkan'
         ]);
 
-        CompanyDocumentCategory::create($request->all());
+        CompanyDocumentCategory::create([
+            'name' => json_encode([
+                [
+                    'language' => 'id',
+                    'name' => $request->name_id
+                ],
+                [
+                    'language' => 'en',
+                    'name' => $request->name_en
+                ]
+            ])
+        ]);
 
-        return back()->with('success', 'Successfully adding category');
+        return redirect()->route('company_document_category.index')->with('success', 'Successfully adding category');
     }
 
     public function edit(Request $request, CompanyDocumentCategory $companyDocumentCategory) {
@@ -44,12 +57,25 @@ class CompanyDocumentCategoryController extends Controller
     public function update(Request $request, CompanyDocumentCategory $companyDocumentCategory) {
 
         $request->validate([
-            'name' => 'required'
+            'name_id' => 'required',
+            'name_en' => 'required'
         ], [
-            'name.required' => 'Name Dibutuhkan'
+            'name_id.required' => 'Name dalam Bahasa Dibutuhkan',
+            'name_en.required' => 'Name dalam English Dibutuhkan'
         ]);
 
-        $companyDocumentCategory->update($request->all());
+        $companyDocumentCategory->update([
+            'name' => json_encode([
+                [
+                    'language' => 'id',
+                    'name' => $request->name_id
+                ],
+                [
+                    'language' => 'en',
+                    'name' => $request->name_en
+                ]
+            ])
+        ]);
 
         return redirect(route('company_document_category.index'))->with('success', 'Successfully updating category');
     }

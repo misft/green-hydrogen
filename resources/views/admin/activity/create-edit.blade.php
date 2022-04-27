@@ -36,7 +36,10 @@
                     <x-form.activity-category.select />
                     <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
-                    <x-form.file label="File" name="embed" multiple />
+                        <div class="mb-2">
+                            <img style="max-width: 200px;" src="{{asset('storage/' . @json_decode($activity->embed) )}}" alt="">
+                        </div>
+                    <x-form.file label="File" name="embed" />
                     <x-form.text :value="@$translation->embed" label="Link Embed" name="embed"/>
 
                 </form>

@@ -28,10 +28,17 @@
                 <form id="form"
                     action="{{ request()->routeIs('company_document_category.create') ? route('company_document_category.store'): route('company_document_category.update', $companyDocumentCategory->id) }}"
                     class="theme-form mega-form" method="post"
-                    enctype="multipart/form-data">
+                    enctype="multipart/form-data" autocomplete="off">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.text :value="@$companyDocumentCategory->name" label="Category" name="name" />
+                    <div class="mb-2">
+                        <div class="col-form-label"><span class="text-info">[id]</span>Name<span class="text-danger">*</span></div>
+                        <input type="text" name="name_id" placeholder="Input name in Bahasa" value="{{ @json_decode($companyDocumentCategory->name)[0]->name ?? @$companyDocumentCategory->name }}" class="form-control"/>
+                    </div>
+                    <div class="mb-2">
+                        <div class="col-form-label"><span class="text-info">[en]</span>Name<span class="text-danger">*</span></div>
+                        <input type="text" name="name_en" placeholder="Input name in English" value="{{ @json_decode($companyDocumentCategory->name)[1]->name ?? @$companyDocumentCategory->name }}" class="form-control"/>
+                    </div>
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>

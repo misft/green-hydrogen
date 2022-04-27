@@ -21,6 +21,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
+            @foreach ($companyDirectoryTopic->translations ?? [0] as $key => $translation)
             <x-form.wizard>
                 <x-slot name="header">
                     {{ request()->routeIs('company_directory_topic.create') ? 'Create Company Topic' : 'Update Company Topic' }}
@@ -31,13 +32,15 @@
                     enctype="multipart/form-data">
                     @csrf
                     <x-form.put-method  />
-                    <x-form.text :value="@$companyDirectoryTopic->name" label="Name" name="name" />
+                    <x-form.localization :value="@$translation->translation_id" />
+                    <x-form.text :value="@$translation->name" label="Name" name="name" />
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>
                     <x-action.cancel />
                 </x-slot>
             </x-form.wizard>
+            @endforeach
         </div>
     </div>
 @endsection

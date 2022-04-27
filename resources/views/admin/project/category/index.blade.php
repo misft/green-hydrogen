@@ -48,7 +48,7 @@
                                         <tr>
                                             <div class="row justify-content-between">
                                             <td class="col-8">
-                                                <h6>{{ $item->name }}</h6>
+                                                <x-table.cell.language :items="$item" key="name" />
                                             </td>
                                             <td class="col-4">
                                                 <x-action.delete-row :idform="$item->id" :action="route('project_category.destroy', $item->id)" />

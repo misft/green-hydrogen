@@ -38,6 +38,9 @@
                     <x-form.text :value="@$event->speaker_title" label="Speaker Title" name="speaker_title" />
                     <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
+                    <div class="mb-2">
+                        <img style="max-width: 200px;" src="{{asset('storage/' . @$event->embed )}}" alt="">
+                    </div>
                     <x-form.file id="embed-file" name="embed" label="File"/>
                     <x-form.text id="embed-text" label="Or Link" placeholder="External Link" name="link" value="{{ @$event->link }}"/>
                     <x-form.text :value="@$event->location" placeholder="Address" label="Address" name="location"/>

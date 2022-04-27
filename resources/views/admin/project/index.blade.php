@@ -58,7 +58,7 @@
                                     @foreach ($projects as $item)
                                         <tr>
                                             <td>
-                                                <h6>{{ $item->category->name }}</h6>
+                                                <h6>{{ $item->category->name ?? 'Category Unset!'}}</h6>
                                             </td>
                                             <td>
                                                 <h6>{{ $item->country->name }}</h6>
