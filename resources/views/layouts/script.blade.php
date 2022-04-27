@@ -13,6 +13,8 @@
 <script src="{{route('/')}}/assets/js/sidebar-menu.js"></script>
 <script src="{{route('/')}}/assets/js/config.js"></script>
 <script src="{{route('/')}}/assets/js/chat-menu.js"></script>
+<script src="{{route('/')}}/assets/js/moment.js"></script>
+<script src="{{route('/')}}/assets/js/moment-timezone.js"></script>
 @yield('script')	
 <!-- Plugins JS Ends-->
 <!-- Theme js-->

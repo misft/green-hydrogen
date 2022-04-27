@@ -60,7 +60,7 @@
                             <td class="text-center">{{$data['year']}}-{{$data['month']}}</td>
                             <td>{{$data['country']}}</td>
                             <td class="text-center">{{$data['visitor']}}</td>
-                            <td class="text-center">{{$data['bounchRate']}}</td>
+                            <td class="text-center">{{number_format($data['bounchRate'], 2, '.', '')}}</td>
                             <td class="text-center">{{number_format($data['duration'], 2, '.', '')}}</td>
                         </tr>
                         @endforeach
@@ -68,7 +68,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-xl-8 xl-100 box-col-12">
+        <!-- <div class="col-xl-8 xl-100 box-col-12">
             <div class="card year-overview">
                 <div class="card-header no-border d-flex">
                     <h5>Year Overview</h5>
@@ -202,7 +202,7 @@
                             </span></span></span>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="col-xl-6 xl-100 box-col-12">
             <div class="card weather-bg">
                 <div class="card-header no-border bg-transparent">
@@ -214,8 +214,8 @@
                     <div class="media weather-details">
                         <span class="weather-title"><i class="fa fa-circle-o d-block text-right"></i><span>16</span></span>
                         <div class="media-body">
-                            <h5>London</h5>
-                            <span class="d-block">01, Dec 2021</span>
+                            <h5 id="country">London</h5>
+                            <span class="d-block" id="date">01, Dec 2021</span>
                             <h6 class="mb-0">Wind : 50km/h </h6>
                         </div>
                     </div>
@@ -223,7 +223,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 xl-100 box-col-12">
+        <!-- <div class="col-xl-6 xl-100 box-col-12">
             <div class="card">
                 <div class="card-header no-border">
                     <h5>Today's Activity</h5>
@@ -515,7 +515,7 @@
                             </span></span></span>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 @endsection
@@ -543,6 +543,12 @@
 <script src="{{ route('/') }}/assets/js/datepicker/date-picker/datepicker.en.js"></script>
 <script src="{{ route('/') }}/assets/js/datepicker/date-picker/datepicker.custom.js"></script>
 <script>
+    // document.getElementById('country').innerHTML = moment().tz().zone.name;
+    document.getElementById('date').innerHTML = moment().format('DD, MMMM YYYY');
+    document.getElementById('country').innerHTML = moment.tz.guess();
+
+    console.log(moment.tz.zone.name);
+
     GenerateChartBounceRate();
     GenerateChartVisitor();
 
