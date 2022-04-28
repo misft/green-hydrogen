@@ -94,14 +94,14 @@
                     <li><a href="{{ route('city.index') }}">City</a></li>
                 </ul>
             </li>
-            <li>
+            {{-- <li>
                 <a class="bar-icons" href="#">
                     <i class="pe-7s-server"></i><span>Language </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
                     <li><a href="{{ route('language.index') }}">Language</a></li>
                 </ul>
-            </li>
+            </li> --}}
             <li>
                 <a class="bar-icons" href="#">
                     <i class="pe-7s-link"></i><span>Event / Schedule </span>

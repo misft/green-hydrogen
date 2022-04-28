@@ -81,8 +81,11 @@
                             <div class="modal-body">
                                 <div class="modal-header"></div>
                                 <div class="contain p-30">
+                                    <div class="mb-5">
+                                        <img src="{{asset('assets/images/logo/logo.3abbe43d90225df4da30.png')}}" class="img-fluid" alt="">
+                                    </div>
                                     <div class="text-center">
-                                        <h3>Green Hydrogen</h3>
+                                        <h3>Hydrogen Indonesia</h3>
                                     </div>
                                 </div>
                             </div>

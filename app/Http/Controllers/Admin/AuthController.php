@@ -34,7 +34,7 @@ class AuthController extends Controller
         ], $request->get('remember'));
 
         if($auth) {
-            return redirect(route('menu.index'));
+            return redirect(route('dashboard'));
         }
 
         return redirect(route('login'))->with([

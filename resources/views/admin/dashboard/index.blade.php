@@ -206,17 +206,17 @@
         <div class="col-xl-6 xl-100 box-col-12">
             <div class="card weather-bg">
                 <div class="card-header no-border bg-transparent">
-                    <h5>Weather Overview</h5>
+                    <h5>Ikhtisar Cuaca</h5>
                 </div>
                 <div class="card-body weather-bottom-bg p-0">
                     <div class="cloud"><img src="{{ route('/') }}/assets/images/cloud.png" alt=""></div>
                     <div class="cloud-rain"></div>
                     <div class="media weather-details">
-                        <span class="weather-title"><i class="fa fa-circle-o d-block text-right"></i><span>16</span></span>
+                        <span class="weather-title"><i class="fa fa-circle-o d-block text-right"></i><span id="suhu">16</span></span>
                         <div class="media-body">
-                            <h5 id="country">London</h5>
-                            <span class="d-block" id="date">01, Dec 2021</span>
-                            <h6 class="mb-0">Wind : 50km/h </h6>
+                            <h5 id="country">Uruguay</h5>
+                            <span class="d-block" id="date"></span>
+                            <h6 class="mb-0" id="angin">Wind : 50km/h </h6>
                         </div>
                     </div>
                     <img class="img-fluid" src="{{ route('/') }}/assets/images/dashboard/weather-image.png" alt="">
@@ -501,7 +501,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="col-xl-4 xl-100 box-col-12">
             <div class="card gradient-primary o-hidden">
                 <div class="card-body">
@@ -509,13 +509,13 @@
                         <div class="setting-bg-primary date-picker-setting position-set pull-right"><i class="fa fa-spin fa-cog"></i></div>
                     </div>
                     <div class="default-datepicker">
-                        <div class="datepicker-here" data-language="en"></div>
+                        <div class="datepicker-here" data-language="id"></div>
                     </div>
                     <span class="default-dots-stay overview-dots full-width-dots"><span class="dots-group"><span class="dots dots1"></span><span class="dots dots2 dot-small"></span><span class="dots dots3 dot-small"></span><span class="dots dots4 dot-medium"></span><span class="dots dots5 dot-small"></span><span class="dots dots6 dot-small"></span><span class="dots dots7 dot-small-semi"></span><span class="dots dots8 dot-small-semi"></span><span class="dots dots9 dot-small">
                             </span></span></span>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>
 @endsection
@@ -541,16 +541,63 @@
 <script src="{{ route('/') }}/assets/js/notify/index.js"></script>
 <script src="{{ route('/') }}/assets/js/datepicker/date-picker/datepicker.js"></script>
 <script src="{{ route('/') }}/assets/js/datepicker/date-picker/datepicker.en.js"></script>
+<script src="{{ route('/') }}/assets/js/datepicker/date-picker/datepicker.id.js"></script>
 <script src="{{ route('/') }}/assets/js/datepicker/date-picker/datepicker.custom.js"></script>
 <script>
     // document.getElementById('country').innerHTML = moment().tz().zone.name;
     document.getElementById('date').innerHTML = moment().format('DD, MMMM YYYY');
-    document.getElementById('country').innerHTML = moment.tz.guess();
+    // document.getElementById('country').innerHTML = moment.tz.zone(moment.tz.guess()).countries();
+    document.getElementById('country').innerHTML = 'Indonesia';
+
+    $(document).ready(() => {
+        if(getCookie('suhu') === null || getCookie('angin') === null){
+            $.ajax({
+                url: 'http://api.openweathermap.org/data/2.5/weather?q=jakarta&appid=2ced89839ba84a75073919baf1c5940c'
+            }).done((data) => {
+                var suhu = Math.round(data.main.temp - 273.15);
+                setCookie('suhu', suhu, 1);
+                var getSuhu = getCookie('suhu');
+                document.getElementById('suhu').innerHTML = getSuhu
+                var angin = data.wind.speed
+                setCookie('angin', angin, 1);
+                var getAngin = getCookie('angin');
+                document.getElementById('angin').innerHTML = `Angin : ${getAngin} m/s`
+            })
+        }else{
+            var getSuhu = getCookie('suhu');
+            document.getElementById('suhu').innerHTML = getSuhu
+            var getAngin = getCookie('angin');
+            document.getElementById('angin').innerHTML = `Angin : ${getAngin} m/s`
+        }
+
+        //Date Picker
+
+    })
 
     console.log(moment.tz.zone.name);
 
     GenerateChartBounceRate();
     GenerateChartVisitor();
+
+    function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
 
     function GenerateChartBounceRate() {
         //get the pie chart canvas
