@@ -552,7 +552,7 @@
     $(document).ready(() => {
         if(getCookie('suhu') === null || getCookie('angin') === null){
             $.ajax({
-                url: 'http://api.openweathermap.org/data/2.5/weather?q=jakarta&appid=2ced89839ba84a75073919baf1c5940c'
+                url: 'https://api.openweathermap.org/data/2.5/weather?q=jakarta&appid=2ced89839ba84a75073919baf1c5940c'
             }).done((data) => {
                 var suhu = Math.round(data.main.temp - 273.15);
                 setCookie('suhu', suhu, 1);
