@@ -20,7 +20,7 @@ class CompanyDocumentController extends Controller
     }
 
     public function latest(Request $request) {
-        $documents = CompanyDocument::with(['company:id,name,image,photo', 'category:id,name'])->limit(3)->orderBy('created_at', 'desc')->get();
+        $documents = CompanyDocument::with(['company:id,name,image,photo', 'category:id,name'])->limit(4)->orderBy('created_at', 'desc')->get();
 
         return $this->success(body: [
             'documents' => $documents

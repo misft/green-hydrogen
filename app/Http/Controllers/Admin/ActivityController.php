@@ -15,7 +15,7 @@ class ActivityController extends Controller
         $category = array();
 
         foreach($categories as $cat) {
-            $category[$cat->id] = $cat->translations; 
+            $category[$cat->id] = $cat->translations;
         }
 
         return view('admin.activity.index', compact('activity', 'category'));
@@ -38,6 +38,11 @@ class ActivityController extends Controller
             'activity_category_id' => 'required',
             'translation_id' => 'required',
             'embed' => 'required',
+        ],[
+            'title.required' => 'Title is needed',
+            'activity_category_id.required' => 'Activity Category is needed',
+            'translation_id.required'=> 'Language is needed',
+            'embed' => 'Embed is needed'
         ]);
         $type = $request->hasFile('embed') ? 'FILE' : 'LINK';
         $file = $request->hasFile('embed') ? json_encode($request->file('embed')->storePublicly('activity')) : $request->embed;
@@ -66,6 +71,10 @@ class ActivityController extends Controller
             'activity_category_id' => 'required',
             'translation_id' => 'required',
             'embed' => 'sometimes',
+        ],[
+            'title.required' => 'Title is needed',
+            'activity_category_id.required' => 'Activity Category is needed',
+            'translation_id.required'=> 'Language is needed',
         ]);
 
         $type = $request->file('embed') ? 'FILE' : 'LINK';

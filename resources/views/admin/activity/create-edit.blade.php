@@ -36,11 +36,25 @@
                     <x-form.activity-category.select />
                     <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
+                    @if (request()->routeIs('activity.edit'))
                         <div class="mb-2">
-                            <img style="max-width: 200px;" src="{{asset('storage/' . @json_decode($activity->embed) )}}" alt="">
+                            <?php
+                            $result = json_decode($activity->embed);
+                            ?>
+                            @if (json_last_error() === JSON_ERROR_NONE)
+                                <img style="max-width: 200px;" class="img-rounded" src="{{asset('storage/' . @json_decode($activity->embed) )}}" alt="">
+                            @else
+                                <img style="max-width: 200px;" class="img-rounded" src="{{ $activity->embed }}">
+                            @endif
                         </div>
-                    <x-form.file label="File" name="embed" />
-                    <x-form.text :value="@$translation->embed" label="Link Embed" name="embed"/>
+                    @endif
+                    <select class="js-example-basic-single col-sm-12" name="type_embed" id="type_embed">
+                            <option selected>Pilih Tipe Lampiran</option>
+                            <option value="file">File</option>
+                            <option value="link">Link</option>
+                    </select>
+                    <x-form.file class="fileinput d-none" label="File Embed" name="embed" />
+                    <x-form.text class="textinput d-none" :value="@$translation->embed" label="Link Embed" name="embed"/>
 
                 </form>
                 <x-slot name="footer">
@@ -56,4 +70,21 @@
 @section('script')
     <script src="{{ route('/') }}/assets/js/select2/select2.full.min.js"></script>
     <script src="{{ route('/') }}/assets/js/select2/select2-custom.js"></script>
+    <script>
+        $(document).ready(() => {
+            $('#type_embed').on('change', function(){
+                var Lampiran = $(this).val()
+                if(Lampiran === 'file'){
+                    $('.fileinput').removeClass('d-none')
+                    $('.textinput').addClass('d-none')
+                }else if(Lampiran === 'link'){
+                    $('.fileinput').addClass('d-none')
+                    $('.textinput').removeClass('d-none')
+                }else{
+                    $('.fileinput').addClass('d-none')
+                    $('.textinput').addClass('d-none')
+                }
+            })
+        })
+    </script>
 @endsection

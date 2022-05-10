@@ -63,11 +63,10 @@ class NewsController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'embed' => 'required'
+            'embed' => 'sometimes'
         ], [
             'title.required' => 'Title Dibutuhkan',
             'description.required' => 'Description Dibutuhkan',
-            'embed.required' => 'Embed Dibutuhkan'
         ]);
 
 

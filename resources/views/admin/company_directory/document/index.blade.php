@@ -58,7 +58,7 @@
                                                             {{ $cat->name }}
                                                         </h6>
                                                     @endforeach
-                                                @else 
+                                                @else
                                                     <h6>
                                                         <span class="text-danger">Masih menggunakan format data lama, silahkan diupdate</span>
                                                     </h6>
@@ -72,7 +72,7 @@
                                                             {{ $title->title }}
                                                         </h6>
                                                     @endforeach
-                                                @else 
+                                                @else
                                                     <h6>
                                                         <span class="text-danger">Masih menggunakan format data lama, silahkan diupdate</span>
                                                     </h6>
@@ -86,7 +86,7 @@
                                                             {{ $description->description }}
                                                         </h6>
                                                     @endforeach
-                                                @else 
+                                                @else
                                                     <h6>
                                                         <span class="text-danger">Masih menggunakan format data lama, silahkan diupdate</span>
                                                     </h6>
@@ -98,9 +98,20 @@
                                                 </h6>
                                             </td>
                                             <td>
+                                                <?php
+                                                    $result = json_decode($item->documents);
+                                                ?>
+                                                @if (json_last_error() === JSON_ERROR_NONE)
                                                 <h6>
-                                                    <a href="{{ asset('storage/'.json_decode($item->documents)[0]) }}" target="_blank" rel="noopener noreferrer">View</a>
+                                                    @foreach (json_decode($item->documents) as $each)
+                                                    <a href="{{asset('storage/'. $each)}}" target="_blank" rel="noopener noreferrer">View</a>
+                                                    @endforeach
                                                 </h6>
+                                                @else
+                                                <h6>
+                                                    <a href="{{ $item->documents }}" target="_blank" rel="noopener noreferrer">View</a>
+                                                </h6>
+                                                @endif
                                             </td>
                                             <td>
                                                 <x-action.delete-row :idform="$item->id" :action="route('company_document.destroy', $item->id)" />

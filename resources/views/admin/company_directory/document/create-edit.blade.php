@@ -57,7 +57,33 @@
                         <textarea class="form-control" name="description_en" rows="3">{{ @json_decode($companyDocument->description)[1]->description ?? @$companyDocument->description }}</textarea>
                     </div>
                     <x-form.file name="coverImage[]" multiple label="Cover Image" />
-                    <x-form.file name="documents[]" multiple label="File" />
+                    @if (request()->routeIs('company_document.edit'))
+                    <div class="mb-2">
+                        <label class="col-form-label" for="lampiran">Daftar Lampiran</label>
+                        <?php
+                            $result = json_decode($companyDocument->documents);
+                        ?>
+                        @if (json_last_error() === JSON_ERROR_NONE)
+                        <div class="list-group">
+                            @foreach (json_decode($companyDocument->documents) as $each)
+                            <a href="{{asset('storage/'. $each)}}" class="list-group-item list-group-item-action">Document {{$loop->iteration}}</a>
+                            @endforeach
+                          </div>
+                        @else
+                        <div class="list-group">
+                            <a href="{{$companyDocument->documents}}" class="list-group-item list-group-item-action">Document</a>
+                          </div>
+                        @endif
+                    </div>
+                    @endif
+
+                    <select class="js-example-basic-single col-sm-12 mb-2" name="type_document" id="type_document">
+                        <option selected>Pilih Type Lampiran</option>
+                        <option value="file">File</option>
+                        <option value="link">Link</option>
+                    </select>
+                    <x-form.file class="fileinput d-none" name="documents[]" multiple label="File Document" />
+                    <x-form.text class="textinput d-none" :value="@$companyDocument->nganu" label="Link Document" name="documents"/>
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>
@@ -71,4 +97,21 @@
 @section('script')
     <script src="{{ route('/') }}/assets/js/select2/select2.full.min.js"></script>
     <script src="{{ route('/') }}/assets/js/select2/select2-custom.js"></script>
+    <script>
+        $(document).ready(() => {
+            $('#type_document').on('change', function(){
+                var Lampiran = $(this).val()
+                if(Lampiran === 'file'){
+                    $('.fileinput').removeClass('d-none')
+                    $('.textinput').addClass('d-none')
+                }else if(Lampiran === 'link'){
+                    $('.fileinput').addClass('d-none')
+                    $('.textinput').removeClass('d-none')
+                }else{
+                    $('.fileinput').addClass('d-none')
+                    $('.textinput').addClass('d-none')
+                }
+            })
+        })
+    </script>
 @endsection

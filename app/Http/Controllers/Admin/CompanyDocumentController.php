@@ -72,6 +72,9 @@ class CompanyDocumentController extends Controller
         foreach($files as $file) {
             $documents[] = $file->storePublicly('company_document');
         }
+        if(empty($files)){
+            $documents = $request->documents;
+        }
 
         CompanyDocument::create(array_merge($request->all(), [
             'title' => json_encode([
@@ -94,7 +97,7 @@ class CompanyDocumentController extends Controller
                     'description' => $request->description_en
                 ]
             ]),
-            'documents' => json_encode($documents),
+            'documents' => empty($documents) ? $documents : json_encode($documents),
             'cover' => json_encode($covers)
         ]));
 
@@ -123,7 +126,7 @@ class CompanyDocumentController extends Controller
             if($request->file('documents')){
                 $files = $request->file('documents') ?? [];
                 $documents = array();
-    
+
                 foreach($files as $file) {
                     $documents[] = $file->storePublicly('company_document');
                 }
@@ -174,6 +177,7 @@ class CompanyDocumentController extends Controller
                             'description' => $request->description_en
                         ]
                     ]),
+                    'documents' => $request->documents !== '' ? $request->documents : $companyDocument->documents,
                     'cover' => json_encode($covers)
                 ]));
             }
@@ -181,7 +185,7 @@ class CompanyDocumentController extends Controller
             if($request->file('documents')){
                 $files = $request->file('documents') ?? [];
                 $documents = array();
-    
+
                 foreach($files as $file) {
                     $documents[] = $file->storePublicly('company_document');
                 }
@@ -230,7 +234,8 @@ class CompanyDocumentController extends Controller
                             'language' => 'en',
                             'description' => $request->description_en
                         ]
-                    ])
+                    ]),
+                    'documents' => $request->documents !== '' ? $request->documents : $companyDocument->documents,
                 ]));
             }
         }

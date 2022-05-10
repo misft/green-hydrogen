@@ -88,7 +88,7 @@ class EventController extends Controller
             'speaker_title' => 'required',
             'title' => 'required',
             'description' => 'required',
-            'embed' => 'required',
+            'embed' => 'sometimes',
             'link' => 'required',
             'location' => 'required',
             'date' => 'required',
@@ -100,7 +100,7 @@ class EventController extends Controller
             'speaker_title.required' => 'Speaker Title Dibutuhkan',
             'title.required' => 'Titel Dibutuhkan',
             'description.required' => 'Description Dibutuhkan',
-            'embed.required' => 'File Embed Dibutuhkan',
+            // 'embed.required' => 'File Embed Dibutuhkan',
             'link.required' => 'Link Dibutuhkan',
             'location.required' => 'Location Dibutuhkan',
             'date.required' => 'Date Dibutuhkan',
@@ -110,13 +110,7 @@ class EventController extends Controller
 
         $event = Event::with(['translations', 'category.translations'])->find($id);
 
-        $embed = $request->hasFile('embed');
-
-        if($embed) {
-            $embed = $request->file('embed')->storePublicly('event');
-        }else {
-            $embed = $event->embed;
-        }
+        $embed = $request->hasFile('embed') ? $request->file('embed')->storePublicly('event') : $event->embed;
 
         $event->update(array_merge($request->all(), [
             'embed' => $embed
