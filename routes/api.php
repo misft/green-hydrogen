@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\CompanyDocumentController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\RegionController;
 use App\Http\Controllers\Api\SectionController;
+use App\Http\Controllers\Api\SmtpController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -176,6 +177,13 @@ Route::group([
 Route::group([
     'controller' => VideoPublicationController::class,
     'prefix' => 'video_publication'
+], function() {
+    Route::get('/', 'index');
+});
+
+Route::group([
+    'controller' => SmtpController::class,
+    'prefix' => 'contact_email'
 ], function() {
     Route::get('/', 'index');
 });
