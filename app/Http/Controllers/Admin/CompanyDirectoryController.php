@@ -64,8 +64,9 @@ class CompanyDirectoryController extends Controller
     }
 
     public function edit(Request $request, CompanyDirectory $companyDirectory) {
+        $companyDirectory->load(['translation']);
         $region = Region::get()->pluck('name', 'id');
-        // dd($companyDirectory);
+
         return view('admin.company_directory.create-edit', compact('companyDirectory', 'region'));
     }
 
