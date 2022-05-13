@@ -31,6 +31,7 @@ class CompanyDirectoryController extends Controller
 
     public function index(Request $request) {
         $companyDirectories = CompanyDirectory::with(['region:id,name'])
+            ->whereIsEmailVerified(1)
             ->get();
 
         return $this->success(body: [
