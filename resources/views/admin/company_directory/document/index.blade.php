@@ -51,16 +51,22 @@
                                     @foreach ($documents as $item)
                                         <tr>
                                             <td>
-                                                @if(is_array(json_decode($item->category->name)))
-                                                    @foreach (json_decode($item->category->name) as $cat)
+                                                @if(!is_null($item->company_document_category_id))
+                                                    @if(is_array(json_decode($item->category->name)))
+                                                        @foreach (json_decode($item->category->name) as $cat)
+                                                            <h6>
+                                                                <span class="text-info">[{{ $cat->language }}]</span>
+                                                                {{ $cat->name }}
+                                                            </h6>
+                                                        @endforeach
+                                                    @else 
                                                         <h6>
-                                                            <span class="text-info">[{{ $cat->language }}]</span>
-                                                            {{ $cat->name }}
+                                                            <span class="text-danger">Masih menggunakan format data lama, silahkan diupdate</span>
                                                         </h6>
-                                                    @endforeach
+                                                    @endif
                                                 @else
                                                     <h6>
-                                                        <span class="text-danger">Masih menggunakan format data lama, silahkan diupdate</span>
+                                                        <span class="text-danger">Data kategori kosong</span>
                                                     </h6>
                                                 @endif
                                             </td>
