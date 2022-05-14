@@ -73,6 +73,11 @@ class VideoPublicationController extends Controller
 
     public function destroy(Request $request, $id) {
 
+        $publication = VideoPublication::find($id);
+        $publication->delete();
+
+        return redirect(route('video_publication.index'))->with('success', 'Successfully deleting video publication');
+
     }
 
 }

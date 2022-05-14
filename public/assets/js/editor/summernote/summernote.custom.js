@@ -2,7 +2,21 @@ var summernote_custom = {
     init: function() {
         $('.summernote').summernote({
             height: 300,
-            tabsize: 2
+            tabsize: 2,
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+            lineHeights: ['0.2', '0.3', '0.4', '0.5', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '2.0', '3.0'],
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'hr']],
+                ['view', ['fullscreen', 'codeview']],
+                ['help', ['help']]
+            ],
         });
         $('.inline-editor').summernote({
             airMode: true
@@ -17,7 +31,7 @@ var summernote_custom = {
                 search: function (keyword, callback) {
                     callback($.grep(this.words, function (item) {
                         return item.indexOf(keyword) === 0;
-                    }));    
+                    }));
                 }
             }
         });
