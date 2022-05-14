@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\EventCategory;
+use Google\Service\Games\EventChild;
 use Illuminate\Http\Request;
 
 class EventCategoryController extends Controller
@@ -68,6 +70,11 @@ class EventCategoryController extends Controller
     }
 
     public function destroy(Request $request, $id) {
+        $EventCategories = EventCategory::with('event')->find($id);
+        $validation = $EventCategories->event->count();
+        if($validation > 0){
+            return back()->with('error', 'Apabila category ini dihapus akan berdampak pada data event');
+        }
         EventCategory::with('translations')->find($id)->delete();
 
         return back()->with('success', 'Successfully deleting event');

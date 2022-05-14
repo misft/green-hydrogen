@@ -57,6 +57,11 @@ class CompanyDirectoryTopicController extends Controller
     }
 
     public function destroy(Request $request, CompanyDirectoryTopic $companyDirectoryTopic) {
+        $validation = $companyDirectoryTopic->company_directory->count();
+        // dd($validation);
+        if($validation > 0){
+            return back()->with('error', 'Topic ini digunakan oleh beberapa company directory, aktivitas ini akan mengganggu data lain');
+        }
         $companyDirectoryTopic->delete();
 
         return redirect(route('company_directory_topic.index'))->with('success', 'Successfully deleting data');

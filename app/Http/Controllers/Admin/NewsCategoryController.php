@@ -69,6 +69,11 @@ class NewsCategoryController extends Controller
     }
 
     public function destroy(Request $request, NewsCategory $newsCategory) {
+        $validation = $newsCategory->news->count();
+        if($validation > 0){
+            return back()->with('error', 'Apabila category ini dihapus, maka akan berdampak pada data news');
+        }
+
         $newsCategory->delete();
 
         return redirect(route('news_category.index'))->with('success', 'Success deleting news category');

@@ -51,6 +51,12 @@ class RegionController extends Controller
     }
 
     public function destroy(Request $request, Region $region) {
+        $regionCompanyDirectory = $region->company_directory->count();
+        $regionProject = $region->project->count();
+        if($regionCompanyDirectory > 0 || $regionProject > 0){
+            return back()->with('error', 'Menghapus region ini akan berdampak pada data lain');
+        }
+
         $region->delete();
 
         return back()->with('success', 'Successfully deleting region');

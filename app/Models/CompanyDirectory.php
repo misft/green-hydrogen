@@ -50,4 +50,9 @@ class CompanyDirectory extends Authenticatable
     {
         return $this->hasMany(CompanyDirectoryTranslation::class);
     }
+
+    public function company_directory_topic()
+    {
+        return $this->belongsTo(CompanyDirectory::class, 'company_directory_topic_id');
+    }
 }

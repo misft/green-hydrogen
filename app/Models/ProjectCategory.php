@@ -18,4 +18,9 @@ class ProjectCategory extends Model
     // {
     //     return $this->hasMany(ProjectCategoryTranslation::class);
     // }
+
+    public function project()
+    {
+        return $this->hasMany(Project::class, 'project_category_id');
+    }
 }

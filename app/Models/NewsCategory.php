@@ -17,4 +17,9 @@ class NewsCategory extends Model
     protected $fillable = [
         'created_at', 'updated_at'
     ];
+
+    public function news()
+    {
+        return $this->hasMany(News::class, 'news_category_id');
+    }
 }

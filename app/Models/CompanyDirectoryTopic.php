@@ -16,4 +16,9 @@ class CompanyDirectoryTopic extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function company_directory()
+    {
+        return $this->hasMany(CompanyDirectory::class, 'company_directory_topic_id');
+    }
 }

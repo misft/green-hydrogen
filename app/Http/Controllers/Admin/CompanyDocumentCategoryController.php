@@ -81,6 +81,12 @@ class CompanyDocumentCategoryController extends Controller
     }
 
     public function destroy(Request $request, CompanyDocumentCategory $companyDocumentCategory) {
+        $validation = $companyDocumentCategory->document->count();
+
+        if($validation){
+            return back()->with('error', 'Menghapus category ini akan berdampak pada data document');
+        }
+
         $companyDocumentCategory->delete();
 
         return redirect(route('company_document_category.index'))->with('success', 'Successfully deleting category');

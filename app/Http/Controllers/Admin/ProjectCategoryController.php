@@ -56,6 +56,11 @@ class ProjectCategoryController extends Controller
     }
 
     public function destroy(Request $request, ProjectCategory $projectCategory) {
+        $validation = $projectCategory->project->count();
+        if($validation > 0){
+            return back()->with('error', 'Menghapus project category akan berdampak pada data project');
+        }
+
         $projectCategory->delete();
 
         return redirect(route('project_category.index'))->with('success', 'Successfully deleting category');

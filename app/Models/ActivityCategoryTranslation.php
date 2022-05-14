@@ -17,4 +17,9 @@ class ActivityCategoryTranslation extends Model
     protected $hidden = [
         'created_at', 'updated_at'
     ];
+
+    public function activity_category()
+    {
+        return $this->belongsTo(ActivityCategory::class, 'activity_category_id');
+    }
 }

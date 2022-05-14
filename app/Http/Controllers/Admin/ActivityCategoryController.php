@@ -65,6 +65,10 @@ class ActivityCategoryController extends Controller
     }
 
     public function destroy(Request $request, ActivityCategory $activityCategory) {
+        $validation = $activityCategory->activities->count();
+        if($validation > 0){
+            return back()->with('error', 'Category ini dihapus maka data activity akan terganggu');
+        }
         $activityCategory->delete();
 
         return redirect(route('activity_category.index'))->with('success', 'Success deleting activity category');

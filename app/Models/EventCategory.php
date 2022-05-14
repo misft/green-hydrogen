@@ -11,4 +11,9 @@ class EventCategory extends Model
     use HasFactory, HasTranslation;
 
     protected $translation = EventCategoryTranslation::class;
+
+    public function event()
+    {
+        return $this->hasMany(Event::class, 'event_category_id');
+    }
 }
