@@ -46,7 +46,7 @@
                     <x-form.text label="Website" name="website" :value="@$project->website" placeholder="https://foo.com"/>
                     <x-form.text label="Total Budget" name="total_budget" :value="@$project->total_budget" placeholder="Input total budget"/>
                     <x-form.maps label="Location" :lat="@$project->lat" :lng="@$project->lng" lat-name="lat" lng-name="lng"/>
-                    <x-form.text :value="@$event->address" placeholder="Address" label="Address" name="location"/>
+                    <x-form.text :value="@$project->address" placeholder="Address" label="Address" name="address"/>
                     @if (request()->routeIs('project.edit'))
                     <div class="col-auto mb-2">
                         <img class="img-thumbnail" src="{{ asset('storage/'.$project->image) }}" width="200" height="200" alt="">
