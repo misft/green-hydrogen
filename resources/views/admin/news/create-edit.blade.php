@@ -37,7 +37,7 @@
                     <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
                         <div class="mb-2">
-                            <img style="max-width: 200px;" src="{{asset('storage/' . @$news->embed )}}" alt="">
+                            <img style="max-width: 200px;" src="{{asset('storage/' . @json_decode($news->embed) )}}" alt="">
                         </div>
                     <x-form.file label="File" name="embed" multiple />
                 </form>

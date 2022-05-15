@@ -42,9 +42,14 @@
                     placeholder="https://foo.com" />
                 <x-form.text label="Contact (Phone)" name="contact" :value="@$companyDirectory->contact"
                     placeholder="+62xxxxxx" />
+                <x-form.text label="Address" name="address" :value="@$companyDirectory->address"
+                    placeholder="Wall Street" />
                 <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
                 <x-form.maps label="Location" :lat="@$companyDirectory->lat" :lng="@$companyDirectory->lng"
                     lat-name="lat" lng-name="lng" />
+                    <div class="mb-2">
+                        <img style="max-width: 200px;" src="{{asset('storage/' . @$companyDirectory->photo )}}" alt="">
+                    </div>
                 <x-form.file name="photo" label="Image" />
 
             </form>
