@@ -7,7 +7,20 @@
 @endsection
 
 @section('style')
-<link rel="stylesheet" type="text/css" href="{{route('/')}}/assets/css/summernote.css">
+    <script src="https://cdn.tiny.cloud/1/gsntcrz8op752see2oshhijzfpgitybqubd5s0koz655r9pp/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#editor',
+            plugins: [
+            'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+            'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+            'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+            ],
+            toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+            'alignleft aligncenter alignright alignjustify | ' +
+            'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+        });
+    </script>
 @endsection
 
 @section('breadcrumb-title')
@@ -70,7 +83,7 @@
                     </div>
                     <div x-show="name == 'description'">
                         <div class="col-form-label"><span class="text-info">[id]</span>Description</div>
-                        <textarea name="content_d_id" id="summernote" class="summernote"  cols="30" rows="10">{{ @$contentID->content }}</textarea>
+                        <textarea name="content_d_id" id="editor" class="editor"  cols="30" rows="10">{{ @$contentID->content }}</textarea>
                     </div>
                     <div x-show="name == 'html'">
                         <div class="col-form-label">HTML<span class="text-danger">*</span></div>
@@ -78,7 +91,7 @@
                     </div>
                     <div x-show="name == 'description'">
                         <div class="col-form-label"><span class="text-info">[en]</span>Description</div>
-                        <textarea name="content_d_en" id="summernote" class="summernote"  cols="30" rows="10">{{ @$contentEN->content }}</textarea>
+                        <textarea name="content_d_en" id="editor" class="editor"  cols="30" rows="10">{{ @$contentEN->content }}</textarea>
                     </div>
                     <div x-show="name == 'picture' || name == 'video'">
                         <x-form.file label="File" name="content" />
@@ -115,6 +128,4 @@
 @section('script')
     <script src="{{ route('/') }}/assets/js/select2/select2.full.min.js"></script>
     <script src="{{ route('/') }}/assets/js/select2/select2-custom.js"></script>
-    <script src="{{route('/')}}/assets/js/editor/summernote/summernote.js"></script>
-    <script src="{{route('/')}}/assets/js/editor/summernote/summernote.custom.js"></script>
 @endsection
