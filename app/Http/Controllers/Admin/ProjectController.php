@@ -62,7 +62,7 @@ class ProjectController extends Controller
             'lng'=>'required',
             'image'=>'required|max:1024|mimes:jpg,jpeg,png',
             'logo'=>'required|max:1024|mimes:jpg,jpeg,png',
-            'member_of_image'=>'required|max:1024|mimes:jpg,jpeg,png',
+            'member_of_image'=>'sometimes|max:1024|mimes:jpg,jpeg,png',
         ];
 
         $message = [
@@ -87,7 +87,6 @@ class ProjectController extends Controller
             'address.required'=>'Address dibutuhkan',
             'logo.max'=>'Batas ukuran logo maximal 1MB',
             'logo.mimes'=>'Tipe logo yang diperbolehkan JPG, JPEG, PNG',
-            'member_of_image.required'=>'Member of dibutuhkan',
             'member_of_image.max'=>'Batas ukuran Member of maximal 1MB',
             'member_of_image.mimes'=>'Tipe Member of yang diperbolehkan JPG, JPEG, PNG',
         ];

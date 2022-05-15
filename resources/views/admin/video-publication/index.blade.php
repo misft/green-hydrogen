@@ -52,7 +52,7 @@
                                             <td>{{ $publication->embed }}</td>
                                             <td>{{ $publication->admin?->name }}</td>
                                             <td class="row">
-                                                <x-action.delete-row idform="$publication->id" :action="route('video_publication.destroy', $publication->id)" />
+                                                <x-action.delete-row :idform="$publication->id" :action="route('video_publication.destroy', $publication->id)" />
                                                 <x-action.edit-row :route="route('video_publication.edit', $publication->id)" />
                                             </td>
                                         </tr>
