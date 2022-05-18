@@ -39,14 +39,15 @@
                     <x-form.select :items="$cities" :value="@$project->city_id" label="City" name="city_id"/>
                     <x-form.text label="Project Name" name="name" :value="@$project->name" placeholder="Insert a name"/>
                     <x-form.text label="Company Name" name="company_name" :value="@$project->company_name" placeholder="Insert a name"/>
-                    <x-form.textarea label="Description" name="description" :value="@$project->description" rows="12" placeholder="Insert description"/>
+                    <!-- <x-form.textarea label="Description" name="description" :value="@$project->description" rows="12" placeholder="Insert description"/> -->
+                    <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
                     <x-form.select :items="$statuses" label="Status" name="status" :value="@$project->status"/>
-                    <x-form.text label="E-mail" name="email" :value="@$project->email" placeholder="johndoe@gmail.com"/>
-                    <x-form.text label="Contact (Phone)" name="contact" :value="@$project->contact" placeholder="+62xxxxxx"/>
+                    <x-form.text label="Commision" name="email" :value="@$project->email" placeholder="johndoe@gmail.com"/>
+                    <!-- <x-form.text label="Contact (Phone)" name="contact" :value="@$project->contact" placeholder="+62xxxxxx"/> -->
                     <x-form.text label="Website" name="website" :value="@$project->website" placeholder="https://foo.com"/>
                     <x-form.text label="Total Budget" name="total_budget" :value="@$project->total_budget" placeholder="Input total budget"/>
                     <x-form.maps label="Location" :lat="@$project->lat" :lng="@$project->lng" lat-name="lat" lng-name="lng"/>
-                    <x-form.text :value="@$project->address" placeholder="Address" label="Address" name="address"/>
+                    <!-- <x-form.text :value="@$project->address" placeholder="Address" label="Address" name="address"/> -->
                     @if (request()->routeIs('project.edit'))
                     <div class="col-auto mb-2">
                         <img class="img-thumbnail" src="{{ asset('storage/'.$project->image) }}" width="200" height="200" alt="">

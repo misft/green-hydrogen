@@ -44,7 +44,7 @@
                     <x-form.file id="embed-file" name="embed" label="File"/>
                     <x-form.text id="embed-text" label="Or Link" placeholder="External Link" name="link" value="{{ @$event->link }}"/>
                     <x-form.text :value="@$event->location" placeholder="Address" label="Address" name="location"/>
-                    <x-form.maps identifier="event_{{ $key }}" lat-name="lat" lng-name="lng" :lat="@$event->lat" :lng="@$event->lng"></x-form.maps>
+                    <x-form.maps identifier="map_{{ $key }}" lat-name="lat" lng-name="lng" :lat="@$event->lat" :lng="@$event->lng"></x-form.maps>
                     <x-form.date label="Date" value="{{ @$event->date }}" name="date"/>
                     <x-form.time label="Start At" value="{{ @$event->start_at }}" name="start_at"/>
                     <x-form.time label="End At" value="{{ @$event->end_at }}" name="end_at"/>
