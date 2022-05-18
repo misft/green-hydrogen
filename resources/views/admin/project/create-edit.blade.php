@@ -38,34 +38,34 @@
                     <x-form.select :items="$regions" :value="@$project->region_id" label="Region" name="region_id"/>
                     <x-form.select :items="$cities" :value="@$project->city_id" label="City" name="city_id"/>
                     <x-form.text label="Project Name" name="name" :value="@$project->name" placeholder="Insert a name"/>
-                    <x-form.text label="Company Name" name="company_name" :value="@$project->company_name" placeholder="Insert a name"/>
+                    <x-form.text label="Founding Institution" name="company_name" :value="@$project->company_name" placeholder="Insert a name"/>
                     <!-- <x-form.textarea label="Description" name="description" :value="@$project->description" rows="12" placeholder="Insert description"/> -->
-                    <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
+                    <x-form.wysiwyg :value="@$translation->description" label="Description Project" name="description" />
                     <x-form.select :items="$statuses" label="Status" name="status" :value="@$project->status"/>
-                    <x-form.text label="Commision" name="email" :value="@$project->email" placeholder="johndoe@gmail.com"/>
+                    <x-form.text label="Commissioned by" name="email" :value="@$project->email" placeholder="johndoe@gmail.com"/>
                     <!-- <x-form.text label="Contact (Phone)" name="contact" :value="@$project->contact" placeholder="+62xxxxxx"/> -->
-                    <x-form.text label="Website" name="website" :value="@$project->website" placeholder="https://foo.com"/>
+                    <!-- <x-form.text label="Website" name="website" :value="@$project->website" placeholder="https://foo.com"/> -->
                     <x-form.text label="Total Budget" name="total_budget" :value="@$project->total_budget" placeholder="Input total budget"/>
-                    <x-form.maps label="Location" :lat="@$project->lat" :lng="@$project->lng" lat-name="lat" lng-name="lng"/>
+                    <x-form.maps identifier="map_{{ $key }}" label="Location" :lat="@$project->lat" :lng="@$project->lng" lat-name="lat" lng-name="lng"/>
                     <!-- <x-form.text :value="@$project->address" placeholder="Address" label="Address" name="address"/> -->
                     @if (request()->routeIs('project.edit'))
                     <div class="col-auto mb-2">
                         <img class="img-thumbnail" src="{{ asset('storage/'.$project->image) }}" width="200" height="200" alt="">
                     </div>
                     @endif
-                    <x-form.file name="image" label="Image"/>
+                    <x-form.file name="image" label="Image Cover"/>
                     @if (request()->routeIs('project.edit'))
                     <div class="col-auto mb-2">
                         <img class="img-thumbnail" src="{{ asset('storage/'.$project->logo) }}" width="200" height="200" alt="">
                     </div>
                     @endif
-                    <x-form.file name="logo" label="Logo"/>
+                    <x-form.file name="logo" label="Logo Founding Institution"/>
                     @if (request()->routeIs('project.edit'))
                     <div class="col-auto mb-2">
                         <img class="img-thumbnail" src="{{ asset('storage/'.$project->member_of_image) }}" width="200" height="200" alt="">
                     </div>
                     @endif
-                    <x-form.file name="member_of_image" label="Member Of"/>
+                    <x-form.file name="member_of_image" label="Logo Commisioned"/>
                 </form>
                 <x-slot name="footer">
                     <button form="form" class="btn btn-primary btn-pill">Submit</button>

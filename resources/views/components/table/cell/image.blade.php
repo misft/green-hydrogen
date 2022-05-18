@@ -1,1 +1,1 @@
-<img src="{{ $src }}" alt="">
+<img style="max-width: 100px;" class="rounded" src="{{ $src }}" alt="">

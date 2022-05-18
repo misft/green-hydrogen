@@ -16,7 +16,7 @@ class Image extends Component
         public $isExternal = false
     ) {
         if(!$this->isExternal) {
-            $this->src = asset($this->src);
+            $this->src = asset('storage/'.$this->src);
         }
     }
 

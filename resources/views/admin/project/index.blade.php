@@ -42,15 +42,15 @@
                                         <th>Category</th>
                                         <th>Country</th>
                                         <th>Region</th>
-                                        <th>Name</th>
-                                        <th>Contact</th>
-                                        <th>Website</th>
-                                        <th>Email</th>
+                                        <th>Project Name</th>
+                                        <!-- <th>Contact</th> -->
+                                        <!-- <th>Website</th> -->
+                                        <th>Commisioned By</th>
                                         <th>City</th>
                                         <th>Total Budget</th>
-                                        <th>Image</th>
-                                        <th>Logo</th>
-                                        <th>Member Of</th>
+                                        <th>Image Cover</th>
+                                        <th>Logo Founding Institution</th>
+                                        <th>Logo Commisioned</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -68,12 +68,6 @@
                                             </td>
                                             <td>
                                                 <h6>{{ $item->name }}</h6>
-                                            </td>
-                                            <td>
-                                                <h6>{{ $item->contact }}</h6>
-                                            </td>
-                                            <td>
-                                                <h6>{{ $item->website }}</h6>
                                             </td>
                                             <td>
                                                 <h6>{{ $item->email }}</h6>
