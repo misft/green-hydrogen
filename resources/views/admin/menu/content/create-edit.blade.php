@@ -11,6 +11,7 @@
     <script>
         tinymce.init({
             selector: '#editor',
+            convert_urls: false,
             plugins: [
             'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
             'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
