@@ -4,6 +4,7 @@
         <script>
             tinymce.init({
                 selector: '#editor',
+                convert_urls: false,
                 plugins: [
                 'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
                 'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
@@ -11,7 +12,7 @@
                 ],
                 toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
                 'alignleft aligncenter alignright alignjustify | ' +
-                'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+                'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'            
             });
         </script>
     @endpush
