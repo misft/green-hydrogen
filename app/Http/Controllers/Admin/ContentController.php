@@ -259,4 +259,15 @@ class ContentController extends Controller
 
         return redirect()->route('content.index')->with('success', 'Successfully deleting content');
     }
+
+    public function upload_image(Request $request) {
+        if($request->hasFile('file')){
+            $path = $request->file('file')->storePublicly('menu/picture');
+            return response()->json([
+                'location' => "https://admin.hydrogen-indonesia.id/storage/".$path
+            ]);
+        } else {
+            return response('failed',500);
+        }
+    }
 }

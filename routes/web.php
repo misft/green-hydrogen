@@ -94,6 +94,7 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/menu', SectionController::class);
     Route::resource('/slot', SpotController::class);
     Route::resource('/content', ContentController::class);
+    Route::post('content/upload_image', [ContentController::class, 'upload_image'])->name('content.upload.image');
     // Route::resource('/menu', MenuController::class);
     Route::resource('/news', NewsController::class);
     Route::resource('/news_category', NewsCategoryController::class);
