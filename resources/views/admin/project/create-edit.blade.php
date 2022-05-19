@@ -38,11 +38,11 @@
                     <x-form.select :items="$regions" :value="@$project->region_id" label="Region" name="region_id"/>
                     <x-form.select :items="$cities" :value="@$project->city_id" label="City" name="city_id"/>
                     <x-form.text label="Project Name" name="name" :value="@$project->name" placeholder="Insert a name"/>
-                    <x-form.text label="Founding Institution" name="company_name" :value="@$project->company_name" placeholder="Insert a name"/>
+                    <x-form.text label="Funding Institution" name="company_name" :value="@$project->company_name" placeholder="Insert a company name"/>
                     <!-- <x-form.textarea label="Description" name="description" :value="@$project->description" rows="12" placeholder="Insert description"/> -->
                     <x-form.wysiwyg :value="@$translation->description" label="Description Project" name="description" />
                     <x-form.select :items="$statuses" label="Status" name="status" :value="@$project->status"/>
-                    <x-form.text label="Commissioned by" name="email" :value="@$project->email" placeholder="johndoe@gmail.com"/>
+                    <x-form.text label="Commissioned by" name="email" :value="@$project->email" placeholder="Insert a Company name"/>
                     <!-- <x-form.text label="Contact (Phone)" name="contact" :value="@$project->contact" placeholder="+62xxxxxx"/> -->
                     <!-- <x-form.text label="Website" name="website" :value="@$project->website" placeholder="https://foo.com"/> -->
                     <x-form.text label="Total Budget" name="total_budget" :value="@$project->total_budget" placeholder="Input total budget"/>
@@ -59,7 +59,7 @@
                         <img class="img-thumbnail" src="{{ asset('storage/'.$project->logo) }}" width="200" height="200" alt="">
                     </div>
                     @endif
-                    <x-form.file name="logo" label="Logo Founding Institution"/>
+                    <x-form.file name="logo" label="Logo Funding Institution"/>
                     @if (request()->routeIs('project.edit'))
                     <div class="col-auto mb-2">
                         <img class="img-thumbnail" src="{{ asset('storage/'.$project->member_of_image) }}" width="200" height="200" alt="">

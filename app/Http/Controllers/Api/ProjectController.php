@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Traits\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Whoops\Run;
 
 class ProjectController extends Controller
@@ -13,7 +14,10 @@ class ProjectController extends Controller
     use Response;
 
     public function index(Request $request) {
-        $projects = Project::with(['country:id,name', 'region:id,name', 'category:id,name'])
+        $projects = Project::select(
+                DB::raw('id, country_id, region_id, project_category_id, name as project_name, company_name as funding_institution, status, email as commissioned_by, total_budget, city_id, lat, lng, image as image_cover, logo as logo_funding_institution,  member_of_image as logo_commissioned')
+            )
+            ->with(['country:id,name', 'region:id,name', 'category:id,name','translations'])
             ->when($request->get('name'), function($query) use ($request) {
                 $query->where('name', "%".$request->get('name')."%");
             })
