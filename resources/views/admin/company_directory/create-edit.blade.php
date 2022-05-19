@@ -33,10 +33,18 @@
                 @csrf
                 <x-form.put-method />
                 <x-form.localization :value="@$translation->translation_id" />
+                <div class="mb-2">
+                    <div class="col-form-label text-muted">Company Topic</div>
+                    <select class="form-control" name="company_directory_topic_id">
+                        @foreach ($topics as $topic)
+                            <option value="{{ $topic->id }}" @if (@$companyDirectory->company_directory_topic_id == $topic->id) selected @endif>{{ $topic->translations[0]->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <x-form.text :value="@$companyDirectory->name" label="Name" name="name" />
                 <x-form.text :value="@$companyDirectory->email" label="Email" name="email" />
                 <x-form.text label="Password" name="password" password="1" value="" placeholder="ContohPass123" />
-                <x-form.select :items="$region" label="Region" name="region_id" placeholder="Pilih Region"
+                <x-form.select :items="$region" label="Region" name="region_id" placeholder="Choose the Region"
                     :value="@$companyDirectory->region_id" />
                 <x-form.text label="Website" name="website" :value="@$companyDirectory->website"
                     placeholder="https://foo.com" />

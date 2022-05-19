@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyDirectory;
+use App\Models\CompanyDirectoryTopic;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +25,9 @@ class CompanyDirectoryController extends Controller
     {
         $company = Auth::guard('company')->user();
         $regions = Region::pluck('name', 'id');
+        $topics = CompanyDirectoryTopic::with('translations')->get();
 
-        return view('company.show', compact('company', 'regions'));
+        return view('company.show', compact('company', 'regions', 'topics'));
     }
 
     /**

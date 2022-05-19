@@ -60,8 +60,8 @@ class ProjectController extends Controller
             // 'address'=>'required',
             'lat'=>'required',
             'lng'=>'required',
-            'image'=>'required|max:1024|mimes:jpg,jpeg,png',
-            'logo'=>'required|max:1024|mimes:jpg,jpeg,png',
+            'image'=>'sometimes|max:1024|mimes:jpg,jpeg,png',
+            'logo'=>'sometimes|max:1024|mimes:jpg,jpeg,png',
             'member_of_image'=>'sometimes|max:1024|mimes:jpg,jpeg,png',
         ];
 
@@ -80,10 +80,10 @@ class ProjectController extends Controller
             'total_budget.required'=>'Kolom Todal Budget dibutuhkan',
             'lat.required'=>'Kolom Latitude dibutuhkan',
             'lng.required'=>'Kolom Longitude dibutuhkan',
-            'image.required'=>'Image dibutuhkan',
+            // 'image.required'=>'Image dibutuhkan',
             'image.max'=>'Batas ukuran Image maximal 1MB',
             'image.mimes'=>'Tipe Image yang diperbolehkan JPG, JPEG, PNG',
-            'logo.required'=>'Logo dibutuhkan',
+            // 'logo.required'=>'Logo dibutuhkan',
             // 'address.required'=>'Address dibutuhkan',
             'logo.max'=>'Batas ukuran logo maximal 1MB',
             'logo.mimes'=>'Tipe logo yang diperbolehkan JPG, JPEG, PNG',

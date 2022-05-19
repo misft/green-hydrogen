@@ -13,6 +13,10 @@ class CompanyDirectoryTopic extends Model
 
     protected $translation = CompanyDirectoryTopicTranslation::class;
 
+    protected $hidden = [
+        'name', 'created_at', 'updated_at'
+    ];
+
     protected $fillable = [
         'name'
     ];

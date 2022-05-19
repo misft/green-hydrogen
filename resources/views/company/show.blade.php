@@ -63,6 +63,14 @@
                                     @method('put')
                                     <x-form.text label="Name" name="name" :value="$company->email" placeholder=""/>
                                     <x-form.textarea label="Description" name="description" :value="$company->description" placeholder=""/>
+                                    <div class="mb-2">
+                                        <div class="col-form-label text-muted">Company Topic</div>
+                                        <select class="form-control" name="company_directory_topic_id">
+                                            @foreach ($topics as $topic)
+                                                <option value="{{ $topic->id }}" @if ($company->company_directory_topic_id == $topic->id) selected @endif>{{ $topic->translations[0]->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <x-form.select :items="$regions" label="Region" name="region_id" :value="$company->region_id"/>
                                     <x-form.text label="Address" name="address" :value="$company->address" placeholder="Jl. Gas Energy"/>
                                     <x-form.maps label="Location" :lat="$company->lat" :lng="$company->lng" lat-name="lat" lng-name="lng"/>

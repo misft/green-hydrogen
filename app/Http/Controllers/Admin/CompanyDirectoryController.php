@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyDirectory;
+use App\Models\CompanyDirectoryTopic;
 use App\Models\CompanyDirectoryVerify;
 use App\Models\Region;
 use Illuminate\Http\Request;
@@ -27,12 +28,14 @@ class CompanyDirectoryController extends Controller
 
     public function create(Request $request) {
         $region = Region::get()->pluck('name', 'id');
-        return view('admin.company_directory.create-edit', compact('region'));
+        $topics = CompanyDirectoryTopic::with('translations')->get();
+        return view('admin.company_directory.create-edit', compact('region','topics'));
     }
 
     public function store(Request $request) {
 
         $request->validate([
+            'company_directory_topic_id' => 'required',
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
@@ -42,6 +45,7 @@ class CompanyDirectoryController extends Controller
             'description' => 'required',
             'photo' => 'required',
         ], [
+            'company_directory_topic_id.required' => 'Topic Dibutuhkan',
             'name.required' => 'Nama Dibutuhkan',
             'email.required' => 'Email Dibutuhkan',
             'password.required' => 'Password Dibutuhkan',
@@ -66,13 +70,15 @@ class CompanyDirectoryController extends Controller
     public function edit(Request $request, CompanyDirectory $companyDirectory) {
         $companyDirectory->load(['translation']);
         $region = Region::get()->pluck('name', 'id');
+        $topics = CompanyDirectoryTopic::with('translations')->get();
 
-        return view('admin.company_directory.create-edit', compact('companyDirectory', 'region'));
+        return view('admin.company_directory.create-edit', compact('companyDirectory', 'region', 'topics'));
     }
 
     public function update(Request $request, CompanyDirectory $companyDirectory) {
 
         $request->validate([
+            'company_directory_topic_id' => 'required',
             'name' => 'required',
             'email' => 'required',
             'password' => 'sometimes',
@@ -82,6 +88,7 @@ class CompanyDirectoryController extends Controller
             'description' => 'required',
             'photo' => 'sometimes',
         ], [
+            'company_directory_topic_id.required' => 'Topic Dibutuhkan',
             'name.required' => 'Nama Dibutuhkan',
             'email.required' => 'Email Dibutuhkan',
             // 'password.required' => 'Password Dibutuhkan',

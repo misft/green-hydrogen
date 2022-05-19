@@ -10,6 +10,10 @@ class CompanyDirectoryTopicTranslation extends Model
 {
     use HasFactory, IsTranslation;
 
+    protected $hidden = [
+        'created_at', 'updated_at'
+    ];
+
     protected $fillable = [
         'company_directory_topic_id',
         'translation_id',
