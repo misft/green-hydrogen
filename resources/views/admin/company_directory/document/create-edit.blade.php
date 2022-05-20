@@ -63,7 +63,7 @@
                         <?php
                             $result = json_decode($companyDocument->documents);
                         ?>
-                        @if (json_last_error() === JSON_ERROR_NONE)
+                        @if (is_array($result))
                         <div class="list-group">
                             @foreach (json_decode($companyDocument->documents) as $each)
                             <a href="{{asset('storage/'. $each)}}" class="list-group-item list-group-item-action">Document {{$loop->iteration}}</a>
@@ -71,7 +71,7 @@
                           </div>
                         @else
                         <div class="list-group">
-                            <a href="{{$companyDocument->documents}}" class="list-group-item list-group-item-action">Document</a>
+                            <a href="{{ trim($companyDocument->documents, '"')}}" class="list-group-item list-group-item-action">Document</a>
                           </div>
                         @endif
                     </div>
