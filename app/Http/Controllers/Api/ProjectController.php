@@ -17,7 +17,7 @@ class ProjectController extends Controller
         $projects = Project::select(
                 DB::raw('id, country_id, region_id, project_category_id, name as project_name, company_name as funding_institution, status, email as commissioned_by, total_budget, city_id, lat, lng, image as image_cover, logo as logo_funding_institution,  member_of_image as logo_commissioned')
             )
-            ->with(['country:id,name', 'region:id,name', 'category:id,name','translations'])
+            ->with(['country:id,name', 'region:id,name', 'category:id,name','translation'])
             ->when($request->get('name'), function($query) use ($request) {
                 $query->where('name', "%".$request->get('name')."%");
             })
