@@ -114,7 +114,7 @@ class ProjectController extends Controller
 
     public function edit(Request $request, $id) {
         $project = Project::find($id);
-        $categories = ProjectCategory::pluck('name', 'id');
+        $categories = ProjectCategory::all();
         $countries = Country::pluck('name', 'id');
         $regions = Region::pluck('name', 'id');
         $cities = City::pluck('name', 'id');
