@@ -66,12 +66,12 @@
                         @if (is_array($result))
                         <div class="list-group">
                             @foreach (json_decode($companyDocument->documents) as $each)
-                            <a href="{{asset('storage/'. $each)}}" class="list-group-item list-group-item-action">Document {{$loop->iteration}}</a>
+                            <a href="{{asset('storage/'. $each)}}" target="_blank" class="list-group-item list-group-item-action">Document {{$loop->iteration}}</a>
                             @endforeach
                           </div>
                         @else
                         <div class="list-group">
-                            <a href="{{ trim($companyDocument->documents, '"')}}" class="list-group-item list-group-item-action">Document</a>
+                            <a href="{{ trim($companyDocument->documents, '"')}}" target="_blank" class="list-group-item list-group-item-action">Document</a>
                           </div>
                         @endif
                     </div>
