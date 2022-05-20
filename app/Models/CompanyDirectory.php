@@ -53,6 +53,6 @@ class CompanyDirectory extends Authenticatable
 
     public function company_directory_topic()
     {
-        return $this->belongsTo(CompanyDirectory::class, 'company_directory_topic_id');
+        return $this->belongsTo(CompanyDirectoryTopic::class, 'company_directory_topic_id');
     }
 }

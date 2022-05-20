@@ -20,7 +20,7 @@ class EventController extends Controller
     }
 
     public function create(Request $request) {
-        $categories = EventCategory::with('translation')->get()->pluck('translation.name', 'id');
+        $categories = EventCategory::with('translation')->get();
 
         return view('admin.event.create-edit', [
             'categories' => $categories
@@ -73,7 +73,7 @@ class EventController extends Controller
 
     public function edit(Request $request, $id) {
         $event = Event::with(['translations', 'category.translations'])->find($id);
-        $categories = EventCategory::with('translation')->get()->pluck('translation.name', 'id');
+        $categories = EventCategory::with('translation')->get();
 
         return view('admin.event.create-edit', [
             'event' => $event,

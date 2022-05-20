@@ -33,7 +33,7 @@
                     @csrf
                     <x-form.put-method  />
                     <x-form.localization :value="@$translation->translation_id" />
-                    <x-form.news-category.select />
+                    <x-form.news-category.select :value="@$news->news_category_id"/>
                     <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
                         <div class="mb-2">

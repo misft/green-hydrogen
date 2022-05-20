@@ -33,7 +33,7 @@
                     @csrf
                     <x-form.put-method  />
                     <x-form.localization :value="@$translation->translation_id"/>
-                    <x-form.select :items="$categories" :value="@$project->project_category_id" label="Category" name="project_category_id"/>
+                    <x-form.select-translations :items="$categories" :value="@$project->project_category_id" label="Category" name="project_category_id"/>
                     <x-form.select :items="$countries" :value="@$project->country_id" label="Country" name="country_id"/>
                     <x-form.select :items="$regions" :value="@$project->region_id" label="Region" name="region_id"/>
                     <x-form.select :items="$cities" :value="@$project->city_id" label="City" name="city_id"/>

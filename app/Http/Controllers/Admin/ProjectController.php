@@ -30,14 +30,14 @@ class ProjectController extends Controller
     }
 
     public function create(Request $request) {
-        $categories = ProjectCategory::pluck('name', 'id');
+        $categories = ProjectCategory::all();
         $countries = Country::pluck('name', 'id');
         $regions = Region::pluck('name', 'id');
         $cities = City::pluck('name', 'id');
         $statuses = [
             "PROJECT" => "PROJECT",
-            "PILOT_PROJECT" => "PILOT PROJECT",
-            "FEASIBILITY_STUDY" => "FEASIBILITY STUDY"
+            "PILOT PROJECT" => "PILOT PROJECT",
+            "FEASIBILITY STUDY" => "FEASIBILITY STUDY"
         ];
 
         return view('admin.project.create-edit', compact('categories', 'countries', 'regions', 'cities', 'statuses'));
@@ -109,7 +109,7 @@ class ProjectController extends Controller
 
         DB::commit();
 
-        return redirect(route('project.index'))->with('success', 'Successfully adding data');
+        return redirect(route('project.edit', $project->id))->with('success', 'Successfully adding data');
     }
 
     public function edit(Request $request, $id) {

@@ -30,7 +30,7 @@ class CompanyDirectoryController extends Controller
     }
 
     public function index(Request $request) {
-        $companyDirectories = CompanyDirectory::with(['region:id,name'])
+        $companyDirectories = CompanyDirectory::with(['region:id,name','company_directory_topic.translation'])
             ->whereIsEmailVerified(1)
             ->get();
 

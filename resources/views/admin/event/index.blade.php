@@ -55,7 +55,7 @@
                                                 <x-table.cell.language :items="$item" key="title" />
                                             </td>
                                             <td>
-                                                <x-table.cell.language :items="$item" key="description" />
+                                                <x-table.cell.language :items="$item" key="description" :html="true" />
                                             </td>
                                             <td class="row">
                                                 <x-action.external-link :route="$item->google_maps_url" label="Open Maps" />

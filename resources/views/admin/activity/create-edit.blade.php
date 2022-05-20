@@ -33,7 +33,7 @@
                     @csrf
                     <x-form.put-method  />
                     <x-form.localization :value="@$translation->translation_id" />
-                    <x-form.activity-category.select />
+                    <x-form.activity-category.select :value="@$activity->activity_category_id"/>
                     <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />
                     @if (request()->routeIs('activity.edit'))
