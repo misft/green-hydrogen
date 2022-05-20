@@ -59,7 +59,7 @@
                                                                 {{ $cat->name }}
                                                             </h6>
                                                         @endforeach
-                                                    @else 
+                                                    @else
                                                         <h6>
                                                             <span class="text-danger">Masih menggunakan format data lama, silahkan diupdate</span>
                                                         </h6>
@@ -106,8 +106,10 @@
                                             <td>
                                                 <?php
                                                     $result = json_decode($item->documents);
+                                                    // $validate = (is_null(json_decode($item->documents))) ? FALSE : TRUE;
+
                                                 ?>
-                                                @if (json_last_error() === JSON_ERROR_NONE)
+                                                @if (is_array($result) )
                                                 <h6>
                                                     @foreach (json_decode($item->documents) as $each)
                                                     <a href="{{asset('storage/'. $each)}}" target="_blank" rel="noopener noreferrer">View</a>
@@ -115,7 +117,7 @@
                                                 </h6>
                                                 @else
                                                 <h6>
-                                                    <a href="{{ $item->documents }}" target="_blank" rel="noopener noreferrer">View</a>
+                                                    <a href="{{ trim($item->documents, '"') }}" target="_blank" rel="noopener noreferrer">View</a>
                                                 </h6>
                                                 @endif
                                             </td>
