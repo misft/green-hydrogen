@@ -75,7 +75,6 @@ class CompanyDocumentController extends Controller
         if(empty($files)){
             $documents = $request->documents;
         }
-
         CompanyDocument::create(array_merge($request->all(), [
             'title' => json_encode([
                 [
@@ -97,7 +96,7 @@ class CompanyDocumentController extends Controller
                     'description' => $request->description_en
                 ]
             ]),
-            'documents' => empty($documents) ? $documents : json_encode($documents),
+            'documents' => is_array($documents) ? json_encode($documents) : $documents,
             'cover' => json_encode($covers)
         ]));
 
