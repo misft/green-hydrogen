@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ActivityCategoryController;
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\AutoReplyNewsletterController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CompanyDirectoryController;
 use App\Http\Controllers\Admin\CompanyDirectoryTopicController;
@@ -117,6 +118,7 @@ Route::middleware(['admin'])->group(function() {
     Route::resource('/setting', SettingController::class)->only('store');
     Route::resource('/video_publication', VideoPublicationController::class);
     Route::resource('/newsletter/subscriber', NewsletterSubscriberController::class)->parameter('subscriber', 'newsletterSubscriber');
+    Route::resource('/newsletter/autoreply', AutoReplyNewsletterController::class)->parameter('autoreply', 'autoReplyNewsletter');
     Route::resource('/newsletter', NewsletterController::class);
     Route::resource('/sponsor/group', SponsorGroupController::class)->parameter('group', 'sponsorGroup');
     Route::resource('/sponsor', SponsorController::class);

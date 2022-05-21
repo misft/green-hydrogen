@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AutoReplySender;
 use App\Models\CompanyDirectory;
 use App\Models\CompanyDirectoryTopic;
 use App\Models\CompanyDirectoryVerify;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class CompanyDirectoryController extends Controller
 {
@@ -61,6 +63,8 @@ class CompanyDirectoryController extends Controller
             'password' => Hash::make($request->get('password')),
             'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company_directory') : null
         ]));
+
+        $this->sendWelcome($request->email);
 
         $companyDirectory->translation()->create($request->all());
 
@@ -149,5 +153,10 @@ class CompanyDirectoryController extends Controller
         }
 
         return redirect(route('login.company'))->with('status', $message);
+    }
+
+    public function sendWelcome($email)
+    {
+        return Mail::to($email)->send(new AutoReplySender());
     }
 }

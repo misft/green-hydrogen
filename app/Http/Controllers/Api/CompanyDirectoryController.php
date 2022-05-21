@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginCompanyDirectoryRequest;
 use App\Http\Requests\Api\RegisterCompanyDirectoryRequest;
+use App\Mail\AutoReplySender;
 use App\Models\CompanyDirectory;
 use App\Models\CompanyDirectoryVerify;
 use App\Models\CompanyDocument;
@@ -46,7 +47,7 @@ class CompanyDirectoryController extends Controller
                 'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company') : null
             ]));
         } catch(\Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             return $this->badRequest(message: __('auth.register_failed'));
         }
 
@@ -56,6 +57,8 @@ class CompanyDirectoryController extends Controller
             $message->to($request->email);
             $message->subject('Email Verification - Green Hydrogen');
         });
+
+        $this->sendWelcome($request->email);
 
         return $this->success(body: [
             'company_directory' => $companyDirectory,
@@ -124,5 +127,10 @@ class CompanyDirectoryController extends Controller
         $document->delete();
 
         return $this->success();
+    }
+
+    public function sendWelcome($email)
+    {
+        return Mail::to($email)->send(new AutoReplySender());
     }
 }
