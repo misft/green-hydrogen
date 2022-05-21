@@ -40,6 +40,7 @@ class CompanyDocumentController extends Controller
             'description_en'=>'required',
             'coverImage'=>'required|max:1024',
             'documents'=>'required|max:1024',
+            'documents.*' => 'max:1024'
         ];
         $message = [
             'company_directory_id.required' => 'Document Directory dibutuhkan',
@@ -52,6 +53,7 @@ class CompanyDocumentController extends Controller
             'coverImage.max' => 'batas ukuran Document File maksimal adalah 1MB',
             'documents.required' => 'Document dibutuhkan',
             'documents.max' => 'batas ukuran Document File maksimal adalah 1MB',
+            'documents.*.max' => 'batas ukuran Document File maksimal adalah 1MB',
         ];
 
         $validate = Validator::make($data, $rules, $message);
@@ -114,6 +116,22 @@ class CompanyDocumentController extends Controller
     }
 
     public function update(Request $request, CompanyDocument $companyDocument) {
+
+        $data = $request->all();
+        $rules = [
+            'documents'=>'sometimes|max:1024',
+            'documents.*' => 'max:1024'
+        ];
+        $message = [
+            'documents.max' => 'batas ukuran Document File maksimal adalah 1MB',
+            'documents.*.max' => 'batas ukuran Document File maksimal adalah 1MB',
+        ];
+
+        $validate = Validator::make($data, $rules, $message);
+        if($validate->fails()){
+            return back()->withErrors($validate)->withInput();
+        }
+
         if($request->file('coverImage')){
             $images = $request->file('coverImage') ?? [];
             $covers = array();
