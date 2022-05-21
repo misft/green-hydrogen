@@ -26,7 +26,7 @@
                 <x-slot name="header">
                     {{ request()->routeIs('project.create') ? 'Create Project' : 'Update Project' }}
                 </x-slot>
-                <form id="form"
+                <form id="form-{{ $key }}"
                     action="{{ request()->routeIs('project.create') ? route('project.store') : route('project.update', $project->id) }}"
                     class="theme-form mega-form" method="post"
                     enctype="multipart/form-data">
@@ -68,7 +68,7 @@
                     <x-form.file name="member_of_image" label="Logo Commisioned"/>
                 </form>
                 <x-slot name="footer">
-                    <button form="form" class="btn btn-primary btn-pill">Submit</button>
+                    <button form="form-{{ $key }}" class="btn btn-primary btn-pill">Submit</button>
                     <x-action.cancel />
                 </x-slot>
             </x-form.wizard>
