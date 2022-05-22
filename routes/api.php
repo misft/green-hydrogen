@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\VideoPublicationController;
 use App\Http\Controllers\Api\ActivityCategoryController;
 use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\CompanyDirectoryController;
+use App\Http\Controllers\Api\CompanyDirectoryTopicController as ApiCompanyDirectoryTopicController;
 use App\Http\Controllers\Api\ContactSupportController;
 use App\Http\Controllers\Api\EngagedUserController;
 use App\Http\Controllers\Api\EventController;
@@ -67,10 +68,12 @@ Route::group([
     'prefix' => 'company_directory'
 ], function() {
     Route::get('/', 'index');
+    Route::get('/topics', [ApiCompanyDirectoryTopicController::class, 'getListAllCategory']);
     Route::post('/register', 'register');
     Route::post('/login', 'login');
     Route::get('/profile', 'profile');
     Route::get('/{id}', 'show');
+
 
     Route::middleware('auth:sanctum')->get('/profile', 'profile');
     Route::middleware('auth:sanctum')->post('/upload', 'upload');
