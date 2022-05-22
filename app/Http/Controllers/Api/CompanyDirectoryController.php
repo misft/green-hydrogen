@@ -46,6 +46,9 @@ class CompanyDirectoryController extends Controller
                 'password' => Hash::make($request->get('password')),
                 'photo' => $request->hasFile('photo') ? $request->file('photo')->storePublicly('company') : null
             ]));
+
+            $companyDirectory->translation()->create($request->all());
+
         } catch(\Exception $e) {
             // dd($e->getMessage());
             return $this->badRequest(message: __('auth.register_failed'));
