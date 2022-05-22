@@ -120,8 +120,8 @@ class ProjectController extends Controller
         $cities = City::pluck('name', 'id');
         $statuses = [
             "PROJECT" => "PROJECT",
-            "PILOT_PROJECT" => "PILOT PROJECT",
-            "FEASIBILITY_STUDY" => "FEASIBILITY STUDY"
+            "PILOT PROJECT" => "PILOT PROJECT",
+            "FEASIBILITY STUDY" => "FEASIBILITY STUDY"
         ];
 
         return view('admin.project.create-edit', compact('project', 'categories', 'countries', 'regions', 'cities', 'statuses'));
