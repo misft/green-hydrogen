@@ -68,9 +68,9 @@ Route::group([
     'prefix' => 'company_directory'
 ], function() {
     Route::get('/', 'index');
-    Route::get('/topics', [ApiCompanyDirectoryTopicController::class, 'getListAllCategory']);
     Route::post('/register', 'register');
     Route::post('/login', 'login');
+    Route::get('/topics', [ApiCompanyDirectoryTopicController::class, 'getListAllCategory']);
     Route::get('/profile', 'profile');
     Route::get('/{id}', 'show');
 
