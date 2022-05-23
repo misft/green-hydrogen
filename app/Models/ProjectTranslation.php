@@ -11,7 +11,7 @@ class ProjectTranslation extends Model
     use HasFactory, IsTranslation;
 
     protected $fillable = [
-        'title', 'description', 'project_id', 'translation_id'
+        'title', 'description', 'project_id', 'translation_id', 'name'
     ];
 
     public function project() {

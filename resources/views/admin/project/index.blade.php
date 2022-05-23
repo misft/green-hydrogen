@@ -67,8 +67,11 @@
                                                 <h6>{{ $item->region->name }}</h6>
                                             </td>
                                             <td>
-                                                <h6>{{ $item->name }}</h6>
+                                                <x-table.cell.language :items="$item" key="name" />
                                             </td>
+                                            {{-- <td>
+                                                <h6>{{ $item->name }}</h6>
+                                            </td> --}}
                                             <td>
                                                 <h6>{{ $item->email }}</h6>
                                             </td>

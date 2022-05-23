@@ -153,7 +153,7 @@
                     <li><a href="{{ route('newsletter.index') }}">Send Newsletter</a></li>
                     <li><a href="{{ route('subscriber.index') }}">List Subscriber</a></li>
                     <li><a href="{{ route('smtp.index') }}">SMTP Setup</a></li>
-                    <li><a href="{{ route('autoreply.index') }}">Auto Reply Newsletter</a></li>
+                    <li><a href="{{ route('autoreply.index') }}">Auto Replay Company Directories</a></li>
                 </ul>
             </li>
             @endif
