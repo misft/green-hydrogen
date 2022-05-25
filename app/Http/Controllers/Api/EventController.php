@@ -22,7 +22,7 @@ class EventController extends Controller
     }
 
     public function home(Request $request) {
-        $events = Event::with(['category.translation'])->with('translation')->where('date', '>=', date('Y-m-d'))->orderBy('date', 'desc')->get();
+        $events = Event::with(['category.translation'])->with('translation')->orderBy('date', 'desc')->get();
         
         return $this->success(body: [
             'events' => $events
