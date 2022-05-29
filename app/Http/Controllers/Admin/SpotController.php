@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Section;
+use App\Models\Setting;
 use App\Models\Slot;
 use App\Models\Spot;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class SpotController extends Controller
         $slots = Spot::with(['translation'])->get();
         $data = array();
         $dataID = null;
+        $lock_slot = $this->lock_slot(1);
 
         foreach($slots as $item){
             if($item->id % 2 == 1){
@@ -32,7 +34,7 @@ class SpotController extends Controller
                             'language' => 'en',
                             'name' => $item->name
                         ]
-                        
+
                     ],
                     'menu' => (object)[
                         'name' => $item->section->name
@@ -44,6 +46,7 @@ class SpotController extends Controller
 
         return view('admin.menu.slot.index', [
             'slots' => $data,
+            'lockslot' => $lock_slot
         ]);
     }
 
@@ -130,7 +133,7 @@ class SpotController extends Controller
 
             $slotID2 = Spot::where('id',$request->replaceSlot-1)->first();
             $slotEN2 = Spot::where('id',$request->replaceSlot)->first();
-    
+
             $dataID = [
                 'name' => $request->name_id,
                 'order' => $slotID2->order,
@@ -166,5 +169,24 @@ class SpotController extends Controller
         Spot::where('id',$id)->delete();
 
         return redirect()->route('slot.index')->with('success', 'Successfully deleting slot');
+    }
+
+    public function lock_slot($check = null){
+        if ($check == null) {
+            $data = Setting::whereParams('lockslot')->first();
+            if ($data == null) {
+                Setting::create(['params' => 'lockslot', 'value' => 1]);
+            } else {
+                Setting::updateOrCreate(['params' => 'lockslot'], ['value' => $data->value == 1 ? 0 : 1 ]);
+            }
+
+            return back()->with(['success' =>   'Update Setting Lock Menu']);
+        }else{
+            $data = Setting::whereParams('lockslot')->first();
+            if ($data == null) {
+                Setting::create(['params' => 'lockslot', 'value' => 1]);
+            }
+            return Setting::whereParams('lockslot')->first()->value;
+        }
     }
 }

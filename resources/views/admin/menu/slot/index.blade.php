@@ -33,7 +33,10 @@
                             that search on specific columns.</span>
                     </div> --}}
                     <div class="card-body">
-                        <x-action.create-button :route="route('slot.create')"></x-create-button>
+                        <div class="row justify-content-between">
+                            <x-action.create-button :route="route('slot.create')"></x-create-button>
+                            <div class="mb-4"><a href="{{route('slot.lock')}}" class="btn btn-{{ $lockslot == 1 ? 'danger' : 'primary' }} btn-md btn-pill">{{ $lockslot == 1 ? 'Enable Menu' : 'Disable Menu'}}</a></div>
+                        </div>
                         <div class="table-responsive product-table">
                             <table class="display" id="basic-1">
                                 <thead>
@@ -52,8 +55,8 @@
                                                 @endforeach
                                             </td>
                                             <td>
-                                                <x-action.delete-row :idform="$slot->id" :action="route('slot.destroy', $slot->id)" />
-                                                <x-action.edit-row :route="route('slot.edit', $slot->id)" />
+                                                <x-action.delete-row :disable="$lockslot" :idform="$slot->id" :action="route('slot.destroy', $slot->id)" />
+                                                <x-action.edit-row :disable="$lockslot" :route="route('slot.edit', $slot->id)" />
                                             </td>
                                         </tr>
                                     @endforeach

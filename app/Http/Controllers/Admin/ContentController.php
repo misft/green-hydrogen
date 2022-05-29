@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content;
+use App\Models\Setting;
 use App\Models\Spot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -58,6 +59,7 @@ class ContentController extends Controller
         $contents = Content::with(['translation'])->get();
         $data = array();
         $dataID = null;
+        $lock_content = $this->lock_content(1);
 
         foreach($contents as $item){
             if($item->id % 2 == 1){
@@ -75,7 +77,7 @@ class ContentController extends Controller
                             'language' => 'en',
                             'content' => $item->content
                         ]
-                        
+
                     ],
                     'spot' => (object)[
                         'name' => $item->spot->name
@@ -90,6 +92,7 @@ class ContentController extends Controller
 
         return view('admin.menu.content.index', [
             'contents' => (object)$data,
+            'lockcontent' => $lock_content
         ]);
     }
 
@@ -157,7 +160,7 @@ class ContentController extends Controller
                         $file = $file->store('menu/picture');
                     else
                         $file = $file->store('menu/video');
-                
+
                 $data[0]["content"] = $file;
                 $data[1]["content"] = $file;
             }
@@ -241,7 +244,7 @@ class ContentController extends Controller
                         $path = $file->storePublicly('menu/picture');
                     else
                         $path = $file->storePublicly('menu/video');
-                
+
                 $dataID["content"] = $path;
                 $dataEN["content"] = $path;
             }
@@ -268,6 +271,25 @@ class ContentController extends Controller
             ]);
         } else {
             return response('failed',500);
+        }
+    }
+
+    public function lock_content($check = null){
+        if ($check == null) {
+            $data = Setting::whereParams('lockcontent')->first();
+            if ($data == null) {
+                Setting::create(['params' => 'lockcontent', 'value' => 1]);
+            } else {
+                Setting::updateOrCreate(['params' => 'lockcontent'], ['value' => $data->value == 1 ? 0 : 1 ]);
+            }
+
+            return back()->with(['success' =>   'Update Setting Lock Menu']);
+        }else{
+            $data = Setting::whereParams('lockcontent')->first();
+            if ($data == null) {
+                Setting::create(['params' => 'lockcontent', 'value' => 1]);
+            }
+            return Setting::whereParams('lockcontent')->first()->value;
         }
     }
 }

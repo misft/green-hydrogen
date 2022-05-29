@@ -8,16 +8,18 @@ class DeleteRow extends Component
 {
     public $action;
     public $idform;
+    public $disable;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($action,$idform)
+    public function __construct($action,$idform, $disable = null)
     {
         $this->action = $action;
         $this->idform = $idform;
+        $this->disable = $disable == 1 ? 'disabled' : '';
     }
 
     /**

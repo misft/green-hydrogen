@@ -85,7 +85,9 @@ Route::middleware(['admin'])->group(function() {
 
     Route::get('/news_category/sidebar', [NewsCategoryController::class, 'sidebar'])->name('news_category.sidebar');
     Route::put('/company_directory/{company_directory}/activate', [CompanyDirectoryController::class, 'activate'])->name('company_directory.activate');
-
+    Route::get('/menu/lock', [MenuController::class, 'lock_menu'])->name('menu.lock');
+    Route::get('/slot/lock', [SpotController::class, 'lock_slot'])->name('slot.lock');
+    Route::get('/content/lock', [ContentController::class, 'lock_content'])->name('content.lock');
 
     Route::resource('/menu_group', MenuGroupController::class);
     // Route::resource('/slot', SlotController::class);

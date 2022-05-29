@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Section;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -20,7 +21,7 @@ class SectionController extends Controller
         $menus = Section::all();
         $data = array();
         $dataID = null;
-
+        $lock_menu = $this->lock_menu();
         foreach($menus as $item){
             if($item->id % 2 == 1){
                 $dataID = $item;
@@ -36,7 +37,7 @@ class SectionController extends Controller
                             'language' => 'en',
                             'name' => $item->name
                         ]
-                        
+
                     ],
                     'parent' => $item->parent,
                     'link' => $item->link,
@@ -51,7 +52,8 @@ class SectionController extends Controller
 
         return view('admin.menu.index', [
             'menus' => $data,
-            'parent' => $parent
+            'parent' => $parent,
+            'lockmenu' => $lock_menu
         ]);
     }
 
@@ -77,7 +79,7 @@ class SectionController extends Controller
 
     /**
      * Algoritma menyimpan menu
-     * 
+     *
      * Urutan menu baru akan ditempatkan dipaling bawah secara ascending dan paling atas secara descending
      */
     public function store(Request $request)
@@ -163,7 +165,7 @@ class SectionController extends Controller
 
      /**
      * Algoritma menyimpan menu
-     * 
+     *
      * Urutan menu yang parentnya diubah akan ditempatkan dipaling bawah secara ascending dan paling atas secara descending
      */
     public function update(Request $request, $id)
@@ -190,7 +192,7 @@ class SectionController extends Controller
 
             $slotID2 = Section::where('id',$request->replaceSlot-1)->first();
             $slotEN2 = Section::where('id',$request->replaceSlot)->first();
-    
+
             $dataID = [
                 'name' => $request->name_id,
                 'order' => $slotID2->order,
@@ -236,4 +238,12 @@ class SectionController extends Controller
 
         return redirect()->route('menu.index')->with('success', 'Successfully deleting menu');
     }
+    public function lock_menu(){
+        $data = Setting::whereParams('lockmenu')->first();
+        if ($data == null) {
+            Setting::create(['params' => 'lockmenu', 'value' => 1]);
+        }
+        return Setting::whereParams('lockmenu')->first()->value;
+    }
 }
+

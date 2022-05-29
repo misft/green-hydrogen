@@ -7,15 +7,18 @@ use App\Models\Menu;
 use App\Models\MenuGroup;
 use App\Models\MenuGroupTranslation;
 use App\Models\MenuTranslation;
+use App\Models\Setting;
+use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
     public function index(Request $request) {
         $menus = Menu::with(['translation', 'menuGroup.translation'])->get();
-
+        $lock_menu = $this->lock_menu(1);
         return view('admin.menu.index', [
-            'menus' => $menus
+            'menus' => $menus,
+            'lockmenu' => $lock_menu
         ]);
     }
 
@@ -71,5 +74,24 @@ class MenuController extends Controller
         return back()->with([
             'success' => 'Data is successfully deleted'
         ]);
-    }    
+    }
+
+    public function lock_menu($check = null){
+        if ($check == null) {
+            $data = Setting::whereParams('lockmenu')->first();
+            if ($data == null) {
+                Setting::create(['params' => 'lockmenu', 'value' => 1]);
+            } else {
+                Setting::updateOrCreate(['params' => 'lockmenu'], ['value' => $data->value == 1 ? 0 : 1 ]);
+            }
+
+            return back()->with(['success' =>   'Update Setting Lock Menu']);
+        }else{
+            $data = Setting::whereParams('lockmenu')->first();
+            if ($data == null) {
+                Setting::create(['params' => 'lockmenu', 'value' => 1]);
+            }
+            return Setting::whereParams('lockmenu')->first()->value;
+        }
+    }
 }

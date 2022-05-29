@@ -7,15 +7,17 @@ use Illuminate\View\Component;
 class EditRow extends Component
 {
     public $route;
+    public $disable;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($route)
+    public function __construct($route, $disable = null)
     {
         $this->route = $route;
+        $this->disable = $disable == 1 ? 'pointer-events: none' : '';
     }
 
     /**
