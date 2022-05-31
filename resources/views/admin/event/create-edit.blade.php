@@ -34,7 +34,7 @@
                     <x-form.put-method  />
                     <x-form.localization :value="@$translation->translation_id" />
                     <x-form.select-translations :items="$categories" label="Category" name="event_category_id" :value="@$event->event_category_id" />
-                    <x-form.text :value="@$event->speaker_name" label="Speaker Name" name="speaker_name" />
+                    <x-form.text :value="@$event->speaker_name" label="Type Event (Online / Offline)" name="speaker_name" />
                     <x-form.text :value="@$event->speaker_title" label="Speaker Title" name="speaker_title" />
                     <x-form.text :value="@$translation->title" label="Title" name="title" />
                     <x-form.wysiwyg :value="@$translation->description" label="Description" name="description" />

@@ -88,6 +88,7 @@ Route::middleware(['admin'])->group(function() {
     Route::get('/menu/lock', [MenuController::class, 'lock_menu'])->name('menu.lock');
     Route::get('/slot/lock', [SpotController::class, 'lock_slot'])->name('slot.lock');
     Route::get('/content/lock', [ContentController::class, 'lock_content'])->name('content.lock');
+    Route::get('/menu/disable/{id}', [SectionController::class, 'toggle_active'])->name('menu.toggle');
 
     Route::resource('/menu_group', MenuGroupController::class);
     // Route::resource('/slot', SlotController::class);

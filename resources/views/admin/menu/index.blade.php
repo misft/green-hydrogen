@@ -76,6 +76,7 @@
                                             <td>
                                                 <x-action.delete-row :disable="$lockmenu" :idform="$menu->id" :action="route('menu.destroy', $menu->id)" />
                                                 <x-action.edit-row :disable="$lockmenu" :route="route('menu.edit', $menu->id)" />
+                                                <a style="{{$lockmenu ? 'pointer-events: none' : ''}}" href="{{route('menu.toggle', $menu->id)}}" class="btn mb-1 btn-{{ App\Models\Section::find($menu->id)->active ? 'warning' : 'info'}} btn-pill btn-sm">{{ App\Models\Section::find($menu->id)->active ? 'Disable' : 'Enable'}} Menu</a>
                                             </td>
                                         </tr>
                                     @endforeach

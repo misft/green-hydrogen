@@ -245,5 +245,11 @@ class SectionController extends Controller
         }
         return Setting::whereParams('lockmenu')->first()->value;
     }
+
+    public function toggle_active($id){
+        $nilai = Section::find($id);
+        Section::whereIn('id', [$id, $id-1])->update(['active' => !$nilai->active]);
+        return back()->with('success', 'Successfully update menu');
+    }
 }
 

@@ -26,7 +26,7 @@
                     <i class="pe-7s-network"></i><span>Company Directory </span>
                 </a>
                 <ul class="iconbar-mainmenu custom-scrollbar">
-                    <li><a href="{{ route('company_directory_topic.index') }}">Company Topic</a></li>
+                    <li><a href="{{ route('company_directory_topic.index') }}">Company Sector</a></li>
                     <li><a href="{{ route('company_directory.index') }}">Registered Companies</a></li>
                     <li><a href="{{ route('company_document_category.index') }}">Document Category</a></li>
                     <li><a href="{{ route('company_document.index') }}">Documents</a></li>
