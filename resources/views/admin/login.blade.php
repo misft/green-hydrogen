@@ -19,7 +19,7 @@
                                 <div class="cont text-left">
                                     <div class="row">
                                         <div class="col text-center">
-                                            <img src="{{ asset('assets/images/bg-login.png') }}" height="400px" alt="">
+                                            <img src="{{ asset('assets/images/banner backend.png') }}" height="400px" alt="">
                                         </div>
                                         <div class="col">
                                             <form class="theme-form w-100" action="{{ request()->routeIs('login.index') ? route('login') : route('login.company.index') }}" method="post">

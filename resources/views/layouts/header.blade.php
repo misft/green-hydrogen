@@ -1,12 +1,12 @@
 <div class="page-main-header">
     <div class="main-header-right">
         <div class="main-header-left text-center">
-            <img src="https://greenhydrogen.my.id/static/media/logo.3abbe43d90225df4da30.png" height="50px" alt="">
+            <img src="{{asset('assets/images/Logo-Header-hydrogen-indonesia.png')}}" height="50px" alt="">
         </div>
         <div class="mobile-sidebar">
             <div class="media-body text-right switch-sm">
                 <label class="switch ml-3"><i class="font-primary" id="sidebar-toggle"
-                        data-feather="align-center"></i></label> 
+                        data-feather="align-center"></i></label>
             </div>
         </div>
         <div class="vertical-mobile-sidebar"><i class="fa fa-bars sidebar-bar"> </i></div>

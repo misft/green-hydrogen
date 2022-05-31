@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" content="">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{ route('/') }}/assets/images/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ route('/') }}/assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="{{asset('assets/images/logo-favicon-hydrogen-indonesia.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/logo-favicon-hydrogen-indonesia.png')}}" type="image/x-icon">
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
@@ -82,7 +82,7 @@
                                 <div class="modal-header"></div>
                                 <div class="contain p-30">
                                     <div class="mb-5">
-                                        <img src="{{asset('assets/images/logo/logo.3abbe43d90225df4da30.png')}}" class="img-fluid" alt="">
+                                        <img src="{{asset('assets/images/Logo-Hydrogen-Indonesia.png')}}" class="img-fluid" alt="">
                                     </div>
                                     <div class="text-center">
                                         <h3>Hydrogen Indonesia</h3>
