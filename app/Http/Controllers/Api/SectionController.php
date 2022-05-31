@@ -26,7 +26,7 @@ class SectionController extends Controller
     public function getMenu($translation_code){
         $menus = Section::whereHas('translation', function ($query) use ($translation_code){
             return $query->where('code', '=', $translation_code);
-        })->orderBy('parent', 'ASC')->orderBy('order','ASC')->get();
+        })->whereActive(1)->orderBy('parent', 'ASC')->orderBy('order','ASC')->get();
 
         return $this->ordered_menu($menus);
     }
